@@ -1,13 +1,13 @@
 ## mp grammar
   + **1. app.json:**
-        ```js
-        pages:
-        window:
-        tabBar ----> list ---> pagePath/text/iconPath/selectedIconPath:
-        wx.switchTab({
-        url: '/pages/list/list',
-        })
-        ```
+    ```js
+    pages:
+    window:
+    tabBar ----> list ---> pagePath/text/iconPath/selectedIconPath:
+    wx.switchTab({
+    url: '/pages/list/list',
+    })
+    ```
 
   + **2. index:**
      * bindgetuserinfo: 是一个回调函数，wx.getUserInfo成功获得数据传入做参数
@@ -21,8 +21,8 @@
         * 判断用户点击的是否为允许按钮: 如果是，则获取用户信息;
         * 否则,什么都不做.
 
-  + 3. list:
-        list 界面的思路:
+  + **3. list:**
+        **list 界面的思路:**
           * 获取数据, 调用 onload 函数初始化 data : ***let datas=require('../../data/list-data.js');***
           * 使用 ***<swiper><swiper-item>...</swiper-item></swiper>***结构做轮播图; 且在最外层设置click事件， 内部点击会向外面冒泡， 最后被捕捉处理[**事件委托**];
           * 使用 <template></template>模板进行显示: ***data-index 出入参数 index; wx.for 内置了index, item参数;           <tempalte/>只需要 .wxml 和 .wxss***
@@ -36,8 +36,7 @@
                 </block>
                 ```
 
-  + 4. detail:
-    * ***detail 界面的思路: 两个功能: 音乐播放，收藏***
+  + **4. detail:**
       * **收藏: 使用了 storage 记录了状态, 数据的存储:**
         ```js
         wx.setStorageSync("isCollected",{});  // 如果detailStorage 为 false，则先set一下
@@ -52,7 +51,8 @@
                 })
             },
         })
-     * **音乐播放: 使用了全局变量**
+        ```
+      * **音乐播放: 使用了全局变量**
         * 音乐播放 :
           ```js
           const backgroundAudioManager = wx.getBackgroundAudioManager();
