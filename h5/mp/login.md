@@ -1,3 +1,4 @@
+##
 1. 获取用户信息：wx.getUserInfo
     判断用户是否已经授权: wx.getSetting 方法中res.authSetting['scope.userInfo']属性是否为空
         没有授权的话，出现是否授权的按钮，判断用户点击的是什么[是/否](bindgetuserinfo='handleGetUserInfo'回调函数的 data.detail.rawData是否为空)，并获取用户信息；
@@ -19,7 +20,7 @@
 3. 收藏功能:
     图片的转换
     数据的存储:
-        ```java
+        ```js
         wx.setStorageSync("isCollected",{});  // 如果detailStorage 为 false，则先set一下
         wx.getStorage({
             key:"isCollected",  //否则这里会出现null

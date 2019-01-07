@@ -35,7 +35,7 @@
 
 ---
 ### 注:
-  **1.angular: 模板 + 数据绑定\n**
-  **2.react: 组件 + 虚拟DOM\n**
+  **1.angular: 模板 + 数据绑定<br/>**
+  **2.react: 组件 + 虚拟DOM<br/>**
 
 - [参考](https://www.jianshu.com/p/a7df83270a8b)
