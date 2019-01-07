@@ -24,7 +24,7 @@
   + **3. list:**
         **list 界面的思路:**
           * 获取数据, 调用 onload 函数初始化 data : ***let datas=require('../../data/list-data.js');***
-          * 使用 ***<swiper><swiper-item>...</swiper-item></swiper>***结构做轮播图; 且在最外层设置click事件， 内部点击会向外面冒泡， 最后被捕捉处理[**事件委托**];
+          * 使用 <swiper><swiper-item>...</swiper-item></swiper>结构做轮播图; 且在最外层设置click事件， 内部点击会向外面冒泡， 最后被捕捉处理[**事件委托**];
           * 使用 <template></template>模板进行显示: ***data-index 出入参数 index; wx.for 内置了index, item参数;<tempalte/>只需要 .wxml 和 .wxss***
           ```html
           <import src="/pages/template/list-template.wxml"></import>  || @import'/pages/template/list-template.wxss';
