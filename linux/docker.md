@@ -4,7 +4,7 @@
 	```shell
 	sudo apt-get update
 	sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
-		```
+	```
   *	**step 2: 安装GPG证书，并查看证书:**
 	```shell
 	curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
@@ -27,8 +27,8 @@
 	```shell
 	sudo docker version
 	```
-	
-	
+
+
 ## 配置文件： 例子： mysql [/etc/mysql/mysql.conf.d# vim mysqld.cnf ]
   *	1. 配置镜像加速器
 		针对Docker客户端版本大于 1.10.0 的用户
@@ -60,25 +60,25 @@
 	docker rmi image-id
 	# 我们经常去docker hub上检索镜像的详细信息，如镜像的TAG.
 	# eg：docker search redis
-	docker search 关键字  
+	docker search 关键字
 	# :tag是可选的，tag表示标签，多为软件的版本，默认是latest
-	docker pull 镜像名:tag   
+	docker pull 镜像名:tag
 	# [‐d：后台运行  ‐p: 将主机的端口映射到容器的一个端口    主机端口:容器内部的端口]
-	docker run ‐d ‐p 8888:8080 tomcat  
+	docker run ‐d ‐p 8888:8080 tomcat
 	# [查看容器的日志]
-	docker logs container‐name/container‐id  
+	docker logs container‐name/container‐id
 	# 查看防火墙状态
 	service firewalld status 
 	# 关闭防火墙
 	service firewalld stop
 	# [查看运行中的容器]
-	docker ps 
+	docker ps
 	# [查看所有的容器]
-	docker ps ‐a 
+	docker ps ‐a
 	# [启动容器]
-	docker start 容器id 
+	docker start 容器id
 	# [停止运行中的容器]
-	docker stop  容器的id   
+	docker stop  容器的id
 	# [删除一个容器]
-	docker rm 容器id 
+	docker rm 容器id
 	```
