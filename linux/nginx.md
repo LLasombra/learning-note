@@ -53,7 +53,7 @@
     /etc/init.d/nginx -s reload
     ``` 
 
- ### 启动与停止服务**
+ ### 启动与停止服务
     ```shell
      # enforce the conf
     /etc/init.d/nginx -s reload
