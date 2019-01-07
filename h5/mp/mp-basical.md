@@ -23,9 +23,9 @@
 
   + **3. list:**
         **list 界面的思路:**
-          * 获取数据, 调用 onload 函数初始化 data : ***let datas=require('../../data/list-data.js');***
+          * 获取数据, 调用 onload 函数初始化 data : **let datas=require('../../data/list-data.js');**
           * 使用
-          ```html
+          ```js
           <swiper><swiper-item>...</swiper-item></swiper>
           ```
           结构做轮播图; 且在最外层设置click事件， 内部点击会向外面冒泡， 最后被捕捉处理[**事件委托**];
