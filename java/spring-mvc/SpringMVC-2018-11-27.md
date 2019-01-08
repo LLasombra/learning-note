@@ -253,41 +253,41 @@
  * **string[视图名] ===> 内部装配为 ModelAndView ===> ViewSolver ===> url等 ===> 视图对象渲染**
  * [示例](https://github.com/Alice52/Learning/blob/master/Spring/SpringMVC/Hello_SpringMVC/src/main/resources/springmvc.xml)
  ```java
-	/**
-		* 若想直接响应SpringMvc渲染的页面，可以使用mvc:view-controller
-		* <mvc:view-controller path="springMvc/test" view-name="hujingwei">
-		*	所以当访问路径"springMvc/test"时，会直接跳转到hujingwei.jsp这个页面。
-		*/
+ /**
+	* 若想直接响应SpringMvc渲染的页面，可以使用mvc:view-controller
+	* <mvc:view-controller path="springMvc/test" view-name="hujingwei">
+	*	所以当访问路径"springMvc/test"时，会直接跳转到hujingwei.jsp这个页面。
+	*/
  ```
  * **详细解析:**
- 	```xml
- 	a) 视图的作用:rent方法渲染模型数据，将模型里的数据以某种形式呈现给客户。
- 			视图解析器的作用: 将逻辑视图[视图名]，转换为物理视图
-	b) Spring MVC 内部将返回String，View ，model类型的方法装配成一个ModelAndView 对象，
-		借助视图解析器（ViewResolver implement ViewResolver接口）得到最终的视图对象（View）[jsp,Excel ect].
-		视图对象由视图解析器负责实例化。由于视图是无状态的，所以他们不会有线程安全的问题;
-	c) 视图分类 ：
-		URL ：
-			InternalResourceView 【默认试图将JSP或其他资源封装成View】
-			JstlView : 支持JSTL国际化标签功能
-		文档视图：
-			AbstractExcelView : Excel文档视图抽象类，基于POI构造Excel文档。
-			AbstractPdfView : Excel文档视图抽象类，基于iText构造PDF文档。
-		报表视图、JSON视图等
+```xml
+a) 视图的作用:rent方法渲染模型数据，将模型里的数据以某种形式呈现给客户。
+		视图解析器的作用: 将逻辑视图[视图名]，转换为物理视图
+b) Spring MVC 内部将返回String，View ，model类型的方法装配成一个ModelAndView 对象，
+	借助视图解析器（ViewResolver implement ViewResolver接口）得到最终的视图对象（View）[jsp,Excel ect].
+	视图对象由视图解析器负责实例化。由于视图是无状态的，所以他们不会有线程安全的问题;
+c) 视图分类 ：
+	URL ：
+		InternalResourceView 【默认试图将JSP或其他资源封装成View】
+		JstlView : 支持JSTL国际化标签功能
+	文档视图：
+		AbstractExcelView : Excel文档视图抽象类，基于POI构造Excel文档。
+		AbstractPdfView : Excel文档视图抽象类，基于iText构造PDF文档。
+	报表视图、JSON视图等
 
-	d) Spring WEB  [*context.xml] 上下文中配置一种或多种解析策略，并指定他们之间的先后顺序[order属性 ： order越小优先级越高].
-	e) 视图解析器分类：
-		解析为Bean的名字：
-			BeanNameViewResolver : 将视图解析为一个Bean，Bean的Id相当于视图名
-		解析为URL :
-			InternalResourceViewReslover : 将视图名解析为一个URL文件
-				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="prefix" value="/WEB-INF/views/"></property>
-					<property name="suffix" value=".jsp"></property>
-				</bean>
-			JasperReportsViewResolver :
-		魔板文件视图等
-	```
+d) Spring WEB  [*context.xml] 上下文中配置一种或多种解析策略，并指定他们之间的先后顺序[order属性 ： order越小优先级越高].
+e) 视图解析器分类：
+	解析为Bean的名字：
+		BeanNameViewResolver : 将视图解析为一个Bean，Bean的Id相当于视图名
+	解析为URL :
+		InternalResourceViewReslover : 将视图名解析为一个URL文件
+			<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+				<property name="prefix" value="/WEB-INF/views/"></property>
+				<property name="suffix" value=".jsp"></property>
+			</bean>
+		JasperReportsViewResolver :
+	魔板文件视图等
+```
 
 ### Spring 的表单标签:
  * *SpringMVC 的表单标签可以实现将模型数据中的属性和 HTML 表单元素相绑定，以实现表单数据更便捷编辑和表单值的回显*
