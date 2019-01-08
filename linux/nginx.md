@@ -1,22 +1,20 @@
 ## nginx 的使用:  lsof -i :80  //查看端口使用情况
- * 1. **安装nginx**:
-    ```shell
-    # install
-    sudo apt-get install nginx
-    # check the version and test
-    nginx -v 
-    nginx -t
-    ```
- * 2. **nginx 的目录结构**:
-    ***安装好的文件位置:***
-    - - -
-    * /usr/sbin/nginx：主程序
-    * /etc/nginx：存放配置文件
-    * /usr/share/nginx：存放静态文件
-    * /var/log/nginx：存放日志  
-    - - -
+  ### 安装 nginx :
+   ```shell
+   # install
+   sudo apt-get install nginx
+   # check the version and test
+   nginx -v 
+   nginx -t
+   ```
+  ### nginx 的目录结构:
+   **安装好的文件位置:**
+   +  /usr/sbin/nginx：主程序
+   +  /etc/nginx：存放配置文件
+   +  /usr/share/nginx：存放静态文件
+   +  /var/log/nginx：存放日志  
 
- * 3. **nginx的默认端口为80，该改一下**
+ ### nginx的默认端口为80，该改一下
     ```shell
     # copy the default conf to recovery, such as port in this file. 
     # location: /etc/nginx/sites-enabled
@@ -55,7 +53,7 @@
     /etc/init.d/nginx -s reload
     ``` 
 
- * 4. **启动与停止服务**
+ ### 启动与停止服务
     ```shell
      # enforce the conf
     /etc/init.d/nginx -s reload
@@ -65,8 +63,4 @@
     /etc/init.d/nginx stop
     # restart the service 
     /etc/init.d/nginx restart
-
-
-
-
-
+   ```
