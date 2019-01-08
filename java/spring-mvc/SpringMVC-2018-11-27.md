@@ -365,11 +365,11 @@ e) 视图解析器分类：
 ### 注:
  ```xml
  <!--
- 	1. 配置直接转发页面，无需经过Handler处理
-	2. 这里可能会出问题：
-		需要配置<mvc:annotation-driven></mvc:annotation-driven>
-			<mvc:default-servlet-handler/>
-	3.  所以要一起出现。
+ 1. 配置直接转发页面，无需经过Handler处理
+ 2. 这里可能会出问题：
+  需要配置<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:default-servlet-handler/>
+ 3.  所以要一起出现。
  -->
  <mvc:view-controller path="/success" view-name="success">
  <mvc:annotation-driven></mvc:annotation-driven>
