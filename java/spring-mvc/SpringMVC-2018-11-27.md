@@ -2,7 +2,7 @@
   ### spring-mvc 的相关配置文件:
   * *web.xml ===> 找到MVC的配置（servlet）===> mvc.xml ===> scan的包 ===> 在相应的包下去找 Controller ===> 通过MapRequest找到相应的方法，并执行===>视图解析器，转发*
 
-	* **url-pattern的解释:**
+* **url-pattern的解释:**
 	```xml
 	<!--
 		会匹配到/login这样的路径型url，不会匹配到模式为*.jsp这样的后缀型url;
