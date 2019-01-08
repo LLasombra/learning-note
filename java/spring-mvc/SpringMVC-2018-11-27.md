@@ -3,19 +3,19 @@
    * *web.xml ===> 找到MVC的配置（servlet）===> mvc.xml ===> scan的包 ===> 在相应的包下去找 Controller ===> 通过MapRequest找到相应的方法，并执行===>视图解析器，转发*
 
    * **url-pattern的解释:**
-	```xml
-	<!--
-	会匹配到/login这样的路径型url，不会匹配到模式为*.jsp这样的后缀型url;
-	原因是这会使用<mvc:default-servlet-handler/> 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler，只处理经过映射的url,否则直接交给web的默认处理器处理。
-	-->
-	< url-pattern>/</url-pattern>
-	```
-	```xml
-	<!--
-	会匹配所有url：路径型的和后缀型的url(包括/login,*.jsp,*.js和*.html等) 
-	-->
-	< url-pattern>/*</url-pattern>
-	```
+	 ```xml
+	 <!--
+	 会匹配到/login这样的路径型url，不会匹配到模式为*.jsp这样的后缀型url;
+	 原因是这会使用<mvc:default-servlet-handler/> 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler，只处理经过映射的url,否则直接交给web的默认处理器处理。
+	 -->
+	 < url-pattern>/</url-pattern>
+	 ```
+	 ```xml
+	 <!--
+	 会匹配所有url：路径型的和后缀型的url(包括/login,*.jsp,*.js和*.html等) 
+	 -->
+	 < url-pattern>/*</url-pattern>
+	 ```
 
   * **处理静态资源:<br/>**
 	```
