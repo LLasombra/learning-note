@@ -9,8 +9,6 @@
 	 原因是这会使用<mvc:default-servlet-handler/> 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler，只处理经过映射的url,否则直接交给web的默认处理器处理。
 	 -->
 	 < url-pattern>/</url-pattern>
-	 ```
-	 ```xml
 	 <!--
 	 会匹配所有url：路径型的和后缀型的url(包括/login,*.jsp,*.js和*.html等) 
 	 -->
@@ -29,50 +27,50 @@
 	```
 
 ### web.xml相关配置
-  * 文件 springmvc 相关【配置 servlet 和 servlet_mapping 】 Spring相关 【 context-param 和 listener 】
+ * 文件 springmvc 相关【配置 servlet 和 servlet_mapping 】 Spring相关 【 context-param 和 listener 】
 	 + **applicationContext.xml :  Spring 配置 Listerner 和 业务逻辑处理事务相关 和 要扫描的包**
 	 + **springmvcContext.xml : springmvc 配置要扫描的包 和 视图解析器**
 
-	* **@RequestMapping(value,method,params,heads)解析:**
-		```java
-		// @RequestMapping(value,method,params,heads) 可以写在类上; 也可以写在方法上;
-		// 还可以将 URL 中占位符参数绑定到控制器处理方法的入参中
-		@RequestMapping(value="/hello",method=RequestMethod.POST,params={“param1=value1”, “param2”},heads)
-			// ?：匹配文件名中的一个字符
-			// *：匹配文件名中的任意字符
-			// **：** 匹配多层路径
+ * **@RequestMapping(value,method,params,heads)解析:**
+	 ```java
+	 // @RequestMapping(value,method,params,heads) 可以写在类上; 也可以写在方法上;
+	 // 还可以将 URL 中占位符参数绑定到控制器处理方法的入参中
+	 @RequestMapping(value="/hello",method=RequestMethod.POST,params={“param1=value1”, “param2”},heads)
+	 	// ?：匹配文件名中的一个字符
+	 	// *：匹配文件名中的任意字符
+	 	// **：** 匹配多层路径
 
-		// @PathVariable("id")：这个是URL中的
-		@RequestMapping("/delete/{id}")
-		public String delete(@PathVariable("id") int id){
-			....
-		}
+	 // @PathVariable("id")：这个是URL中的
+	 @RequestMapping("/delete/{id}")
+	 public String delete(@PathVariable("id") int id){
+	 	....
+	 }
 
-		// @RequestParam 可以把请求参数传递给请求方法 ：这个是URL参数中的[?之后]
-		@RequestMapping("/delete")
-		public String delete(@RequestParam(value="id",required=false，defaultValve="0") int id){
-			....
-		}
+	 // @RequestParam 可以把请求参数传递给请求方法 ：这个是URL参数中的[?之后]
+	 @RequestMapping("/delete")
+	 public String delete(@RequestParam(value="id",required=false，defaultValve="0") int id){
+	 	....
+	 }
 
-		// @RequestHeader 即可将请求头中的属性值绑定到处理方法的入参中
-		@RequestMapping("/delete")
-		public String delete(@@RequestHeader("Accept-Encoding") int id){
-			....
-		}
+   // @RequestHeader 即可将请求头中的属性值绑定到处理方法的入参中
+	 @RequestMapping("/delete")
+	 public String delete(@@RequestHeader("Accept-Encoding") int id){
+	 	....
+	 }
 
-		// @CookieValue 可让处理方法入参绑定某个 Cookie 值
-		@RequestMapping("/delete")
-		public String delete(@@CookieValue(value="sessionId",required=false) int sessionId){
-			....
-		}
+	 // @CookieValue 可让处理方法入参绑定某个 Cookie 值
+	 @RequestMapping("/delete")
+	 public String delete(@@CookieValue(value="sessionId",required=false) int sessionId){
+	 	....
+	 }
 
-		// 会按请求参数名和 POJO 属性名进行自动匹配，自动为该对象填充属性值。支持级联属性
-		// url : /handler?userName=zack&age=1
-		@RequestMapping("/handler")
-		public String delete(User user){
-			....
-		  MVC 的 Handler 方法可以接受哪些 ServletAPI 类型的参数
-			• HttpServletRequest
+	 // 会按请求参数名和 POJO 属性名进行自动匹配，自动为该对象填充属性值。支持级联属性
+	 // url : /handler?userName=zack&age=1
+	 @RequestMapping("/handler")
+	 public String delete(User user){
+	 	....
+	   MVC 的 Handler 方法可以接受哪些 ServletAPI 类型的参数
+	  	• HttpServletRequest
 			• HttpServletResponse
 			• HttpSession
 			• java.security.Principal
@@ -81,8 +79,8 @@
 			• OutputStream
 			• Reader
 			• Writer
-		}
-		```
+	 }
+	 ```
 
 ### REST 风格:
   * Representational State Transfer。（资源）表现层状态转化.
