@@ -83,103 +83,103 @@
 	 ```
 
 ### REST 风格:
-  * Representational State Transfer。（资源）表现层状态转化.
-	* 示例:
-	```
-	– /order/1 HTTP GET ：得到 id = 1 的 order
-	– /order/1 HTTP DELETE：删除 id = 1的 order
-	– /order/1 HTTP PUT：更新id = 1的 order
-	– /order HTTP POST：新增 order
-	```
+ * Representational State Transfer。（资源）表现层状态转化.
+ * 示例:
+ ```
+ – /order/1 HTTP GET ：得到 id = 1 的 order
+ – /order/1 HTTP DELETE：删除 id = 1的 order
+ – /order/1 HTTP PUT：更新id = 1的 order
+ – /order HTTP POST：新增 order
+ ```
 
-	* **如何发送 PUT 请求和 DELETE 请求呢?**
-	```
-	1. 需要配置 HiddenHttpMethodFilter ,在context.xml中
-	2. 需要发送 POST 请求
-	3. 需要在发送 POST 请求时携带一个 name="_method" 的隐藏域, 值为 DELETE 或 PUT
-	```
-  * **在 SpringMVC 的目标方法中使用 @PathVariable 注解 得到 id**
+ * **如何发送 PUT 请求和 DELETE 请求呢?**
+ ```
+ 1. 需要配置 HiddenHttpMethodFilter ,在context.xml中
+ 2. 需要发送 POST 请求
+ 3. 需要在发送 POST 请求时携带一个 name="_method" 的隐藏域, 值为 DELETE 或 PUT
+ ```
+ * **在 SpringMVC 的目标方法中使用 @PathVariable 注解 得到 id**
 
 
 ### 处理模型数据
-  * **传入参数为对象的话，会根据 request 的参数封装成这个对象;**
-	* **传入参数为 map 时会自动放入 request 域对象中**
-	* ***有 @ModelAttribute 标记的方法, 会在每个目标方法执行之前被 SpringMVC 调用!***
-		- ModelAndView : 处理方法返回值类型为 ModelAndView 时, 方法体即可通过该对象添加模型数据: 其既包含视图信息，也包含模型数据信息
-			+ 添加模型数据:
-				- MoelAndView addObject(String attributeName, Object attributeValue)
-				- ModelAndView addAllObject(Map<String, ?> modelMap)
-			+ 设置视图:
-				- void setView(View view)
-				- void setViewName(String view
+ * **传入参数为对象的话，会根据 request 的参数封装成这个对象;**
+ * **传入参数为 map 时会自动放入 request 域对象中**
+ * ***有 @ModelAttribute 标记的方法, 会在每个目标方法执行之前被 SpringMVC 调用!***
+	- ModelAndView : 处理方法返回值类型为 ModelAndView 时, 方法体即可通过该对象添加模型数据: 其既包含视图信息，也包含模型数据信息
+   + 添加模型数据:
+		- MoelAndView addObject(String attributeName, Object attributeValue)
+		- ModelAndView addAllObject(Map<String, ?> modelMap)
+	 + 设置视图:
+		- void setView(View view)
+		- void setViewName(String view
 
-		- Map 及 Model: **ModelMap 或 java.uti.Map 时，处理方法返回时，Map 中的数据会自动添加到模型中.**
-			+ Spring MVC 在内部使用了一个org.springframework.ui.Model 接口存储模型数据
-			+ **Spring MVC 在调用方法前会创建一个隐含的模型对象作为模型数据的存储容器.**
-			+ 如果方法的入参为 Map 或 Model 类型，Spring MVC 会将隐含模型的引用传递给这些入参。
-			+ 在方法体内，开发者可以通过这个入参对象访问到模型中的所有数据，也可以向模型中添加新的属性数据
-			```java
-			@ModelAttribute("user")
-			public User getUser (){
-				User user = new User()；
-				user.setAge(10);
-					return user;
-			}
+	- Map 及 Model: **ModelMap 或 java.uti.Map 时，处理方法返回时，Map 中的数据会自动添加到模型中.**
+	 + Spring MVC 在内部使用了一个org.springframework.ui.Model 接口存储模型数据
+	 + **Spring MVC 在调用方法前会创建一个隐含的模型对象作为模型数据的存储容器.**
+	 + 如果方法的入参为 Map 或 Model 类型，Spring MVC 会将隐含模型的引用传递给这些入参。
+	 + 在方法体内，开发者可以通过这个入参对象访问到模型中的所有数据，也可以向模型中添加新的属性数据
+	 ```java
+	 @ModelAttribute("user")
+	 public User getUser (){
+	 	User user = new User()；
+	 	user.setAge(10);
+	 		return user;
+	 }
 
-			@RequestMapping("/delete")
-			public String handle(Map<String, Object> map){
-				map.put("time", new Data());
-				//这里可以获取到user的值
-				User user = (User) map.get("user");
-			}
-			```
+	 @RequestMapping("/delete")
+	 public String handle(Map<String, Object> map){
+	 	map.put("time", new Data());
+	 	//这里可以获取到user的值
+	 	User user = (User) map.get("user");
+	 }
+	 ```
 
-	* @SessionAttributes: **将模型中的某个属性暂存到HttpSession 中，以便多个请求之间可以共享这个属性**
-		+ @SessionAttributes 通过属性名添加；模型属性的对象类型添加
-		+ @SessionAttributes(types=User.class) 会将隐含模型中所有类型为 User.class [map中的value]的属性添加到会话中。
-		+ @SessionAttributes(value={“user1”, “user2”}
-		+ @SessionAttributes(types={User.class, Dept.class})
-		+ @SessionAttributes(value={“user1”, “user2”}, types={Dept.class})
-		```java
-		@Controller
-		@SessionAttributes("user")
-		@RequestMapping("/hel")
-		public class HelloWOrld{
-			@ModelAttribute("user")
-			public User getUser (){
-				User user = new User()；
-				user.setAge(10);
-				return user;
-			}
-
-			@RequestMapping("/handler")
-			public String delete( @ModelAttribute("user") User user){
-				....
-			}
-
-			@RequestMapping("/delete")
-			public String handle(Map<String, Object> map){
-				map.put("time", new Data());
-				//这里可以获取到user的值
-				User user = (User) map.get("user");
-			}
+ * @SessionAttributes: **将模型中的某个属性暂存到HttpSession 中，以便多个请求之间可以共享这个属性**
+	+ @SessionAttributes 通过属性名添加；模型属性的对象类型添加
+	+ @SessionAttributes(types=User.class) 会将隐含模型中所有类型为 User.class [map中的value]的属性添加到会话中。
+  + @SessionAttributes(value={“user1”, “user2”}
+	+ @SessionAttributes(types={User.class, Dept.class})
+	+ @SessionAttributes(value={“user1”, “user2”}, types={Dept.class})
+	```java
+	@Controller
+	@SessionAttributes("user")
+	@RequestMapping("/hel")
+	public class HelloWOrld{
+		@ModelAttribute("user")
+		public User getUser (){
+			User user = new User()；
+			user.setAge(10);
+			return user;
 		}
-		```
+
+		@RequestMapping("/handler")
+		public String delete( @ModelAttribute("user") User user){
+			....
+		}
+
+		@RequestMapping("/delete")
+		public String handle(Map<String, Object> map){
+			map.put("time", new Data());
+			//这里可以获取到user的值
+			User user = (User) map.get("user");
+		}
+	}
+	```
 
 
-	* **@ModelAttribute: 可以通过方法上添加，也可以在参数前添加； 方法入参标注该注解后, 入参的对象就会放到数据模型中**
-		运行流程:
-		---
-		```
-			有 @ModelAttribute() 修饰的方法，从DB中获取对象，===> put,进入 request 中,也放入 implicitModel 中 ===> request 参数中可以封装成对象的数据覆盖[修改]之前put的数据[ implicitModel 中的]===>将改变后的对象当做参数传入，并放入 request中。
-			没有 @ModelAttribute() 修饰的方法===> 会通过反射创建一个对象 ===> 将 request 参数封装成对象当做参数传入，并放入 request中。
-				* 1. 执行 @ModelAttribute 注解修饰的方法: 从数据库中取出对象, 把对象放入到了 Map 中. 键为: user
-				* 2. SpringMVC 从 Map 中取出 User 对象, 并把表单的请求参数赋给该 User 对象的对应属性.
-				* 3. SpringMVC 把上述对象传入目标方法的参数.
-		```
-		---
-		```java
-		/**
+ * **@ModelAttribute: 可以通过方法上添加，也可以在参数前添加； 方法入参标注该注解后, 入参的对象就会放到数据模型中**
+	 运行流程:
+	 ---
+	 ```
+	 	有 @ModelAttribute() 修饰的方法，从DB中获取对象，===> put,进入 request 中,也放入 implicitModel 中 ===> request 参数中可以封装成对象的数据覆盖[修改]之前put的数据[ implicitModel 中的]===>将改变后的对象当做参数传入，并放入 request中。
+	 	没有 @ModelAttribute() 修饰的方法===> 会通过反射创建一个对象 ===> 将 request 参数封装成对象当做参数传入，并放入 request中。
+	  	* 1. 执行 @ModelAttribute 注解修饰的方法: 从数据库中取出对象, 把对象放入到了 Map 中. 键为: user
+			* 2. SpringMVC 从 Map 中取出 User 对象, 并把表单的请求参数赋给该 User 对象的对应属性.
+			* 3. SpringMVC 把上述对象传入目标方法的参数.
+	 ```
+	 ---
+	 ```java
+	 /**
 		* 1. 有 @ModelAttribute 标记的方法, 会在每个目标方法执行之前被 SpringMVC 调用!
 		* 2. @ModelAttribute 注解也可以来修饰目标方法 POJO 类型的入参, 其 value 属性值有如下的作用:
 		* 1). SpringMVC 会使用 value 属性值在 implicitModel 中查找对应的对象, 若存在则会直接传入到目标方法的入参中.
@@ -250,96 +250,96 @@
 		```
 
 ### 视图 、视图解析器:
-  * **string[视图名] ===> 内部装配为 ModelAndView ===> ViewSolver ===> url等 ===> 视图对象渲染**
-	* [示例](https://github.com/Alice52/Learning/blob/master/Spring/SpringMVC/Hello_SpringMVC/src/main/resources/springmvc.xml)
-	```java
+ * **string[视图名] ===> 内部装配为 ModelAndView ===> ViewSolver ===> url等 ===> 视图对象渲染**
+ * [示例](https://github.com/Alice52/Learning/blob/master/Spring/SpringMVC/Hello_SpringMVC/src/main/resources/springmvc.xml)
+ ```java
 	/**
 		* 若想直接响应SpringMvc渲染的页面，可以使用mvc:view-controller
 		* <mvc:view-controller path="springMvc/test" view-name="hujingwei">
 		*	所以当访问路径"springMvc/test"时，会直接跳转到hujingwei.jsp这个页面。
 		*/
-	```
-	* **详细解析:**
-		```xml
-		a) 视图的作用:rent方法渲染模型数据，将模型里的数据以某种形式呈现给客户。
-				视图解析器的作用: 将逻辑视图[视图名]，转换为物理视图
-		b) Spring MVC 内部将返回String，View ，model类型的方法装配成一个ModelAndView 对象，
-			借助视图解析器（ViewResolver implement ViewResolver接口）得到最终的视图对象（View）[jsp,Excel ect].
-			视图对象由视图解析器负责实例化。由于视图是无状态的，所以他们不会有线程安全的问题;
-		c) 视图分类 ：
-			URL ：
-				InternalResourceView 【默认试图将JSP或其他资源封装成View】
-				JstlView : 支持JSTL国际化标签功能
-			文档视图：
-				AbstractExcelView : Excel文档视图抽象类，基于POI构造Excel文档。
-				AbstractPdfView : Excel文档视图抽象类，基于iText构造PDF文档。
-			报表视图、JSON视图等
+ ```
+ * **详细解析:**
+ 	```xml
+ 	a) 视图的作用:rent方法渲染模型数据，将模型里的数据以某种形式呈现给客户。
+ 			视图解析器的作用: 将逻辑视图[视图名]，转换为物理视图
+	b) Spring MVC 内部将返回String，View ，model类型的方法装配成一个ModelAndView 对象，
+		借助视图解析器（ViewResolver implement ViewResolver接口）得到最终的视图对象（View）[jsp,Excel ect].
+		视图对象由视图解析器负责实例化。由于视图是无状态的，所以他们不会有线程安全的问题;
+	c) 视图分类 ：
+		URL ：
+			InternalResourceView 【默认试图将JSP或其他资源封装成View】
+			JstlView : 支持JSTL国际化标签功能
+		文档视图：
+			AbstractExcelView : Excel文档视图抽象类，基于POI构造Excel文档。
+			AbstractPdfView : Excel文档视图抽象类，基于iText构造PDF文档。
+		报表视图、JSON视图等
 
-		d) Spring WEB  [*context.xml] 上下文中配置一种或多种解析策略，并指定他们之间的先后顺序[order属性 ： order越小优先级越高].
-		e) 视图解析器分类：
-			解析为Bean的名字：
-				BeanNameViewResolver : 将视图解析为一个Bean，Bean的Id相当于视图名
-			解析为URL :
-				InternalResourceViewReslover : 将视图名解析为一个URL文件
-					<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-						<property name="prefix" value="/WEB-INF/views/"></property>
-						<property name="suffix" value=".jsp"></property>
-					</bean>
-				JasperReportsViewResolver :
-			魔板文件视图等
-		```
+	d) Spring WEB  [*context.xml] 上下文中配置一种或多种解析策略，并指定他们之间的先后顺序[order属性 ： order越小优先级越高].
+	e) 视图解析器分类：
+		解析为Bean的名字：
+			BeanNameViewResolver : 将视图解析为一个Bean，Bean的Id相当于视图名
+		解析为URL :
+			InternalResourceViewReslover : 将视图名解析为一个URL文件
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/WEB-INF/views/"></property>
+					<property name="suffix" value=".jsp"></property>
+				</bean>
+			JasperReportsViewResolver :
+		魔板文件视图等
+	```
 
 ### Spring 的表单标签:
-  * *SpringMVC 的表单标签可以实现将模型数据中的属性和 HTML 表单元素相绑定，以实现表单数据更便捷编辑和表单值的回显*
-	* **[GET把参数包含在URL中，POST通过request body传递参数](https://www.cnblogs.com/logsharing/p/8448446.html)**
-	```
-	GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。<br/>
-	GET在浏览器回退时是无害的，而POST会再次提交请求。<br/>
-	GET产生的URL地址可以被Bookmark，而POST不可以。<br/>
-	GET请求会被浏览器主动cache，而POST不会，除非手动设置。<br/>
-	GET请求只能进行url编码，而POST支持多种编码方式。<br/>
-	GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。<br/>
-	GET请求在URL中传送的参数是有长度限制的，而POST么有。<br/>
-	对参数的数据类型，GET只接受ASCII字符，而POST没有限制。<br/>
-	GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。<br/>
-	GET参数通过URL传递，POST放在Request body中。<br/>
-	```
-	* **SpringMVC 提供了多个表单组件标签:**
-		- <form:input/>、<form:select/> 等，用以绑定表单字段的属性值，它们的共有属性如下：
-			* path：表单字段，对应 html 元素的 name 属性，支持级联属性
-			* htmlEscape：是否对表单值的 HTML 特殊字符进行转换，默认值为 true
-			* cssClass：表单组件对应的 CSS 样式类名
-			* cssErrorClass：表单组件的数据存在错误时，采取的 CSS 样式
-		- **form:input、form:password、form:hidden、form:textarea：对应 HTML 表单的 text、password、hidden、textarea标签**
-			- form:radiobutton：单选框组件标签，当表单 bean 对应的属性值和 value 值相等时，单选框被选中
-			- form:radiobuttons：单选框组标签，
-				* items：可以是一个 List、String[] 或 Map
-				* itemValue：指定 radio 的 value 值。可以是集合中 bean 的一个属性值
-				* itemLabel：指定 radio 的 label 值
-				* delimiter：多个单选框可以通过 delimiter 指定分隔符
-			- form:checkbox：复选框组件。用于构造单个复选框
-			- form:checkboxs：用于构造多个复选框。使用方式同form:radiobuttons 标签
-			- form:select：用于构造下拉框组件。使用方式同form:radiobuttons 标签
-			- form:option：下拉框选项组件标签。使用方式同form:radiobuttons 标签
-			- form:errors：显示表单组件或数据校验所对应的错误
-				* <form:errors path= “ *” /> ：显示表单所有的错误
-				* <form:errors path= “ user*” /> ：显示所有以 user 为前缀的属性对应的错误
-				* <form:errors path= “ username” /> ：显示特定表单对象属性的错误
+ * *SpringMVC 的表单标签可以实现将模型数据中的属性和 HTML 表单元素相绑定，以实现表单数据更便捷编辑和表单值的回显*
+ * **[GET把参数包含在URL中，POST通过request body传递参数](https://www.cnblogs.com/logsharing/p/8448446.html)**
+ ```
+ GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。<br/>
+ GET在浏览器回退时是无害的，而POST会再次提交请求。<br/>
+ GET产生的URL地址可以被Bookmark，而POST不可以。<br/>
+ GET请求会被浏览器主动cache，而POST不会，除非手动设置。<br/>
+ GET请求只能进行url编码，而POST支持多种编码方式。<br/>
+ GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。<br/>
+ GET请求在URL中传送的参数是有长度限制的，而POST么有。<br/>
+ 对参数的数据类型，GET只接受ASCII字符，而POST没有限制。<br/>
+ GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。<br/>
+ GET参数通过URL传递，POST放在Request body中。<br/>
+ ```
+ * **SpringMVC 提供了多个表单组件标签:**
+	- <form:input/>、<form:select/> 等，用以绑定表单字段的属性值，它们的共有属性如下：
+   * path：表单字段，对应 html 元素的 name 属性，支持级联属性
+	 * htmlEscape：是否对表单值的 HTML 特殊字符进行转换，默认值为 true
+	 * cssClass：表单组件对应的 CSS 样式类名
+	 * cssErrorClass：表单组件的数据存在错误时，采取的 CSS 样式
+	- **form:input、form:password、form:hidden、form:textarea：对应 HTML 表单的 text、password、hidden、textarea标签**
+	 * form:radiobutton：单选框组件标签，当表单 bean 对应的属性值和 value 值相等时，单选框被选中
+	 * form:radiobuttons：单选框组标签，
+		- items：可以是一个 List、String[] 或 Map
+		- itemValue：指定 radio 的 value 值。可以是集合中 bean 的一个属性值
+		- itemLabel：指定 radio 的 label 值
+		- delimiter：多个单选框可以通过 delimiter 指定分隔符
+		- form:checkbox：复选框组件。用于构造单个复选框
+		- form:checkboxs：用于构造多个复选框。使用方式同form:radiobuttons 标签
+		- form:select：用于构造下拉框组件。使用方式同form:radiobuttons 标签
+		- form:option：下拉框选项组件标签。使用方式同form:radiobuttons 标签
+		- form:errors：显示表单组件或数据校验所对应的错误
+		 * <form:errors path= “ *” /> ：显示表单所有的错误
+		 * <form:errors path= “ user*” /> ：显示所有以 user 为前缀的属性对应的错误
+		 * <form:errors path= “ username” /> ：显示特定表单对象属性的错误
 
 ### 数据绑定流程:
-  * Spring MVC 主框架将 ServletRequest 对象及目标方法的入参实例传递给 **WebDataBinderFactory** 实例，
+ * Spring MVC 主框架将 ServletRequest 对象及目标方法的入参实例传递给 **WebDataBinderFactory** 实例，
 		以创建 **DataBinder** 实例对象
-	* **DataBinder** 调用装配在 Spring MVC 上下文中的 **ConversionService** 组件进行数据类型转换、数据格式化工作。将 Servlet 中的请求信息填充到入参对象中
-	* 调用 **Validator** 组件对已经绑定了请求消息的入参对象进行数据**合法性校验**，并最终生成数据绑定结果**BindingData** 对象
-	* Spring MVC 抽取 **BindingResult** 中的入参对象和校验错误对象，将它们赋给处理方法的响应入参
+ * **DataBinder** 调用装配在 Spring MVC 上下文中的 **ConversionService** 组件进行数据类型转换、数据格式化工作。将 Servlet 中的请求信息填充到入参对象中
+ * 调用 **Validator** 组件对已经绑定了请求消息的入参对象进行数据**合法性校验**，并最终生成数据绑定结果**BindingData** 对象
+ * Spring MVC 抽取 **BindingResult** 中的入参对象和校验错误对象，将它们赋给处理方法的响应入参
 
 ### 中台:
-	```
-	中台就是接入层啊，一般有中台的都是比较大的项目，后台会分为很多模块，比如订单模块，比如会员模块，接入层需要做的就是对数据的封装，权限的过滤，
-	以及各种安全什么的，前台需要什么数据，接入层去对应的后台微服务模块获取就行，接入层是没有表的，数据都从后台拿。
-	```
+ ```
+ 中台就是接入层啊，一般有中台的都是比较大的项目，后台会分为很多模块，比如订单模块，比如会员模块，接入层需要做的就是对数据的封装，权限的过滤，
+ 以及各种安全什么的，前台需要什么数据，接入层去对应的后台微服务模块获取就行，接入层是没有表的，数据都从后台拿。
+ ```
 ### mvc:annotation-driven:
-  * **<mvc:annotation-driven /> 会自动注册RequestMappingHandlerMapping、RequestMappingHandlerAdapter 与ExceptionHandlerExceptionResolver 三个bean.**
+ * **<mvc:annotation-driven /> 会自动注册RequestMappingHandlerMapping、RequestMappingHandlerAdapter 与ExceptionHandlerExceptionResolver 三个bean.**
 		还将提供以下支持：<br/>
 		 - 支持使用 ConversionService 实例对表单参数进行类型转换<br/>
 		 - 支持使用 @NumberFormat annotation、@DateTimeFormat注解完成数据类型的格式化<br/>
@@ -347,31 +347,31 @@
 		 - 支持使用 @RequestBody 和 @ResponseBody 注解<br/>
 
 ### 国际化:fmt
-  * 写i18n_en_US.properties文件
-	* 再context.xml中配置：
-	```xml
-	<!-- 配置国际化资源文件 -->
-	<bean id="messageSource"
-		class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="i18n"></property>
-	</bean>
-	```
-	* 在jsp页面中添加,并使用：
-	```xml
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	<fmt:message key="i18n.username"></fmt:message>
-	<fmt:message key="i18n.password"></fmt:message>
-	```
+ * 写i18n_en_US.properties文件
+ * 再context.xml中配置：
+ ```xml
+ <!-- 配置国际化资源文件 -->
+ <bean id="messageSource"
+ 	class="org.springframework.context.support.ResourceBundleMessageSource">
+ 	<property name="basename" value="i18n"></property>
+ </bean>
+ ```
+ * 在jsp页面中添加,并使用：
+ ```xml
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <fmt:message key="i18n.username"></fmt:message>
+ <fmt:message key="i18n.password"></fmt:message>
+ ```
 ### 注:
-	```xml
-	<!--
-		1. 配置直接转发页面，无需经过Handler处理
-		2. 这里可能会出问题：
-			需要配置<mvc:annotation-driven></mvc:annotation-driven>
-				<mvc:default-servlet-handler/>
-		3.  所以要一起出现。
-	-->
-	<mvc:view-controller path="/success" view-name="success">
-	<mvc:annotation-driven></mvc:annotation-driven>
-	<mvc:default-servlet-handler/>
-	```
+ ```xml
+ <!--
+ 	1. 配置直接转发页面，无需经过Handler处理
+	2. 这里可能会出问题：
+		需要配置<mvc:annotation-driven></mvc:annotation-driven>
+			<mvc:default-servlet-handler/>
+	3.  所以要一起出现。
+ -->
+ <mvc:view-controller path="/success" view-name="success">
+ <mvc:annotation-driven></mvc:annotation-driven>
+ <mvc:default-servlet-handler/>
+ ```
