@@ -4,9 +4,9 @@
   * **Git 数据库中保存的信息都是以文件内容的哈希值(24b9da6552252987aa493b52f8696cd6d3b0037)来索引，不是文件名**
   * **Git 一般只添加数据**
   * **Git 有三种状态**
-  + committed(已提交): Git 仓库--Git 用来保存项目的元数据和对象数据库的地方
-  + modified(已修改): 工作目录--对项目的某个版本独立提取出来的内容--暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中
-  + staged(已暂存): 暂存区域
+   + &nbsp; committed(已提交): Git 仓库--Git 用来保存项目的元数据和对象数据库的地方
+   + &nbsp; modified(已修改): 工作目录--对项目的某个版本独立提取出来的内容--暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中
+   + &nbsp; staged(已暂存): 暂存区域
   ![avatar](http://www.yiibai.com/uploads/images/201707/0607/744160702_48164.png)
  ### git 安装和设置
   #### 安装
@@ -81,12 +81,12 @@
  ### git fetch 和 git pull 的区别:
   * [参考](https://www.cnblogs.com/ToDoToTry/p/4095626.html)
   * git remote: 本地的repo和远程的repo进行版本对应
-   - *git remote add：*  来添加当前本地长度的远程repo，本地就知道push到哪个branch
+   * *git remote add：*  来添加当前本地长度的远程repo，本地就知道push到哪个branch
   * git branch: 为了单独记录软件的某一个发布版本而存在的
-   - *git branch:*  可以查看本地分支
-   - *git branch -r:*  可以用来查看远程分支
-   - *git push origin feature/001:* 地分支和远程分支在git push 的时候可以随意指定，交错对应，只要不出现**版本从图**即可
-   - *git pull :*  等价于 *git fetch + git merge*
+   &nbsp;&nbsp;- *git branch:*  可以查看本地分支
+   &nbsp;&nbsp;- *git branch -r:*  可以用来查看远程分支
+   &nbsp;&nbsp;- *git push origin feature/001:* 地分支和远程分支在git push 的时候可以随意指定，交错对应，只要不出现**版本从图**即可
+   &nbsp;&nbsp;- *git pull :*  等价于 *git fetch + git merge*
   * git push 和 commit-id: git commit 操作来保存当前工作到本地的repo，此时会产生一个commit-id，这是一个能唯一标识一个版本的序列号。 在使用git push后，这个序列号还会同步到远程repo.
   * git merge: 团队协作时使用
   * git fetch: **将更新 git remote 中所有的远程 repo 所包含分支的最新commit-id, 将其记录到.git/FETCH_HEAD文件中(将远程的commit-id 拿到本地)**
