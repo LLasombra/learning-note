@@ -5,9 +5,9 @@
   * **Git 一般只添加数据**
   * **Git 有三种状态**
   ![avatar](http://www.yiibai.com/uploads/images/201707/0607/744160702_48164.png)
-   - committed(已提交): Git 仓库--Git 用来保存项目的元数据和对象数据库的地方
-   - modified(已修改): 工作目录--对项目的某个版本独立提取出来的内容--暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中
-   - staged(已暂存): 暂存区域
+  - committed(已提交): Git 仓库--Git 用来保存项目的元数据和对象数据库的地方
+  - modified(已修改): 工作目录--对项目的某个版本独立提取出来的内容--暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中
+  - staged(已暂存): 暂存区域
  ### git 安装和设置
   #### 安装
   ```shell
@@ -81,7 +81,7 @@
  ### git fetch 和 git pull 的区别:
   * [参考](https://www.cnblogs.com/ToDoToTry/p/4095626.html)
   * git remote: 本地的repo和远程的repo进行版本对应
-   - *git remote add：*  来添加当前本地长度的远程repo，本地就知道push到哪个branch
+  - *git remote add：*  来添加当前本地长度的远程repo，本地就知道push到哪个branch
   * git branch: 为了单独记录软件的某一个发布版本而存在的
    - *git branch:*  可以查看本地分支
    - *git branch -r:*  可以用来查看远程分支
