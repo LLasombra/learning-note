@@ -99,14 +99,14 @@
   * git rebase: **在另一个分支基础之上重新应用，用于把一个分支的修改合并到当前分支**
   * 出现冲突，git 停下来解决冲突，在执行
   * git git rebase --continue
-  * git rebase --abort 放弃rebase
+  * git rebase --abort 放弃rebase<br/>
   * [参考](https://www.yiibai.com/git/git_rebase.html)
-  * 开发
+  * 开发<br/>
   ![avatar](http://www.yiibai.com/uploads/images/201707/1307/842100748_44775.png)
   ![avatar](http://www.yiibai.com/uploads/images/201707/1307/810100749_17109.png)
-  * git merge
+  * git merge<br/>
   ![avatar](http://www.yiibai.com/uploads/images/201707/1307/350100750_71786.png)
-  * git rebase
+  * git rebase<br/>
    ![avatar](http://www.yiibai.com/uploads/images/201707/1307/845100751_76810.png)
    ![avatar](http://www.yiibai.com/uploads/images/201707/1307/645100753_82870.png)
 
