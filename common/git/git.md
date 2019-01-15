@@ -102,7 +102,7 @@
   * git rebase --abort 放弃rebase<br/>
   * [参考](https://www.yiibai.com/git/git_rebase.html)
   * 开发<br/>
-  ![avatar](http://www.yiibai.com/uploads/images/201707/1307/842100748_44775.png)
+  ![avatar](http://www.yiibai.com/uploads/images/201707/1307/842100748_44775.png)<br/>
   ![avatar](http://www.yiibai.com/uploads/images/201707/1307/810100749_17109.png)
   * git merge<br/>
   ![avatar](http://www.yiibai.com/uploads/images/201707/1307/350100750_71786.png)
