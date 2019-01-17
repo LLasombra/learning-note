@@ -17,13 +17,13 @@
  * cd omnisocials-backend/src/modules
  * rm -rf nikehbl
  * ln -s /srv/omnisocials-frontend/src/modules/nikehbl nikehbl
- *  cd /srv/omnisocials-frontend/src/modules/nikehbl
  // 切换到有UI的分支
+ * cd /srv/omnisocials-frontend/src/modules/nikehbl
  * git fetch
-  961  git checkout feat-add-graphic-management
-  962  cd ~/workspace/omnisocials
+ * git checkout feat-add-graphic-management
+ * cd ~/workspace/omnisocials
   // 重启服务，注意不需要init
-  963  ./build.sh up
+ * ./build.sh up
 
 ## 软链
 在`omnisocials`的根目录下面有一个叫做`docker-compose.yml`的文件。
