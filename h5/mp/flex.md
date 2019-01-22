@@ -35,5 +35,8 @@
   **align-items属性 ：在交叉轴上移动**
   **align-content属性 ： 多轴**
 
+
+
+	上面有一层flex
   `justify-content:center;` **左右移动**
   `align-items:center;` **使水平方向在一条线上，上下移动**
