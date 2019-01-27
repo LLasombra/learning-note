@@ -129,7 +129,9 @@
   * git fetch remote_repo remote_branch_name:local_branch_name: **将更新名称为remote_repo 的远程repo上的分支： remote_branch_name ，并在本地创建local_branch_name 本地分支保存远端分支的所有数据**
   * git pull [origin feature/001]: **首先，基于本地的[FETCH_HEAD](#FETCH_HEAD)记录，比对本地的FETCH_HEAD记录与远程仓库的版本号，然后git fetch 获得当前指向的远程分支的后续版本的数据，然后再利用git merge将其与本地的当前分支合并**
   ![avatar](https://www.yiibai.com/uploads/allimg/140613/0A025G34-0.jpg)
+  
 ### git commit 解决
+
  ```shell
  # 提交改动
  git add -A
@@ -153,4 +155,3 @@
  # 推送远程分支
  git push -f origin xxx
  ```
- 
