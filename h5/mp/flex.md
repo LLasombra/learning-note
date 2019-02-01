@@ -1,4 +1,7 @@
-# Flex布局元素：`http://www.runoob.com/w3cnote/flex-grammar.html`
+# Flex布局元素：
+
+[参考](http://www.runoob.com/w3cnote/flex-grammar.html)
+
   1. 设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。 ***display : flex***;
 	2. 采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。
 		它的所有子元素自动成为容器成员，称为Flex项目（flex item）简称”项目”。
