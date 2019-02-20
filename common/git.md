@@ -147,7 +147,8 @@
  # rebase develop 的代码
  git rebase develop
  # 解决冲突，继续rebase
- git rebase continue
+ git add .
+ git rebase --continue
  # merge 代码进这个分支
  git merge --squash new-name
  # 添加 commit 信息
