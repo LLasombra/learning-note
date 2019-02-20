@@ -154,4 +154,13 @@
  git commit -m 'xxx'
  # 推送远程分支
  git push -f origin xxx
+ 
+ # 第二次提交改动, 没有commit 的提交
+ git status
+ git add .
+ git commit --amend
+ git push --set-upstream origin feat-team-share-page -f
+ # rebase develop
+ git fetch
+ git rebase origin/develop
  ```
