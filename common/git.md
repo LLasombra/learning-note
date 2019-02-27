@@ -164,5 +164,8 @@
  # rebase develop
  git fetch
  git rebase origin/develop
+ # resolve conflict
+ git add .
+ git rebase --continue
  git push -f
  ```
