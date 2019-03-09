@@ -13,15 +13,24 @@
 ### 2.常用的UI组件
   * 1). 简单UI组件
     + TextView : 文本视图
+
     ![avatar](https://img-blog.csdnimg.cn/20190309205241981.png)
+
     + EditText : 可编辑的文本视图
+
     ![avatar](https://img-blog.csdnimg.cn/20190309205435703.png)
+
     + Button : 按钮
     + ImageView : 图片视图
+
     ![avatar](https://img-blog.csdnimg.cn/20190309205606768.png)
+
     + CheckBox : 多选框
+
     ![avatar](https://img-blog.csdnimg.cn/20190309205658116.png)
+
     + RadioGroup/RadioButton : 单选框
+
     ![avatar](https://img-blog.csdnimg.cn/20190309205741606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
  * 2). 菜单Menu
@@ -45,32 +54,49 @@
             重写onContextItemSelected(), 根据itemId做响应
     ```
  * 3). 进度条
-    + ProgressBar
+    + a. ProgressBar
       - 圆形
+
       ![avatar](https://img-blog.csdnimg.cn/20190309210243695.png)
+
       - 水平
+
       ![avatar](https://img-blog.csdnimg.cn/20190309210415928.png)
       ![avatar](https://img-blog.csdnimg.cn/20190309210534779.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
-    2). SeekBar
+
+    + b. SeekBar
+
     ![avatar](https://img-blog.csdnimg.cn/20190309210709302.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
  * 4). 对话框
-    + API结构<br>
-    ![avatar](https://img-blog.csdnimg.cn/20190309210816580.png)<br>
-    + AlertDialog
+    + a.API结构
+
+    ![avatar](https://img-blog.csdnimg.cn/20190309210816580.png)
+
+    + b.AlertDialog
       - 一般的
+
       ![avatar](https://img-blog.csdnimg.cn/20190309211209305.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
+
       - 自定义布局的
         - 动态加载布局文件得到对应的View对象
+
         ![avatar](https://img-blog.csdnimg.cn/20190309211310905.png)
-        - 设置View<br>
+
+        - 设置View
+
         ![avatar](https://img-blog.csdnimg.cn/20190309211352722.png)
-      - 带单选列表的<br>
+
+      - 带单选列表的
+
         ![avatar](https://img-blog.csdnimg.cn/2019030921145176.png)
-    + ProgressDialog
+
+    + c.ProgressDialog
       - 圆形进度
+
         ![avatar](https://img-blog.csdnimg.cn/20190309211520748.png)
-      - 水平进度<br>
+
+      - 水平进度
       ![avatar](https://img-blog.csdnimg.cn/20190309211628674.png)
 
 ### 补充:
@@ -98,6 +124,7 @@
 
 ### 4.常用的视图标签的属性
  * 1).视图的常用属性
+
   ![avatar](https://img-blog.csdnimg.cn/20190309212748451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
   ![avatar](https://img-blog.csdnimg.cn/20190309212826920.png)
 
@@ -113,11 +140,12 @@
 
 ### 5.ListView的使用
  * 1). 理解
+
    ![avatar](https://img-blog.csdnimg.cn/20190309213305839.png)
    ![avatar](https://img-blog.csdnimg.cn/20190309213336391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
-   ```java
-  2). 使用
+```java
+  2). 使用'\n'
     a. ArrayAdapter : 显示简单文本列表
       ArrayAdapter(Context context, int resource, T[] objects)
     b. SimpleAdpater : 显示复杂列表
@@ -136,22 +164,22 @@
     d. 给ListView的Item设置监听
       item的点击监听: listView.setOnItemClickListener(listener)
       item的长按监听 : listView.setOnItemLongClickListener(listener)
-  3). 优化
+  3). 优化'\n'
+
     a. 内存中最多存在n+1个convertView对象
     b. 只有当convertView为null时才去加载item的布局文件
-  ```
-
+```
 ### 6.style和Theme
-  1). style : 多个视图标签属性的集合
-    好处:  复用标签属性
-    目标: 布局文件中的视图标签
-  2). theme : 本质也是style
-    好处:  复用标签属性
-    目标:  功能清单文件中整个应用/Activity
+  + 1). style : 多个视图标签属性的集合
+    - 好处:  复用标签属性
+    - 目标: 布局文件中的视图标签
+  + 2). theme : 本质也是style
+    - 好处:  复用标签属性
+    - 目标:  功能清单文件中整个应用/Activity
 
 ### 7.练习
-  1). 应用功能编码的基本流程
-    外观:  布局文件, 读取数据, 定义Adapter, 显示列表
-    行为: 设置事件监听, 并在回调就去中做出对应的响应
-  2). 初始显示列表和更新列表
-  3). GridView的基本使用
+  * 1). 应用功能编码的基本流程
+    + 外观:  布局文件, 读取数据, 定义Adapter, 显示列表
+    + 行为: 设置事件监听, 并在回调就去中做出对应的响应
+  * 2). 初始显示列表和更新列表
+  * 3). GridView的基本使用

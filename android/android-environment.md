@@ -4,7 +4,7 @@
 2. 创建第一个Android项目: HelloAndroid
     * 指定sdk的版本都为182). 修改清单文件: minSdk="8"
 3. 四个文件目录结构:
-    * 应用项目的
+    * 1).应用项目的
       + src(源码文本夹): **MainActivity**.java: 主界面类
       + gen(自动生成的源码文本夹): R.java: 对应res文件夹
         - drawble: 图片
@@ -15,16 +15,21 @@
         - layout: 界面的布局文件: 功能类似于HTML
         - values: 常量文件夹: strings.xml : 包含固定的字符串, 在布局中引用: @string/name
       + **AndroidManifest.xml(功能清单文件)**
+
       ![avatar](https://img-blog.csdnimg.cn/20190309191219716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
-     * 应用APK的
+    * 2).应用APK的
+
      ![avatar](https://img-blog.csdnimg.cn/20190309191439658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
+
      ![avatar](https://img-blog.csdnimg.cn/20190309191452963.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
-     * Android系统的
+    * 3).Android系统的
+
      ![avatar](https://img-blog.csdnimg.cn/20190309191507735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
-     4). SDK的
+    * 4).SDK的
+
      ![avatar](https://img-blog.csdnimg.cn/20190309191519922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
 4. 三个应用开发工具
@@ -58,9 +63,9 @@
        + 用户 可以在系统设置中设置文本的大小:
        + dp 为单位是没有效果的；所以sp 为单位是比较好的
      * 注意:
-      1. 在布局文件视图的宽高尽量使用match_parent/wrap_content
-      2. 如果必须指定特定值，使用dp/dip做单位
-      3. 文本大小使用 sp 做单位
+       1. 在布局文件视图的宽高尽量使用match_parent/wrap_content
+       2. 如果必须指定特定值，使用dp/dip做单位
+       3. 文本大小使用 sp 做单位
 
 6. 相关API:
      * **Activity:** 四大应用组件之一

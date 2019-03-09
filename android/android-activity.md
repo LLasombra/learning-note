@@ -55,6 +55,7 @@
         onResume() : 只有经历此方法, 才进入运行状态
         onDestroy() : 在对象死亡之前, 做一些收尾或清理的工作
 ```
+
 ![avatar](https://img-blog.csdnimg.cn/20190309203904166.png)
 
 ### 6. TaskStack和lauchMode
