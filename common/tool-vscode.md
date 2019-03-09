@@ -1,7 +1,7 @@
 # vscode 的快捷键
 
 ## window
-* **shift + alt + R:** 在文件夹中打开
+* **shift + alt + R:** 在文件夹中打开 Open file in explorer
 * **Ctrl + ,:** 显示设置面板 Show setting paltte
 * **Ctrl + Shift + P，F1:** 显示命令面板 Show Command Palette
 * **Ctrl + P** 快速打开 Quick Open

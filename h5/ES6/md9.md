@@ -4,7 +4,7 @@
 
 ---
 ##获取格式为(yyyy-MM-dd)的日期
-```
+```js
 // 获取当前日期
 var date = new Date();
 // 获取当前月份
@@ -25,7 +25,7 @@ if (strDate >= 0 && strDate <= 9) {
 var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
 ```
 ## 获取时间戳
-```
+```php
 #获取当前时间的时间戳(毫秒数)
 new Date().getTime()
 #获取指定时间的时间戳(两种格式都是一样的)
