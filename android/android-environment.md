@@ -20,13 +20,13 @@
      * 应用APK的
      ![avatar](https://img-blog.csdnimg.cn/20190309191439658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
      ![avatar](https://img-blog.csdnimg.cn/20190309191452963.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
-               
+
      * Android系统的
      ![avatar](https://img-blog.csdnimg.cn/20190309191507735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
-             
+
      4). SDK的
      ![avatar](https://img-blog.csdnimg.cn/20190309191519922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
-   
+
 4. 三个应用开发工具
    * ADB: 调试工具
    ```json
@@ -41,8 +41,8 @@
         + LogCat: 查看日志输出
         + File Explorer: 查看系统内部文件
         + Devices: 显示关联的 Android 设备
-        + Emulator Control: 操作控制控制的 Android 设备 
-          
+        + Emulator Control: 操作控制控制的 Android 设备
+
     * Log: 日志工具类
         + Log 提供了多个级别的输出打印方法，在 Logcat 中显示不同的颜色
         + Log 打印时必须指定TAG，在 Logcat 中可以通过添加 TAG 进行过滤查看
@@ -51,16 +51,16 @@
           - 应用包名: 显示指定包名应用的所有输出
 
 5. 尺寸
-     * dp 与 px 的比较: 
+     * dp 与 px 的比较:
        + 以 px 为长度单位，再好的手机上会变小， 在坏手机上会变大
        + dp 为单位是比较好的
-     *  dp 与 sp 的比较: 
+     *  dp 与 sp 的比较:
        + 用户 可以在系统设置中设置文本的大小:
        + dp 为单位是没有效果的；所以sp 为单位是比较好的
      * 注意:
       1. 在布局文件视图的宽高尽量使用match_parent/wrap_content
       2. 如果必须指定特定值，使用dp/dip做单位
-      3. 文本大小使用 sp 做单位        
+      3. 文本大小使用 sp 做单位
 
 6. 相关API:
      * **Activity:** 四大应用组件之一
