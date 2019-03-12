@@ -12,7 +12,7 @@
 
 # Package Files #
 *.jar
-!settings.jar
+!idea-settings.jar
 *.war
 *.nar
 *.ear
