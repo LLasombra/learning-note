@@ -40,6 +40,7 @@
 * **Alt + left/right:** 切换代码视图
 * **Alt + Up/Down:** 在方法间快速移动定位
 * **Ctrl + Shift + Up/Down:** 向上/下移动语句
+* **Ctrl + alt + enter:** insert before
 * **[Shift] + F2:** 高亮错误或警告快速定位
 * **Ctrl + Shift + F7:** 高亮显示所有该文本，按 Esc 高亮消失
 * **Alt + F3:** 逐个往下查找相同文本，并高亮显示
