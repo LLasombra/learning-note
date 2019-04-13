@@ -7,12 +7,8 @@
       - [d. 保留字](#d-%E4%BF%9D%E7%95%99%E5%AD%97)
     - [2. 类型、值、变量](#2-%E7%B1%BB%E5%9E%8B%E5%80%BC%E5%8F%98%E9%87%8F)
       - [a. 类型分类](#a-%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB)
-        - [按数据类型分类](#%E6%8C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB)
-          - [原始类型：数字、字符串、布尔值、原始值[undefined{未声明或声明后未赋值}[少用]、null]](#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%83%E5%B0%94%E5%80%BC%E5%8E%9F%E5%A7%8B%E5%80%BCundefined%E6%9C%AA%E5%A3%B0%E6%98%8E%E6%88%96%E5%A3%B0%E6%98%8E%E5%90%8E%E6%9C%AA%E8%B5%8B%E5%80%BC%E5%B0%91%E7%94%A8null)
-          - [对象[属性的集合]类型：array、function etc.](#%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8Barrayfunction-etc)
-        - [按可变分类](#%E6%8C%89%E5%8F%AF%E5%8F%98%E5%88%86%E7%B1%BB)
-          - [可变类型：[对象(名值对)object、array、function.....]](#%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B%E5%AF%B9%E8%B1%A1%E5%90%8D%E5%80%BC%E5%AF%B9objectarrayfunction)
-          - [不可变类型：[null、undefined、number、bool、string]](#%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8Bnullundefinednumberboolstring)
+        - [1. 按数据类型分类](#1-%E6%8C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB)
+        - [2. 按可变分类](#2-%E6%8C%89%E5%8F%AF%E5%8F%98%E5%88%86%E7%B1%BB)
       - [b. 有 GC 机制](#b-%E6%9C%89-gc-%E6%9C%BA%E5%88%B6)
       - [c. 相关的类](#c-%E7%9B%B8%E5%85%B3%E7%9A%84%E7%B1%BB)
         - [1. Math](#1-math)
@@ -33,16 +29,16 @@
     - [10. JavaScript 子集与扩展](#10-javascript-%E5%AD%90%E9%9B%86%E4%B8%8E%E6%89%A9%E5%B1%95)
     - [11. nodejs](#11-nodejs)
   - [客户端](#%E5%AE%A2%E6%88%B7%E7%AB%AF)
-    - [Web 中的 JavaScript](#web-%E4%B8%AD%E7%9A%84-javascript)
-    - [Window 对象(default)](#window-%E5%AF%B9%E8%B1%A1default)
-    - [脚本化文档](#%E8%84%9A%E6%9C%AC%E5%8C%96%E6%96%87%E6%A1%A3)
-    - [脚本化 CSS](#%E8%84%9A%E6%9C%AC%E5%8C%96-css)
-    - [事件处理(8)](#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%868)
-    - [脚本化 HTTP](#%E8%84%9A%E6%9C%AC%E5%8C%96-http)
-    - [JQuery 库操纵文档的内容、样式、行为](#jquery-%E5%BA%93%E6%93%8D%E7%BA%B5%E6%96%87%E6%A1%A3%E7%9A%84%E5%86%85%E5%AE%B9%E6%A0%B7%E5%BC%8F%E8%A1%8C%E4%B8%BA)
-    - [客户端 Cache](#%E5%AE%A2%E6%88%B7%E7%AB%AF-cache)
-    - [多媒体与图形编程](#%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%8E%E5%9B%BE%E5%BD%A2%E7%BC%96%E7%A8%8B)
-    - [HTML5](#html5)
+    - [1. Web 中的 JavaScript](#1-web-%E4%B8%AD%E7%9A%84-javascript)
+    - [2. Window 对象(default)](#2-window-%E5%AF%B9%E8%B1%A1default)
+    - [3. 脚本化文档](#3-%E8%84%9A%E6%9C%AC%E5%8C%96%E6%96%87%E6%A1%A3)
+    - [4. 脚本化 CSS](#4-%E8%84%9A%E6%9C%AC%E5%8C%96-css)
+    - [5. 事件处理(8)](#5-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%868)
+    - [6. 脚本化 HTTP](#6-%E8%84%9A%E6%9C%AC%E5%8C%96-http)
+    - [7. JQuery 库操纵文档的内容、样式、行为](#7-jquery-%E5%BA%93%E6%93%8D%E7%BA%B5%E6%96%87%E6%A1%A3%E7%9A%84%E5%86%85%E5%AE%B9%E6%A0%B7%E5%BC%8F%E8%A1%8C%E4%B8%BA)
+    - [8. 客户端 Cache](#8-%E5%AE%A2%E6%88%B7%E7%AB%AF-cache)
+    - [9. 多媒体与图形编程](#9-%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%8E%E5%9B%BE%E5%BD%A2%E7%BC%96%E7%A8%8B)
+    - [10. HTML5](#10-html5)
   - [summary](#summary)
     - [1.查看变量值](#1%E6%9F%A5%E7%9C%8B%E5%8F%98%E9%87%8F%E5%80%BC)
     - [2. 对象 map](#2-%E5%AF%B9%E8%B1%A1-map)
@@ -107,17 +103,17 @@
 
 #### a. 类型分类
 
-##### 按数据类型分类
+##### 1. 按数据类型分类
 
-###### 原始类型：数字、字符串、布尔值、原始值[undefined{未声明或声明后未赋值}[少用]、null]
+- 原始类型：数字、字符串、布尔值、原始值[undefined{未声明或声明后未赋值}[少用]、null]
 
-###### 对象[属性的集合]类型：array、function etc.
+- 对象[属性的集合]类型：array、function etc.
 
-##### 按可变分类
+##### 2. 按可变分类
 
-###### 可变类型：[对象(名值对)object、array、function.....]
+- 可变类型：[对象(名值对)object、array、function.....]
 
-###### 不可变类型：[null、undefined、number、bool、string]
+-不可变类型：[null、undefined、number、bool、string]
 
 #### b. 有 GC 机制
 
