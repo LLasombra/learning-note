@@ -10,6 +10,8 @@ sudo python3 get-pip.py
 pip --version
 # 获取帮助
 pip --help
+# 安装指定版本的
+pip install django==1.11.7
 # 升级 pip
 pip install -U pip
 # 升级 pip2
