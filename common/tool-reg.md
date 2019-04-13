@@ -1,7 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
 - [Regex](#regex)
   - [Regex Expression Syntax](#regex-expression-syntax)
     - [元字符(**metacharacter**):](#%E5%85%83%E5%AD%97%E7%AC%A6metacharacter)
@@ -28,8 +24,6 @@
     - [flags 标识诠释](#flags-%E6%A0%87%E8%AF%86%E8%AF%A0%E9%87%8A)
     - [正则表达式对象](#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AF%B9%E8%B1%A1)
     - [python-extensions: xpath](#python-extensions-xpath)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Regex
 
