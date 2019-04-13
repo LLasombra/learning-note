@@ -1,0 +1,1 @@
+String s_name = new String(request.getParameter("pram_name").getBytes("iso-8859-1"), "utf-8");
