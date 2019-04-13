@@ -1,4 +1,8 @@
-[TOC]
+- [npm](#npm)
+  - [install npm](#install-npm)
+  - [common instructions](#common-instructions)
+  - [generate content](#generate-content)
+    - [说明](#%E8%AF%B4%E6%98%8E)
 
 # npm
 
