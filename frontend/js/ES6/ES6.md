@@ -16,7 +16,7 @@
       - [c. 相关的类](#c-%E7%9B%B8%E5%85%B3%E7%9A%84%E7%B1%BB)
         - [1. Math](#1-math)
         - [2. Date](#2-date)
-        - [3. string](#3-string)
+        - [3. String](#3-string)
         - [4. false](#4-false)
         - [5. 全局对象](#5-%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1)
         - [6. 拆箱与装箱问题](#6-%E6%8B%86%E7%AE%B1%E4%B8%8E%E8%A3%85%E7%AE%B1%E9%97%AE%E9%A2%98)
@@ -56,13 +56,27 @@
           - [f. 遍历 Map 结构](#f-%E9%81%8D%E5%8E%86-map-%E7%BB%93%E6%9E%84)
           - [g. 输入模块的指定方法](#g-%E8%BE%93%E5%85%A5%E6%A8%A1%E5%9D%97%E7%9A%84%E6%8C%87%E5%AE%9A%E6%96%B9%E6%B3%95)
     - [4. 语句](#4-%E8%AF%AD%E5%8F%A5)
-    - [5. 对象](#5-%E5%AF%B9%E8%B1%A1)
-    - [6. 数组](#6-%E6%95%B0%E7%BB%84)
-    - [7. 函数](#7-%E5%87%BD%E6%95%B0)
-    - [8. 类、模板](#8-%E7%B1%BB%E6%A8%A1%E6%9D%BF)
-    - [9. 正则 Reg](#9-%E6%AD%A3%E5%88%99-reg)
-    - [10. JavaScript 子集与扩展](#10-javascript-%E5%AD%90%E9%9B%86%E4%B8%8E%E6%89%A9%E5%B1%95)
-    - [11. nodejs](#11-nodejs)
+      - [a. 表达式语句](#a-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E5%8F%A5)
+      - [b. 复合语句和空语句](#b-%E5%A4%8D%E5%90%88%E8%AF%AD%E5%8F%A5%E5%92%8C%E7%A9%BA%E8%AF%AD%E5%8F%A5)
+      - [c. 声明语句](#c-%E5%A3%B0%E6%98%8E%E8%AF%AD%E5%8F%A5)
+      - [d. 条件语句](#d-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5)
+      - [e. 循环语句](#e-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5)
+      - [f. 跳转语句](#f-%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5)
+      - [g. 其他语句](#g-%E5%85%B6%E4%BB%96%E8%AF%AD%E5%8F%A5)
+      - [h. 总结](#h-%E6%80%BB%E7%BB%93)
+    - [5. 字符串](#5-%E5%AD%97%E7%AC%A6%E4%B8%B2)
+      - [a. 字符串的遍历器接口](#a-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%81%8D%E5%8E%86%E5%99%A8%E6%8E%A5%E5%8F%A3)
+      - [b. includes(), startsWith(), endsWith()](#b-includes-startswith-endswith)
+      - [c. repeat()](#c-repeat)
+      - [d. matchAll()](#d-matchall)
+      - [e. 模板字符串](#e-%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2)
+    - [6. 对象](#6-%E5%AF%B9%E8%B1%A1)
+    - [7. 数组](#7-%E6%95%B0%E7%BB%84)
+    - [8. 函数](#8-%E5%87%BD%E6%95%B0)
+    - [9. 类、模板](#9-%E7%B1%BB%E6%A8%A1%E6%9D%BF)
+    - [10. 正则 Reg](#10-%E6%AD%A3%E5%88%99-reg)
+    - [11. JavaScript 子集与扩展](#11-javascript-%E5%AD%90%E9%9B%86%E4%B8%8E%E6%89%A9%E5%B1%95)
+    - [12. nodejs](#12-nodejs)
   - [客户端](#%E5%AE%A2%E6%88%B7%E7%AB%AF)
     - [1. Web 中的 JavaScript](#1-web-%E4%B8%AD%E7%9A%84-javascript)
     - [2. Window 对象(default)](#2-window-%E5%AF%B9%E8%B1%A1default)
@@ -81,7 +95,7 @@
     - [4.对象数组与对象数组](#4%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84)
     - [5. 优先级](#5-%E4%BC%98%E5%85%88%E7%BA%A7)
     - [6. math](#6-math)
-    - [7. 事件处理函数：](#7-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0)
+    - [7. 事件处理函数:](#7-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0)
     - [8. front 文件加载顺序](#8-front-%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F)
     - [9. 两个单独的对象一定不相等, 只有引用同一对象才想等.](#9-%E4%B8%A4%E4%B8%AA%E5%8D%95%E7%8B%AC%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%80%E5%AE%9A%E4%B8%8D%E7%9B%B8%E7%AD%89-%E5%8F%AA%E6%9C%89%E5%BC%95%E7%94%A8%E5%90%8C%E4%B8%80%E5%AF%B9%E8%B1%A1%E6%89%8D%E6%83%B3%E7%AD%89)
     - [10. 基本类型转换](#10-%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2)
@@ -94,6 +108,31 @@
     - [17. 类](#17-%E7%B1%BB)
     - [18. codingstyle](#18-codingstyle)
     - [19. 函数声明语句 与 函数表达式](#19-%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E8%AF%AD%E5%8F%A5-%E4%B8%8E-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F)
+    - [20. 'use strict'](#20-use-strict)
+    - [21. String](#21-string)
+  - [API](#api)
+    - [String](#string)
+      - [1. constructor](#1-constructor)
+      - [2. property](#2-property)
+      - [3. method](#3-method)
+        - [charAt(string) 字符串指定位置的字符](#charatstring-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E7%9A%84%E5%AD%97%E7%AC%A6)
+        - [concat(string) 多个字符串拼接为字符串 Array.concat()](#concatstring-%E5%A4%9A%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2-arrayconcat)
+        - [indexOf(string) 寻找子串](#indexofstring-%E5%AF%BB%E6%89%BE%E5%AD%90%E4%B8%B2)
+        - [lastIndexOf(substring[, start]) [从指定位置开始]寻找最后一个子串](#lastindexofsubstring-start-%E4%BB%8E%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E5%BC%80%E5%A7%8B%E5%AF%BB%E6%89%BE%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%AD%90%E4%B8%B2)
+        - [match(new RegExp(...)) 使用 Regex 进行匹配](#matchnew-regexp-%E4%BD%BF%E7%94%A8-regex-%E8%BF%9B%E8%A1%8C%E5%8C%B9%E9%85%8D)
+        - [replace(string/reg, string) 替换字符串, 可以使用 RegExp](#replacestringreg-string-%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-regexp)
+        - [search(string/reg) 查找字符串, 可以使用 RegExp](#searchstringreg-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-regexp)
+        - [split(string/reg, limit) 使用字符串或 reg 将原字符串分割为数组 Array.join()](#splitstringreg-limit-%E4%BD%BF%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%96-reg-%E5%B0%86%E5%8E%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E5%89%B2%E4%B8%BA%E6%95%B0%E7%BB%84-arrayjoin)
+        - [slice(start, end) 字符串的切片或子串[可以是负数] Array.slice()](#slicestart-end-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87%E6%88%96%E5%AD%90%E4%B8%B2%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%B4%9F%E6%95%B0-arrayslice)
+        - [substring(from, to) 字符串的切片或子串[可以是负数] Array.slice()](#substringfrom-to-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87%E6%88%96%E5%AD%90%E4%B8%B2%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%B4%9F%E6%95%B0-arrayslice)
+        - [substr(start, length) 字符串的切片或子串[可以是负数] Array.slice()](#substrstart-length-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87%E6%88%96%E5%AD%90%E4%B8%B2%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%B4%9F%E6%95%B0-arrayslice)
+        - [toLowerCase() 将字符串转换为小写](#tolowercase-%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B0%8F%E5%86%99)
+        - [toUpperCase() 将字符串转换为大写](#touppercase-%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%A4%A7%E5%86%99)
+        - [trim() 去除字符串中的空格](#trim-%E5%8E%BB%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E7%A9%BA%E6%A0%BC)
+        - [toString() 返回原始的字符串值](#tostring-%E8%BF%94%E5%9B%9E%E5%8E%9F%E5%A7%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC)
+        - [valueOf() 返回原始的字符串值](#valueof-%E8%BF%94%E5%9B%9E%E5%8E%9F%E5%A7%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC)
+        - [charCodeAt() 字符串指定位置的字符的编码](#charcodeat-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E7%9A%84%E5%AD%97%E7%AC%A6%E7%9A%84%E7%BC%96%E7%A0%81)
+        - [localeCompare(string) 比较 <0>](#localecomparestring-%E6%AF%94%E8%BE%83-0)
 
 # ECMAScript core knowledge
 
@@ -177,21 +216,21 @@ Google 公司的 Traceur 转码器, 也可以将 ES6 代码转为 ES5 代码
 
 ##### 1. 按数据类型分类
 
-- 原始类型：数字、字符串、布尔值、原始值[undefined{未声明或声明后未赋值}[少用]、null]
+- 原始类型: 数字、字符串、布尔值、原始值[undefined{未声明或声明后未赋值}[少用]、null]
 
-- 对象[属性的集合]类型：array、function etc.
+- 对象[属性的集合]类型: array、function etc.
 
 ##### 2. 按可变分类
 
-- 可变类型：[对象(名值对)object、array、function.....]
+- 可变类型: [对象(名值对)object、array、function.....]
 
--不可变类型：[null、undefined、number、bool、string]
+-不可变类型: [null、undefined、number、bool、String]
 
 #### b. 有 GC 机制
 
 #### c. 相关的类
 
-> Math、Date、string、array、function、date、regExp、Error
+> Math、Date、String、array、function、date、regExp、Error
 
 ##### 1. Math
 
@@ -204,8 +243,8 @@ Math.exp(3);         //E的三次方
 Math.max/min(x,y,z);      //取大小
 Math.log(512)/Math.ln2;
 
-Infinity：溢出(overflow)
--Infinity：下溢(underflow)
+Infinity: 溢出(overflow)
+-Infinity: 下溢(underflow)
 ```
 
 ##### 2. Date
@@ -222,14 +261,14 @@ now.getMinutes();
 now.getSeconds();
 ```
 
-##### 3. string
+##### 3. String
 
 ![avatar](https://img-blog.csdnimg.cn/20190413200601854.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
 ```js
 var s = 'hello,world'; //s[0];   ===>'h'
 s.charAt(s.length - 1); //d
-s.substring(1, 4); //ell
+s.subString(1, 4); //ell
 s.slice(1, 4); //ell
 s.slice(-3); //rld
 s.indexOf(''); //2,首次出现l的位置
@@ -249,10 +288,10 @@ s.join();
 ##### 5. 全局对象
 
     全局对象的属性是全局定义的符号, JavaScript可以直接使用, JavaScript解释器会创建一个新的全局变量, 并给它一组定义的初始属性
-    全局属性：NaN、undefined ···
-    全局函数：eval()、isFinite()、isNaN() ···
-    全局对象：Math、json ···
-    构造函数：Date()
+    全局属性: NaN、undefined ···
+    全局函数: eval()、isFinite()、isNaN() ···
+    全局对象: Math、json ···
+    构造函数: Date()
 
 ##### 6. 拆箱与装箱问题
 
@@ -281,7 +320,7 @@ o.y = 3; //OK
 ##### 7. 不可变的原始值和可变的对象引用
 
 ```js
-// 不可变的原始值：undefined、null、string、number、boolean
+// 不可变的原始值: undefined、null、String、number、boolean
 // 两个单独的对象一定不相等, 只有引用同一对象才想等.
 var o = { x: 1 },
 var p = { x: 1 };
@@ -303,11 +342,11 @@ o == p; //false
 ![avatar](https://img-blog.csdnimg.cn/20190413202039356.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
 ```js
-// Number2string
+// Number2String
 var a = 12.56;
-a.toFixed(1); // '12.5' 指定小数点后位数  Number2string
-a.toExpontial(5); // '1.25300e+1' 使用指数计数法, 小数前只有一位  Number2string
-a.topresicion(5); // '12.530' 有效数位  Number2string
+a.toFixed(1); // '12.5' 指定小数点后位数  Number2String
+a.toExpontial(5); // '1.25300e+1' 使用指数计数法, 小数前只有一位  Number2String
+a.topresicion(5); // '12.530' 有效数位  Number2String
 parseInt('0.1'); //0
 parseInt('.1'); //NaN
 parseFloat('0.1'); //0.1
@@ -331,7 +370,7 @@ parseFloat('$2'); //NaN
 ##### var
 
 ```js
-// C系列语言中, 定义与声明的区别：定义：int =0；声明：int a;
+// C系列语言中, 定义与声明的区别: 定义: int =0: 声明: int a;
 var a = [1, , , , , , , 6]; //之间会自动填充undefined
 var a = { x: 1, y: { z: 3 } }; // a.x = a['x']
 var a = [0, 1, 2, 3];
@@ -523,15 +562,15 @@ var getGlobal = function() {
 
 - 种类
   `+、-、++、--、&、~、<<、>>、>>>(无符号的有右移)`
-- `+` 如果其中一个是对象, 则要通过 tostring()/valueof()转换为原始值；原始值若是字符转, 则另一个值也要转换为字符转. 否则都转换为数字或 NaN 进行运算
+- `+` 如果其中一个是对象, 则要通过 toString()/valueof()转换为原始值: 原始值若是字符转, 则另一个值也要转换为字符转. 否则都转换为数字或 NaN 进行运算
   ```js
   1 + {}; //"1[object Object]"
   2 + null; //2
   2 + undefined; //NaN
   ```
-- 一元运算符(+ - 、++、--)：作用于一个单独的操作数, 并产生一个新值(优先级很高)
+- 一元运算符(+ - 、++、--): 作用于一个单独的操作数, 并产生一个新值(优先级很高)
 - 位运算符(&、|、^、~、<<、>>、>>>(无符号的有右移,只是左边最高位要补零)
-- `==、+ 转换为 string 后运算; -、<、> 转换为 Number 后运算`
+- `==、+ 转换为 String 后运算; -、<、> 转换为 Number 后运算`
 
 ##### 2. 关系表达式
 
@@ -544,7 +583,7 @@ var getGlobal = function() {
   2 + null; //2
   2 + undefined; //NaN
   ```
-- 一元运算符(+ - 、++、--)：作用于一个单独的操作数, 并产生一个新值(优先级很高)
+- 一元运算符(+ - 、++、--): 作用于一个单独的操作数, 并产生一个新值(优先级很高)
 - 位运算符(&、|、^、~、<<、>>、>>>(无符号的有右移,只是左边最高位要补零)
 
 ##### 3. 逻辑表达式
@@ -553,7 +592,7 @@ var getGlobal = function() {
 
 ##### 4. 赋值表达式
 
-- 种类: ?:、typeof、delete [delete：只能删除自有的可配置属性, 不能删除继承属性]、void、,
+- 种类: ?:、typeof、delete [delete: 只能删除自有的可配置属性, 不能删除继承属性]、void、,
 - ?:
   ```js
   x > 0 ? x : -x; //|x|
@@ -565,10 +604,10 @@ var getGlobal = function() {
   |null |'obect'|
   |true/false |'boolean'|
   |number/NaN |'number'|
-  |string |'string'|
+  |String |'String'|
   |function |'function'|
   |非函数内置对象 |'object'|
-  |object |'string'|
+  |object |'String'|
 
 ##### 5. 表达式计算[rarely]
 
@@ -934,19 +973,297 @@ const { SourceMapConsumer, SourceNode } = require('source-map');
 
 ### 4. 语句
 
-### 5. 对象
+#### a. 表达式语句
 
-### 6. 数组
+1. 赋值语句: let 与 () 问题
+2. 递增、递减:
+3. delete:
+4. 函数调用:
 
-### 7. 函数
+#### b. 复合语句和空语句
 
-### 8. 类、模板
+1. JavaScript 解释器执行语句时, 空语句不做任何操作.
+2. 空语句可以通过循环初始化数组.
 
-### 9. 正则 Reg
+```js
+  //初始化 a 数组
+for(var i=0;i<a.length;a[i++]=0)
+```
 
-### 10. JavaScript 子集与扩展
+#### c. 声明语句
 
-### 11. nodejs
+1. 声明语句可以声明变量或函数
+2. function:声明与定义的区别:
+   都创建了新的函数对象, 声明语句中的函数名是一个<font color = 'red'>变量</font>; 定义中函数名是一个<font color = 'red'>对象</font>.
+3. JavaScript 中可以在声明一个函数之前就调用它.
+
+#### d. 条件语句
+
+1. if ... else if ...else
+2. **<font color = 'red'>switch: case 的匹配表达式实际上是“===”恒等运算符比较, 比较是不会做任何转换</font>**
+
+#### e. 循环语句
+
+1. 种类:
+   while 、do while 、for...in 、for...of
+
+2. for/in: for(variable in object)
+
+   - for/in 循环并不会遍历所有的属性, 只遍历可枚举的属性
+   - JavaScript 内置方法不是可枚举的【如 toString、prototype】, 代码中的方法属性和继承而来的都可枚举. (存在方法可以使其不可枚举). 枚举按照先后的顺序
+
+   ```js
+   var o = { x: 1, y: 2, z: 3 };
+   var a = [],
+     i = 0;
+   for (a[i++] in o);
+   // 隐式的给 a 赋值
+   for (a[i] in o) {
+     i++;
+   }
+
+   for (x in o) {
+     console.log(x);
+   }
+   ```
+
+3. for...of
+
+   - 任何部署了 Iterator 接口的对象, 都可以用 for...of 循环遍历. Map 结构原生支持 Iterator 接口, 配合变量的解构赋值, 获取键名和键值就非常方便
+
+   ```js
+   const map = new Map();
+   map.set('first', 'hello');
+   map.set('second', 'world');
+
+   for (let [key, value] of map) {
+     console.log(key + ' is ' + value);
+   }
+   // first is hello
+   // second is world
+
+   // 获取键名
+   for (let [key] of map) {
+     // ...
+   }
+
+   // 获取键值
+   for (let [, value] of map) {
+     // ...
+   }
+   ```
+
+#### f. 跳转语句
+
+1. 种类:
+   label、break、continue[再循环体内]、return、throw、try/catch/finally
+2. 标签语句:
+
+   - 通过给语句定义标签, 就可以在程序的任何地方通过标签名引用这条语句
+
+     ```js
+     mianloop: while(token!=null){
+     //program
+     continue mainloop;     //跳转到下一次loop
+     //program}
+     // 1.可以使用同一标识符作为语句标签和作为变量名后函数名
+     ```
+
+   - 语句标签在起作用的语句(也可以是子句)内是要有定义的
+   - 一个语句标签不能和他内部的语句标签重名, 但在两个代码段不相互嵌套情况下是可以出现的[类似于临时变量]
+   - 任何语句都可以有多个标签.
+
+3. break: 立即跳出最内层的循或 switch 语句[立即跳出循环或其他语句]
+
+   ```
+   a) break;
+   b) break labelname;
+   ```
+
+4. continue:结束本次循环, 进入下一次循环
+
+   ```
+   a) continue;
+   b) Continue labelname;
+   c) 注意: while 中, 检测循环开始时的表达式
+    dowhile 中, 检测 while 中的表达式
+   for 中, 计算自增, 检测 test
+   for/in 中, 开始遍历下一个属性名, 这个属性名赋给指定的变量
+   ```
+
+5. return:
+   return; //返回 undefined
+
+6. throw:
+
+   ```js
+   //  异常
+   if (x < 0) throw new Error('x 不能是负数');
+   //  Error 对象 = name 属性 + Message 属性
+   ```
+
+7. try/catch/finally:
+   ```
+   a) 终止 try 语句的方法
+      正常终止,执行完了
+      break、continue、return
+      异常+捕获
+      异常+不捕获
+   b) 只要 try 语句中代码有一部分执行了, finally 一定会执行. finally 常用于清除工作
+   ```
+
+#### g. 其他语句
+
+1.  kind
+    - with、debugger、'use strict'
+2.  with: 用于临时扩展作用域链, 但是影响函数的优化
+    a) with object //将 object 添加到作用域链的头部,然后执行
+    Statement //statement 语句,最后把作用域链恢复到开始状态
+    b) **严格模式下, 禁用 with 语句**
+    c) 在对象层次嵌套很深的时候, 通常会使用 with 语句来简化代码的编写
+
+    ```js
+    document.form[0].address.value; //若多次出现
+    // 则使用:
+    with (document.forms[0]) {
+      name.value = '';
+      address.value = '';
+      email.value = '';
+    }
+
+    var f = document.forms[0];
+    f.name.value = '';
+    ```
+
+    d) **with 语句提供了一种读写属性的快捷方式, 但不能创建属性**
+
+    ```js
+    with (o) {
+      x = 1; //若 o 有 x 属性,则为 x 赋值为 1
+      //若 o 没有 x 属性 ,则等价于 var x=1;
+    }
+    ```
+
+3.  degubber: 用来产生一个断点, JavaScript 代码会停止在断点位置
+4.  'use strict'
+    a) 只能出现在脚本化代码的开始, 函数体的开始, 任何实体语句以前: 与 eval() 使用时算是局部的上下文环境[可改不可创]
+    b) 在严格模式下, 禁用 with 语句, 所有变量都要声明
+    c) 调用的函数(不是方法)中的 this 返回 undefined:
+    ```js
+    // 区分是否支持 ECMA5 严格模式:
+    var hasStrictModel = (function() {
+      'use strict';
+      // 在严格时, this 返回 undefined; 在不严格时, this 返回全局对象
+      return this === undefined;
+    })();
+    ```
+    d) call()、apply()中的 this 是通过 call()、apply()传入的第一个参数:
+    在不严格时,null/undefined 的值会被全局对象或转换为对象的非全局对象所替代
+    e) ···
+
+#### h. 总结
+
+![avatar](https://img-blog.csdnimg.cn/20190415095132209.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
+
+### 5. 字符串
+
+#### a. 字符串的遍历器接口
+
+1. for...of 循环遍历
+
+   ```js
+   // 可以识别大于0xFFFF的码点, 传统的for循环无法识别这样的码点(汉字)
+   let text = String.fromCodePoint(0x20bb7);
+
+   for (let i = 0; i < text.length; i++) {
+     console.log(text[i]);
+   }
+   // " "
+   // " "
+
+   for (let i of text) {
+     console.log(i);
+   }
+   // "𠮷"
+   ```
+
+#### b. includes(), startsWith(), endsWith()
+
+1. 一个字符串是否包含在另一个字符串中
+
+```js
+// includes(): 返回布尔值, 表示是否找到了参数字符串
+
+// startsWith(): 返回布尔值, 表示参数字符串是否在原字符串的头部。
+// endsWith(): 返回布尔值, 表示参数字符串是否在原字符串的尾部。
+```
+
+#### c. repeat()
+
+```js
+// repeat方法返回一个新字符串, 表示将原字符串重复n次: 参数大于等于0, 小数取整, NaN等同于 0
+'na'.repeat(2.9); // "nana"
+'na'.repeat(NaN); // ""
+```
+
+#### d. matchAll()
+
+    matchAll 方法返回一个正则表达式在当前字符串的所有匹配
+
+#### e. 模板字符串
+
+```js
+// 模板字符串（template string）是增强版的字符串, 用反引号（`）标识. 它可以当作普通字符串使用, 也可以用来定义多行字符串, 或者在字符串中嵌入变量
+// 1. 普通字符串
+`In JavaScript '\n' is a line-feed.`;
+
+// 2. 字符串中嵌入变量, 需要将变量名写在 ${} 之中
+let name = 'Bob',
+  time = 'today';
+`Hello ${name}, how are you ${time}?`;
+
+// 3. 如果使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中, 比如<ul>标签前面会有一个换行。如果你不想要这个换行，可以使用trim方法消除它
+$('#list').html(
+  `
+  <ul>
+    <li>first</li>
+    <li>second</li>
+  </ul>
+  `.trim()
+);
+
+// 4. 大括号内部可以放入任意的 JavaScript 表达式，可以进行运算，以及引用对象属性
+let x = 1;
+let y = 2;
+`${x} + ${y * 2} = ${x + y * 2}`; // "1 + 4 = 5"
+
+let obj = { x: 1, y: 2 };
+`${obj.x + obj.y}`; // "3"
+
+// 5. 模板字符串之中还能调用函数
+function fn() {
+  return 'Hello World';
+}
+
+`foo ${fn()} bar`; // foo Hello World bar
+
+// 6. 模板字符串中的变量没有声明，将报错
+let msg = `Hello, ${place}`; // Uncaught ReferenceError: place is not defined
+```
+
+### 6. 对象
+
+### 7. 数组
+
+### 8. 函数
+
+### 9. 类、模板
+
+### 10. 正则 Reg
+
+### 11. JavaScript 子集与扩展
+
+### 12. nodejs
 
 ## 客户端
 
@@ -995,14 +1312,17 @@ book.topic; // 'javascript' 等价于 book['topic']
 ### 3. 数组
 
 ```js
-// C++ 中只有*不可以改; java 中 string 不可变, 但是改变后会出现一个新的 string.
+// C++ 中只有*不可以改; java 中 String 不可变, 但是改变后会出现一个新的 String.
 var prime = [2, 3, 4, 5];
 prime.length; //4
 
 //数组也可以直接添加
 prime[4] = 6;
-// 清空数组：
+// 清空数组:
 prime.length = 0;
+
+//初始化 a 数组
+for(var i=0;i<a.length;a[i++]=0)
 ```
 
 ### 4.对象数组与对象数组
@@ -1033,9 +1353,9 @@ console.log(data.trail[0][0]); // 1
 
     () > [] > *
     ()优先级高, 首先说明p是一个指针, 指向一个整型的一维数组, 这个一维数组的长度是n, 也可以说是p的步长. 也就是说执行p+1时, p要跨过n个整型数据的长度.
-    数组指针：int (*a)[5]  //行指针
-    []优先级高, 先与p结合成为一个数组, 再由int*说明这是一个整型指针数组, 它有n个指针类型的数组元素. 这里执行p+1时, 则p指向下一个数组元素, 这样赋值是错误的：p=a；因为p是个不可知的表示, 只存在p[0]、p[1]、p[2]...p[n-1],而且它们分别是指针变量可以用来存放变量地址. 但可以这样 *p=a; 这里*p表示指针数组第一个元素的值, a的首地址的值.
-    指针数组：int *a[5]
+    数组指针: int (*a)[5]  //行指针
+    []优先级高, 先与p结合成为一个数组, 再由int*说明这是一个整型指针数组, 它有n个指针类型的数组元素. 这里执行p+1时, 则p指向下一个数组元素, 这样赋值是错误的: p=a: 因为p是个不可知的表示, 只存在p[0]、p[1]、p[2]...p[n-1],而且它们分别是指针变量可以用来存放变量地址. 但可以这样 *p=a; 这里*p表示指针数组第一个元素的值, a的首地址的值.
+    指针数组: int *a[5]
 
 ### 6. math
 
@@ -1050,7 +1370,7 @@ console.log(0 / 0); // NaN
 isFinite(a); // 有限的  //a!=NaN 且a！= infinty 时为true
 ```
 
-### 7. 事件处理函数：
+### 7. 事件处理函数:
 
     是一个在浏览器中注册的 JavaScript 函数, 当特定事件发生时, 调用此函数. 定义事件处理函数的简单说方法, 给 HTML 的以 'on'为前缀的属性绑定一个回调函数. 或者使用 addEventListener() 函数.
 
@@ -1123,24 +1443,24 @@ Object.prototype.isPrototypeOf(A.prototype); // true
 
     a) 读取不存在的属性和方法时, 返回undefined  // delete a[2] 返回 true 后, a[2] 为 undefined
     b) return;  //返回undefined
-    c) 'use strict'：调用的函数(不是方法)中的this返回undefined
-    d) Object.getOwnPropertyDescriptor({},  'x'/'tostring')  //undefined
+    c) 'use strict': 调用的函数(不是方法)中的this返回undefined
+    d) Object.getOwnPropertyDescriptor({},  'x'/'toString')  //undefined
     e) 未定义或定义未赋值的变量
 
 ### 13. 枚举
 
     对象的内置方法不可枚举; 自有的属性方法可枚举
 
+    继承属性可枚举(内置的基本方法除 toString 外), 不可删除
+    方法属性的可枚举性
     一些内置属性也不可枚举 prototype
     基本类型的原型属性不可枚举[如Number、Array];
-    继承属性可枚举(内置的基本方法除 tostring 外), 不可删除
-    方法属性的可枚举性
 
     只能删除自有的可配置属性, 不能删除继承属性和var/function/prototype等
 
 ### 14. Object.prototype 的属性
 
-> tostring
+> toString
 > valueof
 > constructor
 > hasOwnproperty
@@ -1162,11 +1482,11 @@ delete a[2]; //true
 2 in a;  //fasle
 a.length;   //3
 
-// 删除一个不存在的属性返回true：
+// 删除一个不存在的属性返回true:
 delete a[20] // true
 
 // delete 不能删除 var、function、不可配置的属性(如object.prototype)出来的对象
-var a={x:1,y:1}；delete a; //false
+var a={x:1,y:1}: delete a; //false
 var t = 12;
 delete t //true
 
@@ -1176,7 +1496,7 @@ delete 1; //false
 this.x=1;
 delete this.x/x; //true,严格是会报错的
 
-// delete：只能删除自有的可配置属性, 不能删除继承属性, 一些内置属性不可删.
+// delete: 只能删除自有的可配置属性, 不能删除继承属性, 一些内置属性不可删.
 ```
 
 ### 17. 类
@@ -1206,3 +1526,134 @@ delete this.x/x; //true,严格是会报错的
   };
 }
 ```
+
+### 20. 'use strict'
+
+```js
+a) 只能出现在脚本化代码的开始, 函数体的开始, 任何实体语句以前: 与 eval() 使用时算是局部的上下文环境[可改不可创]
+b) 在严格模式下, 禁用 with 语句, 所有变量都要声明
+c) 调用的函数(不是方法)中的 this 返回 undefined:
+
+  // 区分是否支持 ECMA5 严格模式:
+  var hasStrictModel = (function() {
+    'use strict';
+    // 在严格时, this 返回 undefined; 在不严格时, this 返回全局对象
+    return this === undefined;
+  })();
+
+d) call()、apply()中的 this 是通过 call()、apply()传入的第一个参数:
+在不严格时,null/undefined 的值会被全局对象或转换为对象的非全局对象所替代
+e) ···
+
+```
+
+```js
+严格模式和非严格模式之间的区别如下(前三条尤为重要):
+1. 在严格模式中禁止使用with语句.
+2. 在严格模式中, 所有的变量都要先声明, 如果给一个未声明的变量、函数、函数参数、catch从句参数或全局对象的属性赋值, 将会抛出一个引用错误异常(在非严格模式中,隐式声明的全局变量的方法是给全局对象新添加一个新属性).
+3. 在严格模式中, 调用的函数(不是方法)中的一个this值是undefined. (在非严格模式中, 调用的函数中的this值总是全局对象). 可以利用这种特性来判断JavaScript实现是否支持严格模式:
+		var hasStrictMode =(function(){
+       "use strict";
+       return this===undefined}()
+    );
+4. 同样, 在严格模式中, 当通过call()或apply()来调用函数时, 其中的this值就是通过call()或apply()传入的第一个参数(在非严格模式中, null和undefined值被全局对象和转换为对象的非对象值所代替).
+5. 在严格模式中, 给只读属性赋值和给不可扩展的对象创建新成员都将抛出一个类型错误异常(在非严格模式中, 这些操作只是简单地操作失败, 不会报错).
+6. 在严格模式中, 传入eval()的代码不能在调用程序所在的上下文中声明变量或定义函数, 而在非严格模式中是可以这样做的. 相反, 变量和函数的定义是在eval()创建的新作用域中, 这个作用域在eval()返回时就弃用了.
+7. 在严格模式中, 函数里的arguments对象(见8.3.2节)拥有 传入函数值的静态副本. 在非严格模式中, arguments对象具有“魔术般”的行为, arguments里的数组元素和函数参数都是指向同一个值的引用.
+8. 在严格模式中, 当delete运算符后跟随非法的标识符(比如变量、函数、函数参数)时, 将会抛出一个语法错误异常(在非严格模式中, 这种delete表达式什么也没做, 并返回false). 在严格模式中, 试图删除一个不可配置的属性将抛出一个类型错误异常(在非严格模式中, delete表达式操作失败, 并返回false).
+9. 在严格模式中, 在一个对象直接量中定义两个或多个同名属性将产生一个语法错误(在非严格模式中不会报错).
+10. 在严格模式中, 函数声明中存在两个或多个同名的参数将产生一个语法错误(在非严格模式中不会报错).
+11. 在严格模式中是不允许使用八进制整数直接量(以0为前缀, 而不是0x为前缀)的(在非严格模式中某些实现是允许八进制整数直接量的).
+12. 在严格模式中, 标识符eval和arguments当做关键字, 它们的值是不能更改的. 不能给这些标识符赋值, 也不能把它们声明为变量、用做函数名、用做函数参数或用做catch块的标识符.
+13. 在严格模式中限制了对调用栈的检测能力, 在严格模式的函数中, arguments. caller和arguments.callee都会抛出一个类型错误异常. 严格模式的函数同样具有caller和arguments属性, 当访问这两个属性时将抛出类型错误异常(有一些JavaScript的实现在非严格模式里定义了这些非标准的属性). 】
+```
+
+### 21. String
+
+1. 确定一个字符串是否包含在另一个字符串中的 4 种方法
+
+   ```js
+   // indexOf(): 返回 number 小于 0, 表示不包含
+   // includes(): 返回布尔值, 表示是否找到了参数字符串
+   // startsWith(): 返回布尔值, 表示参数字符串是否在原字符串的头部
+   // endsWith(): 返回布尔值, 表示参数字符串是否在原字符串的尾部
+   let s = 'Hello world!';
+
+   // 支持第二个参数, 表示开始搜索的位置
+   let s = 'Hello world!';
+   s.indexOf('e'); // 1
+   s.startsWith('world', 6); // true
+   s.endsWith('Hello', 5); // true
+   s.includes('Hello', 6); // false
+   ```
+
+2. 字符串中嵌入变量, 需要将变量名写在 \${} 之中
+   ```js
+   let name = 'Bob',
+     time = 'today';
+   `Hello ${name}, how are you ${time}?`;
+   ```
+
+## API
+
+### String
+
+#### 1. constructor
+
+```js
+  new String (s) // 构造函数, 返回的是对象
+  function String (s) // 转换函数, 返回的是转换后的原始值
+```
+
+#### 2. property
+
+```js
+length; // 字符串中的字符数
+```
+
+#### 3. method
+
+##### charAt(string) 字符串指定位置的字符
+
+##### concat(string) 多个字符串拼接为字符串 Array.concat()
+
+##### indexOf(string) 寻找子串
+
+##### lastIndexOf(substring[, start]) [从指定位置开始]寻找最后一个子串
+
+##### match(new RegExp(...)) 使用 Regex 进行匹配
+
+```js
+'1ds dsa dws dws 52 dw2 ds 45'.match(/\d+/g); // ["1", "52", "2", "45"]
+```
+
+##### replace(string/reg, string) 替换字符串, 可以使用 RegExp
+
+##### search(string/reg) 查找字符串, 可以使用 RegExp
+
+##### split(string/reg, limit) 使用字符串或 reg 将原字符串分割为数组 Array.join()
+
+```js
+'1:2:3:4'.split(':'); // ["1", "2", "3", "4"]
+'hello'.split('', 3); // ["h", "e", "l"]
+```
+
+##### slice(start, end) 字符串的切片或子串[可以是负数] Array.slice()
+
+##### substring(from, to) 字符串的切片或子串[可以是负数] Array.slice()
+
+##### substr(start, length) 字符串的切片或子串[可以是负数] Array.slice()
+
+##### toLowerCase() 将字符串转换为小写
+
+##### toUpperCase() 将字符串转换为大写
+
+##### trim() 去除字符串中的空格
+
+##### toString() 返回原始的字符串值
+
+##### valueOf() 返回原始的字符串值
+
+##### charCodeAt() 字符串指定位置的字符的编码
+
+##### localeCompare(string) 比较 <0>
