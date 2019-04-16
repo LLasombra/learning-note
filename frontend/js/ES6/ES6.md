@@ -71,6 +71,22 @@
       - [d. matchAll()](#d-matchall)
       - [e. 模板字符串](#e-%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2)
     - [6. 对象](#6-%E5%AF%B9%E8%B1%A1)
+      - [a. 对象的扩展](#a-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95)
+        - [1. 属性的简洁表示法](#1-%E5%B1%9E%E6%80%A7%E7%9A%84%E7%AE%80%E6%B4%81%E8%A1%A8%E7%A4%BA%E6%B3%95)
+        - [2. 属性名表达式](#2-%E5%B1%9E%E6%80%A7%E5%90%8D%E8%A1%A8%E8%BE%BE%E5%BC%8F)
+        - [3. 方法的 name 属性](#3-%E6%96%B9%E6%B3%95%E7%9A%84-name-%E5%B1%9E%E6%80%A7)
+        - [4. 属性的可枚举性和遍历](#4-%E5%B1%9E%E6%80%A7%E7%9A%84%E5%8F%AF%E6%9E%9A%E4%B8%BE%E6%80%A7%E5%92%8C%E9%81%8D%E5%8E%86)
+        - [5. super 关键字](#5-super-%E5%85%B3%E9%94%AE%E5%AD%97)
+        - [6. 对象的扩展运算符 ...](#6-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6-)
+      - [b. 对象的创建: 直接量、new、object.create()](#b-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA-%E7%9B%B4%E6%8E%A5%E9%87%8Fnewobjectcreate)
+      - [c. 对象的特征 value、writable、enumerable、configurable](#c-%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%89%B9%E5%BE%81-valuewritableenumerableconfigurable)
+      - [d. 对象的查询设置](#d-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9F%A5%E8%AF%A2%E8%AE%BE%E7%BD%AE)
+      - [e. 对象的删除属性](#e-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%A0%E9%99%A4%E5%B1%9E%E6%80%A7)
+      - [f. 对象的检测属性](#f-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A3%80%E6%B5%8B%E5%B1%9E%E6%80%A7)
+      - [g. 对象的枚举属性](#g-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%B1%9E%E6%80%A7)
+      - [h. 对象的三个属性: 原型属性、类属性、可扩展性(可删减属性): 区别于可配置性(与 delete 有关)](#h-%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B1%9E%E6%80%A7-%E5%8E%9F%E5%9E%8B%E5%B1%9E%E6%80%A7%E7%B1%BB%E5%B1%9E%E6%80%A7%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E5%8F%AF%E5%88%A0%E5%87%8F%E5%B1%9E%E6%80%A7-%E5%8C%BA%E5%88%AB%E4%BA%8E%E5%8F%AF%E9%85%8D%E7%BD%AE%E6%80%A7%E4%B8%8E-delete-%E6%9C%89%E5%85%B3)
+      - [i. 序列化对象](#i-%E5%BA%8F%E5%88%97%E5%8C%96%E5%AF%B9%E8%B1%A1)
+      - [j. 对象的方法](#j-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95)
     - [7. 数组](#7-%E6%95%B0%E7%BB%84)
     - [8. 函数](#8-%E5%87%BD%E6%95%B0)
     - [9. 类、模板](#9-%E7%B1%BB%E6%A8%A1%E6%9D%BF)
@@ -90,7 +106,7 @@
     - [10. HTML5](#10-html5)
   - [summary](#summary)
     - [1.查看变量值](#1%E6%9F%A5%E7%9C%8B%E5%8F%98%E9%87%8F%E5%80%BC)
-    - [2. 对象 map](#2-%E5%AF%B9%E8%B1%A1-map)
+    - [2. 对象](#2-%E5%AF%B9%E8%B1%A1)
     - [3. 数组](#3-%E6%95%B0%E7%BB%84)
     - [4.对象数组与对象数组](#4%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84)
     - [5. 优先级](#5-%E4%BC%98%E5%85%88%E7%BA%A7)
@@ -1000,7 +1016,7 @@ for(var i=0;i<a.length;a[i++]=0)
 #### d. 条件语句
 
 1. if ... else if ...else
-2. **<font color = 'red'>switch: case 的匹配表达式实际上是“===”恒等运算符比较, 比较是不会做任何转换</font>**
+2. **<font color = 'red'>switch: case 的匹配表达式实际上是'==='恒等运算符比较, 比较是不会做任何转换</font>**
 
 #### e. 循环语句
 
@@ -1194,8 +1210,8 @@ for(var i=0;i<a.length;a[i++]=0)
 ```js
 // includes(): 返回布尔值, 表示是否找到了参数字符串
 
-// startsWith(): 返回布尔值, 表示参数字符串是否在原字符串的头部。
-// endsWith(): 返回布尔值, 表示参数字符串是否在原字符串的尾部。
+// startsWith(): 返回布尔值, 表示参数字符串是否在原字符串的头部.
+// endsWith(): 返回布尔值, 表示参数字符串是否在原字符串的尾部.
 ```
 
 #### c. repeat()
@@ -1222,7 +1238,7 @@ let name = 'Bob',
   time = 'today';
 `Hello ${name}, how are you ${time}?`;
 
-// 3. 如果使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中, 比如<ul>标签前面会有一个换行。如果你不想要这个换行，可以使用trim方法消除它
+// 3. 如果使用模板字符串表示多行字符串, 所有的空格和缩进都会被保留在输出之中, 比如<ul>标签前面会有一个换行.如果你不想要这个换行, 可以使用trim方法消除它
 $('#list').html(
   `
   <ul>
@@ -1232,7 +1248,7 @@ $('#list').html(
   `.trim()
 );
 
-// 4. 大括号内部可以放入任意的 JavaScript 表达式，可以进行运算，以及引用对象属性
+// 4. 大括号内部可以放入任意的 JavaScript 表达式, 可以进行运算, 以及引用对象属性
 let x = 1;
 let y = 2;
 `${x} + ${y * 2} = ${x + y * 2}`; // "1 + 4 = 5"
@@ -1247,11 +1263,567 @@ function fn() {
 
 `foo ${fn()} bar`; // foo Hello World bar
 
-// 6. 模板字符串中的变量没有声明，将报错
+// 6. 模板字符串中的变量没有声明, 将报错
 let msg = `Hello, ${place}`; // Uncaught ReferenceError: place is not defined
 ```
 
 ### 6. 对象
+
+#### a. 对象的扩展
+
+##### 1. 属性的简洁表示法
+
+```js
+// 1. 可以写入变量和函数, 作为对象的属性和方法
+const foo = 'bar';
+const baz = { foo: foo };
+
+function f(x, y) {
+  // 返回一个对象 {x: x, y: y}
+  return { x, y };
+}
+
+const o = {
+  method() {
+    return 'Hello!';
+  }
+};
+o.method(); // 'Hello!'
+
+// 2. 模块输出一组变量简写
+module.exports = { getItem, setItem, clear };
+
+// 3. 属性赋值器简写
+const cart = {
+  // JavaScript中约定大写字母开头的变量是私有的；_开始的变量是局部变量
+  _wheels: 4,
+  get wheels() {
+    return this._wheels;
+  },
+  set wheels(value) {
+    if (value < this._wheels) {
+      throw new Error('数值太小了！');
+    }
+    this._wheels = value;
+  }
+};
+
+// 4. 如果某个方法的值是一个 Generator 函数，前面需要加上星号
+const obj = {
+  *m() {
+    yield 'hello world';
+  }
+};
+```
+
+##### 2. 属性名表达式
+
+```js
+// 1. 字面量定义对象时，用方法二（表达式）作为对象的属性名，即把表达式放在方括号内
+let propKey = 'foo';
+let obj = {
+  [propKey]: true,
+  ['a' + 'bc']: 123
+};
+
+// 2. 表达式还可以用于定义方法名
+let obj = {
+  ['h' + 'ello']() {
+    return 'hi';
+  }
+};
+obj.hello(); // hi
+
+// 3. 注意，属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串[object Object]，这一点要特别小心。
+
+const keyA = { a: 1 };
+const keyB = { b: 2 };
+
+const myObject = {
+  [keyA]: 'valueA',
+  [keyB]: 'valueB'
+};
+
+myObject; // Object {[object Object]: "valueB"}  // 属性同名覆盖吊一个
+```
+
+##### 3. 方法的 name 属性
+
+```js
+// 1. 函数的name属性，返回函数名。对象方法也是函数，因此也有name属性
+const person = {
+  sayName() {
+    console.log('hello!');
+  },
+  get foo() {}
+};
+person.sayName.name; // "sayName"
+person.foo.name; // TypeError: Cannot read property 'name' of undefined
+const descriptor = Object.getOwnPropertyDescriptor(obj, 'foo');
+descriptor.get.name; // "get foo"
+```
+
+##### 4. 属性的可枚举性和遍历
+
+- 可枚举性: <font color='red'>尽量不要用 for...in 循环，而用 Object.keys()代替</font>
+  1. for...in 循环：只遍历对象自身的和继承的可枚举的属性。
+  2. Object.keys()：返回对象自身的所有可枚举的属性的键名。
+  3. JSON.stringify()：只串行化对象自身的可枚举的属性。
+  4. Object.assign()： 忽略 enumerable 为 false 的属性，只拷贝对象自身的可枚举的属性。
+- 属性的遍历
+
+  - 遍历的规则
+    首先遍历所有数值键，按照数值升序排列。
+    其次遍历所有字符串键，按照加入时间升序排列。
+    最后遍历所有 Symbol 键，按照加入时间升序排列
+
+  ```
+  （1）for...in
+      for...in循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。
+
+  （2）Object.keys(obj)
+      Object.keys返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名。
+
+  （3）Object.getOwnPropertyNames(obj): 小所有
+      Object.getOwnPropertyNames返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。
+
+  （4）Object.getOwnPropertySymbols(obj): 大所有
+      Object.getOwnPropertySymbols返回一个数组，包含对象自身的所有 Symbol 属性的键名。
+
+  （5）Reflect.ownKeys(obj)： 大所有
+      Reflect.ownKeys返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
+  ```
+
+##### 5. super 关键字
+
+- this 关键字总是指向函数所在的当前对象;
+- super 指向 **<font color='red'>当前对象的原型对象, 且必须在当前对象的方法内使用</font>**
+
+```js
+const proto = {
+  foo: 'hello'
+};
+
+const obj = {
+  foo: 'world',
+  find() {
+    return super.foo;
+  }
+};
+Object.setPrototypeOf(obj, proto);
+obj.find(); // "hello"
+// 对象obj.find()方法之中，通过super.foo引用了原型对象proto的foo属性。
+// 注意，super关键字表示原型对象时，只能用在对象的方法之中，用在其他地方都会报错。
+```
+
+##### 6. 对象的扩展运算符 ...
+
+- 对象的解构赋值: 解构赋值的拷贝是浅拷贝
+- **<font color ='red'>扩展运算符的解构赋值，不能复制继承属性; 非扩展云闪付的解构赋值可以用读取继承属性</font>**
+
+```js
+// 1. ...z 必须是最后一个参数
+let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
+
+// 2. 扩展运算符的解构赋值，不能复制继承属性; 非扩展云闪付的解构赋值可以用读取继承属性
+let o1 = { a: 1 };
+let o2 = { b: 2 };
+o2.__proto__ = o1;
+let { ...o3 } = o2;
+o3; // { b: 2 }
+o3.a; // undefined
+
+const o = Object.create({ x: 1, y: 2 });
+o.z = 3;
+console.log(o); // {z: 3}
+let { x, ...newObj } = o;
+let { y, z } = newObj;
+x; // 1
+y; // undefined
+z; // 3
+
+// 3. 对象的扩展运算符（...）用于取出参数对象的所有可遍历属性，拷贝到当前对象之中
+let z = { a: 3, b: 4 };
+let n = { ...z }; //n = { a: 3, b: 4 }
+{...{}, a: 1} // { a: 1 }
+
+//4. 扩展运算符后面不是对象，则会自动将其转为对象
+// 等同于 {...Object(1)}; 扩展运算符后面是整数1，会自动转为数值的包装对象Number{1}。由于该对象没有自身属性，所以返回一个空对象
+{...1} // {}
+{...true} // {}
+{...undefined} // {}
+{...null} // {}
+{...'hello'} // {0: "h", 1: "e", 2: "l", 3: "l", 4: "o"}
+// Object.assign() 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象
+// 5. 对象的扩展运算符等同于使用Object.assign()方法
+let aClone = { ...a }; // let aClone = Object.assign({}, a);
+
+// 6. 深克隆
+const clone1 = {
+  __proto__: Object.getPrototypeOf(obj),
+  ...obj
+};
+// 写法二
+const clone2 = Object.assign(
+  Object.create(Object.getPrototypeOf(obj)),
+  obj
+);
+// 写法三
+const clone3 = Object.create(
+  Object.getPrototypeOf(obj),
+  Object.getOwnPropertyDescriptors(obj)
+)
+
+// 7. 扩展运算符可以用于合并两个对象
+let ab = { ...a, ...b };  // let ab = Object.assign({}, a, b);
+
+// 8. 如果用户自定义的属性，放在扩展运算符后面，则扩展运算符内部的同名属性会被覆盖掉
+let aWithOverrides = { ...a, x: 1, y: 2 };
+// 等同于
+let aWithOverrides = { ...a, ...{ x: 1, y: 2 } };
+// 等同于
+let x = 1, y = 2, aWithOverrides = { ...a, x, y };
+// 等同于
+let aWithOverrides = Object.assign({}, a, { x: 1, y: 2 });
+
+// 9. 修改现有对象部分的属性
+let newVersion = {
+  ...previousVersion,
+  name: 'New Name' // Override the name property
+};
+   // 恢复为默认值
+   let aWithDefaults = { x: 1, y: 2, ...a };
+
+// 10. 与数组的扩展运算符一样，对象的扩展运算符后面可以跟表达式。
+const obj = {
+  ...(x > 1 ? {a: 1} : {}), // 会优先执行
+  b: 2,
+};
+```
+
+#### b. 对象的创建: 直接量、new、object.create()
+
+1. 对象直接量:
+   - 通过直接量创建的对象都有一个相同的原型对象, 并可以通过 JavaScript 代码 object.prototype 获取原型对象的引用
+
+```js
+var point = { x: 0, y: 0 }; //可以嵌套; 每次执行都会新建并初始化
+// 对象直接量的原型: object.prototype   // f.prototype=p;
+```
+
+2. new: new + 构造函数:
+   ```js
+   var a = new Array();
+   // new 创建的原型: 构造函数.prototype   // Array.prototype
+   ```
+3. **object.create()**:
+   ```js
+   var o1 = object.create({ x: 1, y: 2 });
+   // 可以通过传入 null 来创建没有原型的新对象:
+   var o2 = object.create(null); //不继承任何属性和方法, 包括 tostring
+   // 创建普通空对象: {}、 object.create(object.prototype)、new object();
+   var o3 = object.create(object.prototype);
+   var o3 = {};
+   var o3 = new object();
+   ```
+4. 通过原型继承创建一个新的对象
+   ```js
+   function inherit(p) {
+     if (p == null) throw typeError();
+     if (Object.create) return Object.create(p);
+     var t = typeof p;
+     if (t !== 'object' && t !== 'function') throw Type.Error();
+     function f() {}
+     f.prototype = p;
+     return new f();
+   }
+   ```
+
+注: 1.
+
+#### c. 对象的特征 value、writable、enumerable、configurable
+
+- a) ECMA3 中创建的属性都是可写、可枚举、可配置的, 且无法更改这些特征
+- b) ECMA5 中可以通过 API 给原型对象添加方法; 也可以将对象定义为不可写或不可删除的属性
+- c) <font color ='red'>**描述符对象**: 实现属性特征的查询和设置(不能读取继承属性和方法)</font>
+
+      ```js
+      Object.getOwnPropertyDescriptor({x:1}, 'x') //value:1;w:T;e:T;c:T
+      Object.getOwnPropertyDescriptor({}, 'x'/'tostring') //undefined
+      ```
+
+- d) 设置属性特征或新建属性具有某种特征:
+
+  - **defineproperty(修改对象, 属性名, 描述符对象)**
+    ```js
+    // 若新建, 描述符对象属性不全时默认false、undefined
+    var o = {}; // 创建一个空对象
+    // 添加一个不可枚举的数据属性x, 并赋值为1
+    Object.defineProperty(o, 'x', {
+      value: 1,
+      writable: true,
+      enumerable: false,
+      configurable: true
+    });
+    // 属性是存在的, 但不可枚举 o.x;  // => 1
+    Object.keys(o); // => []
+    // 现在对属性x做修改, 让它变为只读
+    Object.defineProperty(o, 'x', { writable: false });
+    // 试图更改这个属性的值
+    o.x = 2; // 操作失败但不报错, 而在严格模式中抛出类型错误异常
+    o.x; // => 1
+    // 属性依然是可配置的, 因此可以通过这种方式对它进行修改:
+    Object.defineProperty(o, 'x', { value: 2 });
+    o.x; // => 2
+    // 现在将x从数据属性修改为存取器属性
+    Object.defineProperty(o, 'x', {
+      get: function() {
+        return 0;
+      }
+    });
+    o.x; // => 0
+    ```
+  - **同时修改或创建多个属性: object.defineproperties(object,map)**
+
+    ```js
+    var p = Object.defineProperties(
+      {}, // 要修改的对象, 这里是 null
+      {
+        x: { value: 1, writable: true, enumerable: true, configurable: true },
+        r: {
+          get: function() {
+            return Math.sqrt(this.x * this.x + this.y * this.y);
+          },
+          enumerable: true,
+          configurable: true
+        }
+      }
+    );
+    ```
+
+- e) object.defineproperty()和 object.defineproperties(object,map)的使用规则
+  ```js
+  [违反规则的使用都会抛出类型错误异常]:
+  1. 如果对象是不可扩展的, 则可以编辑已有的自有属性, 但不能给它添加新属性.
+  2.如果属性是不可配置的, 则不能修改它的可配置性和可枚举性.
+  3.如果存取器属性是不可配置的, 则不能修改其getter和setter方法, 也不能将它转换为数据属性.
+  4.如果数据属性是不可配置的, 则不能将它转换为存取器属性.
+  5.如果数据属性是不可配置的, 则不能将它的可写性从false修改为true, 但可以从true修改为false.
+  6.如果数据属性是不可配置且不可写的, 则不能修改它的值.然而可配置但不可写属性的值是可以修改的(实际上是先将它标记为可写的, 然后修改它的值, 最后转换为不可写的).
+  ```
+- f) **<font color='red'>可扩展与可配置的区别</font>**
+
+  1. **<font color='red' >可扩展(Object.preventExtensions(o)): 对象; 可配置(defineProperty): 属性</font>**
+  2. 可扩展与是否可以添加属性有关; 可配置与 delete 有关 [不可配置不可删]
+  3. 不可扩展的可配置可以删, 某些内置对象属性不可删 [object.prototype/var/function 等]
+  4. 继承的属性方法描述符对象不可以读; 继承对象的属性是可以枚举的
+
+     ```js
+     //给 object.prototype 添加一个新的不可枚举的 extend() 方法
+     //复制参数对象的所有自有属性(包括不可枚举对象)
+     //a.entend(o) 代码中的this是object.prototype
+     Object.defineProperty(
+       Object.prototype,
+       'extend', // 定义Object.prototype.extend
+       {
+         writable: true,
+         enumerable: false, // 将其定义为不可枚举的
+         configurable: true,
+         value: function(o) {
+           // 值就是这个函数
+           // 得到所有的自有属性,包括不可枚举属性
+           var names = Object.getOwnPropertyNames(o);
+           // 遍历它们
+           for (var i = 0; i < names.length; i++) {
+             // 如果属性已经存在,则跳过
+             if (names[i] in this) continue;
+             // 获得o中的属性的描述符
+             var desc = Object.getOwnPropertyDescriptor(o, names[i]);
+             // 用它给this创建一个属性
+             Object.defineProperty(this, names[i], desc);
+           }
+         }
+       }
+     );
+     ```
+
+#### d. 对象的查询设置
+
+- object.property 等价于 object['property'] 等价于 关联数组 [js 中对象都是]
+
+  1. 使用 [] 运算符(其中 string 是动态的,在运行时可以更改), 所以全面[适用性强]
+     .运算符之后的标识符是静态的, 必须写死在代码里)
+  2. 继承中的赋值, 不会影响原型数据, 自改变自身 [只在查询是才能感觉到继承]
+
+- 关联数组/字典/散列: JavaScript 中对象都是关联数组
+  ```js
+  var addr = '';
+  // 可以改用for/in
+  for (var i = 0; i < 4; i++) {
+    // address+i是属性, 而非下标
+    addr += customer['address' + i] + '\n';
+  }
+  ```
+- 属性访问错误:
+  1. 查询不存在的属性返回 undefined
+  2. 删除[delete]不存在的属性: true
+  3. 访问不存在对象的而属性会报错。[null/undefined 无属性]
+  4. 给 null、undefined 设置属性会报错
+- setter/getter: 有 setter、getter 定义的属性称为 '存取器属性', 可以继承
+  ```js
+  var p = {
+    x: 1.0,
+    y: 1.0,
+    get r() {
+      /*代码*/
+    },
+    set r(argument) {
+      /*代码*/
+    },
+    get theta() {
+      /*代码*/
+    }
+  };
+  var q = inherit(p);
+  (q.x = 1), (q.y = 1);
+  consoale(q.theta); //ok
+  ```
+
+#### e. 对象的删除属性
+
+- 删除属性: delete: 只能删除自有的可配置属性, 不能删除继承属性, 一些内置对象属性不可删
+
+#### f. 对象的检测属性
+
+- 检测属性: in、hasOwnProperty()、PropertyIsEnumberable()、属性检查
+
+  ```js
+  // a)	in: 可以检查继承属性 [instanceof 可以检查继承的方法]
+  // In可以区分不存在属性和存在属性但值为undefined:
+  var o = { x: undefined };
+  'toString' in o; //true
+  o.x !== undefined; //false
+  'x' in o; //true
+  delete o.x; //true    delete o;  /error
+  'x' in o; //false
+
+  // b)	hasownproperty():  //继承属性不可以
+  o.hasownproperty('x'); //true
+  o.hasownproperty('tostring'); //false
+
+  // c)	propertyisenumerable():   //继承属性可枚举(tostring类似方法除外)
+  var o = inherit({ y: 2 });
+  o.x = 1; //ok
+  o.propertyisenumerable('x'); //true
+  o.propertyisenumerable('y'); //false
+
+  // d)	属性查询:
+  var o = { x: 1 };
+  o.x !== undefined; //true    =====>o.x!=null
+  o.toString !== undefined; //true
+  if (o.x) {
+    //x为undefined、null、false、''、+-0、NaN    [7]
+    //x存在，且不能转换为false
+  }
+  ```
+
+#### g. 对象的枚举属性
+
+- 枚举属性: [获取所有属性: getOwnPropertyNames()]
+  1. 有许多实用工具库给 Object.prototype 添加了很多的新的方法或属性 [可继承], 且这些方法是可枚举的(ECMA5 之前), 所以要过滤这些方法。
+  ```js
+  // 方法一：
+  for (p in o) {
+    if (!o.hasProperty(p)) continue; //过滤继承方法
+  }
+  //方法二：
+  for (p in o) {
+    if (typeof o[p] === 'function') continue;
+  }
+  ```
+  2. 枚举对象的工具函数
+  - 返回对象
+    ```
+    extend(o,p); //p——>o,覆盖相同的属性(p 基准)
+    merge(o,p); //P——>o,不覆盖相同属性(o 基准)
+    restrict(o,p); //删除 o 中与 p 不相同的属性(o 基准)
+    Subtract(o,p); //删除 o 中与 P 相同属性(o 基准)【o-p】
+    union(o,p); //同有 O 和 P 的所有属性(p 基准)【o+p】
+    intersection(o,p); //op 共有的属性(o 基准)【∩】
+    ```
+  - 返回数组
+    ```
+    keys(o); //返回数组包含 o 中可枚举的自有属性
+    ECMA5:
+      Object.keys() //自有
+      Object.getOwnPropertyNames() //获取所有自有属性
+    ```
+
+#### h. 对象的三个属性: 原型属性、类属性、可扩展性(可删减属性): 区别于可配置性(与 delete 有关)
+
+1.  原型属性：
+    ```
+    直接量创建对象原型：Object.PPrototype==>constructor.prototype
+    new 创建：构造函数名.prototype
+    Object.prototype(o):参数 o 为原型
+    ```
+2.  查询原型: //查询原型，检测一个 Object 是否为另一个 Object 的原型
+
+    ```js
+    // ECMA5：Object.getPrototypeof()
+    var p = { x: 1 };
+    var o = Object.create(p);
+    p.isprototypeof(o); //true
+    Object.prototype.isPrototypeof(o / p); //true
+    // ECMA3：
+    o.constructor.prototype; //检查原型
+    ```
+
+3.  类属性：是一个字符串，用以表示对象信息 classof()
+
+    ```js
+    // 查询方法：
+    toString(); //返回字符串 '[Object class]' [8，-1]
+    //由于很多类的 toString 方法重写了，所以间接调用 [.call()]
+    function classof(o) {
+      if (o === null) return 'Null';
+      if (o === undefined) return 'Undefined';
+      return Object.prototype.toString.call(o).slice(8, -1);
+    }
+    ```
+
+4.  可扩展性(Object.esExtensible()): **<font color='red' >可扩展(Object.preventExtensions(o)): 对象; 可配置(defineProperty): 属性</font>**
+
+    ```
+    对象的可扩展性用以表示是否可以给对象添加新的属性;
+    可配置 () 是属性, 表示是否可以 delete
+    所有的内置对象和自定义对象都实现是可扩展的;
+    宿主对象的可扩展性由 JavaScript 定义. [除非把他们转换为不可扩展的]
+        可扩展------->不可扩展： Object.preventExtensions(o);
+    ```
+
+#### i. 序列化对象
+
+1. 将对象的状态转为字符串(stringify());也可将字符串转为对象(parese())
+   ```js
+   //ECMA5：
+   JSON.stringify(); //只能序列化对象可枚举属性
+   JSON.parse(); //string——>object
+   o = { x: 1, y: { z: [false, null, ''] } }; // 定义一个测试对象
+   s = JSON.stringify(o); // s是 '{"x":1,"y":{"z":[false,null,""]}}'
+   p = JSON.parse(s); // p是o的深拷贝
+   //【JSON语法：NaN、+-infinity------------>序列化为null】
+   ```
+
+#### j. 对象的方法
+
+1. object.prototype 里的方法
+   ```js
+   tostring(); //object——>string
+   toLocalString(); //返回表示这个对象的本地化字符串
+   toJson(); //object.prototype里没有次方法；但是JSON.Stringify()会调用
+   valueOf(); //object——>原始值
+   ```
 
 ### 7. 数组
 
@@ -1296,10 +1868,10 @@ console.log();
 alert();
 ```
 
-### 2. 对象 map
+### 2. 对象
 
 ```js
-// 名值对的集合
+// 名值对的集合 map
 var book = {
   topic: 'javascript',
   fat: true
@@ -1307,6 +1879,76 @@ var book = {
 //对象可以添加属性
 book.author = '练顺';
 book.topic; // 'javascript' 等价于 book['topic']
+```
+
+```js
+1. 对象的分类:
+    内置对象: 如数组、函数、Date()、RegExp()
+    自定义对象: JavaScript 代码中定义的对象
+    宿主对象: 有 JavaScript 解释器所嵌入的宿主环境(web浏览器定义的) [如HTMLElemnet]
+
+2. 对象的创建: 直接量、new、object.create() [原型问题]
+
+3. JavaScript 对象是动态的: 可以增加或删除属性; 除了String、number、true/fasle、null、undefined之外, JavaScript 中都是对象
+
+4. 对象是可变的, 我们提供引用而非值来操作对象:
+    x是某对象的引用; var y=x; 则y也是对对象的引用, 而非对象副本.
+
+5. 属性的分类:
+    自有属性 + 数据属性
+    继承属性 + 存取器属性
+
+6. 对象的属性:
+  a) 特征(definePropeerty())
+      可写性
+      可枚举: 与遍历 for/in 有关, 只遍历可枚举的属性方法
+      可配置: 与 delete 有关, 不可配置不可删
+  b) 查询设置:  getter / setter [监视: 属性值改变时调用的回调函数]
+  c) 删除: delete [可以删除自有的可配置属性, 继承属性不可删]
+  d) 枚举:
+  e) 继承:
+  f) Error:
+  g) 检测: in、hasOwnPreproty()、propertyIsEnumberable()、属性查询
+
+7. 属性:
+  a) 数据属性(自有/继承)
+      名字 name
+      特征
+        value
+        writable
+        enumerable
+        configurable
+
+  b) 存取器属性
+      名字 name
+      特征
+        value
+        set [监视]
+        enumerable
+        configurable
+  c) writable、Enumerable、configurable、writable为Boolean类型
+
+8. 对象的三个属性:
+  原型属性: 对象的原型指向另一个对象, 本对象的一些属性继承自原型属性
+  类属性 classof(): 一个标识对象类型的字符串[tostring]
+  可扩展性: ECMA5 中指明是否可以添加删除属性 Object.isExtensible()
+
+9. 序列化对象: 对象与字符串的转换
+// ECMA5
+JSON.stringify() // toString
+JSON.parse() // toJson
+
+10. 对象的最基本方法: tostring()、toLocalString()、valueOf()、toJSON() [不是]
+
+11. 对象的常见用法: create、set、query、delete、test、enumberable
+
+12. 原型:
+    每一个 JavaScript 对象(除 null )都和另一个对相关联;
+    每一个 JavaScript 对象(除 object.prototype )都有原型
+
+13. 描述符对象 object.getOwnPropertyDescriptor(): 实现属性特征的查询和设置.
+    描述符对象的属性与他们所描述的属性特征同名: [value、writable、Enumerable、configurable]
+    object.getOwnPropertyDescriptor(o,p) 读取已有的自有属性 [继承属性不可读]
 ```
 
 ### 3. 数组
@@ -1449,7 +2091,7 @@ Object.prototype.isPrototypeOf(A.prototype); // true
 
 ### 13. 枚举
 
-    对象的内置方法不可枚举; 自有的属性方法可枚举
+    对象的内置[原型]方法不可枚举; 自有的属性方法可枚举
 
     继承属性可枚举(内置的基本方法除 toString 外), 不可删除
     方法属性的可枚举性
@@ -1467,6 +2109,12 @@ Object.prototype.isPrototypeOf(A.prototype); // true
 > isPrototypeof
 > propertyIsEnumerable
 > toLocalString
+
+> 基本的方法
+> tostring()
+> toLocalString()
+> valueOf()
+> toJSON() [不是]
 
 ### 15. 可扩展性
 
@@ -1552,14 +2200,14 @@ e) ···
 1. 在严格模式中禁止使用with语句.
 2. 在严格模式中, 所有的变量都要先声明, 如果给一个未声明的变量、函数、函数参数、catch从句参数或全局对象的属性赋值, 将会抛出一个引用错误异常(在非严格模式中,隐式声明的全局变量的方法是给全局对象新添加一个新属性).
 3. 在严格模式中, 调用的函数(不是方法)中的一个this值是undefined. (在非严格模式中, 调用的函数中的this值总是全局对象). 可以利用这种特性来判断JavaScript实现是否支持严格模式:
-		var hasStrictMode =(function(){
+    var hasStrictMode =(function(){
        "use strict";
        return this===undefined}()
     );
 4. 同样, 在严格模式中, 当通过call()或apply()来调用函数时, 其中的this值就是通过call()或apply()传入的第一个参数(在非严格模式中, null和undefined值被全局对象和转换为对象的非对象值所代替).
 5. 在严格模式中, 给只读属性赋值和给不可扩展的对象创建新成员都将抛出一个类型错误异常(在非严格模式中, 这些操作只是简单地操作失败, 不会报错).
 6. 在严格模式中, 传入eval()的代码不能在调用程序所在的上下文中声明变量或定义函数, 而在非严格模式中是可以这样做的. 相反, 变量和函数的定义是在eval()创建的新作用域中, 这个作用域在eval()返回时就弃用了.
-7. 在严格模式中, 函数里的arguments对象(见8.3.2节)拥有 传入函数值的静态副本. 在非严格模式中, arguments对象具有“魔术般”的行为, arguments里的数组元素和函数参数都是指向同一个值的引用.
+7. 在严格模式中, 函数里的arguments对象(见8.3.2节)拥有 传入函数值的静态副本. 在非严格模式中, arguments对象具有'魔术般'的行为, arguments里的数组元素和函数参数都是指向同一个值的引用.
 8. 在严格模式中, 当delete运算符后跟随非法的标识符(比如变量、函数、函数参数)时, 将会抛出一个语法错误异常(在非严格模式中, 这种delete表达式什么也没做, 并返回false). 在严格模式中, 试图删除一个不可配置的属性将抛出一个类型错误异常(在非严格模式中, delete表达式操作失败, 并返回false).
 9. 在严格模式中, 在一个对象直接量中定义两个或多个同名属性将产生一个语法错误(在非严格模式中不会报错).
 10. 在严格模式中, 函数声明中存在两个或多个同名的参数将产生一个语法错误(在非严格模式中不会报错).
