@@ -1,155 +1,3 @@
-- [ECMAScript core knowledge](#ecmascript-core-knowledge)
-  - [相关简介](#%E7%9B%B8%E5%85%B3%E7%AE%80%E4%BB%8B)
-    - [1. Babel 转码器](#1-babel-%E8%BD%AC%E7%A0%81%E5%99%A8)
-    - [2. Traceur 转码器](#2-traceur-%E8%BD%AC%E7%A0%81%E5%99%A8)
-  - [语法](#%E8%AF%AD%E6%B3%95)
-    - [1. 词法结构](#1-%E8%AF%8D%E6%B3%95%E7%BB%93%E6%9E%84)
-      - [a. 大小写敏感](#a-%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F)
-      - [b. 标识符](#b-%E6%A0%87%E8%AF%86%E7%AC%A6)
-      - [c. 关键字](#c-%E5%85%B3%E9%94%AE%E5%AD%97)
-      - [d. 保留字](#d-%E4%BF%9D%E7%95%99%E5%AD%97)
-    - [2. 类型、值、变量](#2-%E7%B1%BB%E5%9E%8B%E5%80%BC%E5%8F%98%E9%87%8F)
-      - [a. 类型分类](#a-%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB)
-        - [1. 按数据类型分类](#1-%E6%8C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB)
-        - [2. 按可变分类](#2-%E6%8C%89%E5%8F%AF%E5%8F%98%E5%88%86%E7%B1%BB)
-      - [b. 有 GC 机制](#b-%E6%9C%89-gc-%E6%9C%BA%E5%88%B6)
-      - [c. 相关的类](#c-%E7%9B%B8%E5%85%B3%E7%9A%84%E7%B1%BB)
-        - [1. Math](#1-math)
-        - [2. Date](#2-date)
-        - [3. String](#3-string)
-        - [4. false](#4-false)
-        - [5. 全局对象](#5-%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1)
-        - [6. 拆箱与装箱问题](#6-%E6%8B%86%E7%AE%B1%E4%B8%8E%E8%A3%85%E7%AE%B1%E9%97%AE%E9%A2%98)
-        - [7. 不可变的原始值和可变的对象引用](#7-%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%80%BC%E5%92%8C%E5%8F%AF%E5%8F%98%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8)
-        - [8. 类型转换](#8-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2)
-    - [3. 表达式、运算符](#3-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%90%E7%AE%97%E7%AC%A6)
-      - [a. var 与 let 与 const](#a-var-%E4%B8%8E-let-%E4%B8%8E-const)
-        - [ES6 声明变量的六种方法](#es6-%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%E7%9A%84%E5%85%AD%E7%A7%8D%E6%96%B9%E6%B3%95)
-        - [var](#var)
-        - [let](#let)
-        - [const](#const)
-      - [b. 全局对象](#b-%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1)
-        - [顶层对象属性](#%E9%A1%B6%E5%B1%82%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7)
-        - [global 对象](#global-%E5%AF%B9%E8%B1%A1)
-          - [在所有情况下, 都取到顶层对象](#%E5%9C%A8%E6%89%80%E6%9C%89%E6%83%85%E5%86%B5%E4%B8%8B-%E9%83%BD%E5%8F%96%E5%88%B0%E9%A1%B6%E5%B1%82%E5%AF%B9%E8%B1%A1)
-      - [c. 表达式](#c-%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-        - [1. 算术表达式](#1-%E7%AE%97%E6%9C%AF%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-        - [2. 关系表达式](#2-%E5%85%B3%E7%B3%BB%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-        - [3. 逻辑表达式](#3-%E9%80%BB%E8%BE%91%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-        - [4. 赋值表达式](#4-%E8%B5%8B%E5%80%BC%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-        - [5. 表达式计算[rarely]](#5-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97rarely)
-        - [6. 其他表达式](#6-%E5%85%B6%E4%BB%96%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-      - [d. 变量的解构赋值](#d-%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC)
-        - [规则](#%E8%A7%84%E5%88%99)
-        - [1. 数组的解构赋值](#1-%E6%95%B0%E7%BB%84%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC)
-        - [2. 对象的解构赋值](#2-%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC)
-        - [3. 字符串的解构赋值](#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC)
-        - [4. 数值和布尔值的解构赋值](#4-%E6%95%B0%E5%80%BC%E5%92%8C%E5%B8%83%E5%B0%94%E5%80%BC%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC)
-        - [5. 函数参数的解构赋值](#5-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC)
-        - [6. 圆括号问题](#6-%E5%9C%86%E6%8B%AC%E5%8F%B7%E9%97%AE%E9%A2%98)
-        - [7.用途](#7%E7%94%A8%E9%80%94)
-          - [a. 交换变量的值](#a-%E4%BA%A4%E6%8D%A2%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC)
-          - [b. 从函数返回多个值](#b-%E4%BB%8E%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%A4%9A%E4%B8%AA%E5%80%BC)
-          - [c. 函数参数的定义](#c-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89)
-          - [d. 提取 JSON 数据](#d-%E6%8F%90%E5%8F%96-json-%E6%95%B0%E6%8D%AE)
-          - [e. 函数参数的默认值](#e-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC)
-          - [f. 遍历 Map 结构](#f-%E9%81%8D%E5%8E%86-map-%E7%BB%93%E6%9E%84)
-          - [g. 输入模块的指定方法](#g-%E8%BE%93%E5%85%A5%E6%A8%A1%E5%9D%97%E7%9A%84%E6%8C%87%E5%AE%9A%E6%96%B9%E6%B3%95)
-    - [4. 语句](#4-%E8%AF%AD%E5%8F%A5)
-      - [a. 表达式语句](#a-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E5%8F%A5)
-      - [b. 复合语句和空语句](#b-%E5%A4%8D%E5%90%88%E8%AF%AD%E5%8F%A5%E5%92%8C%E7%A9%BA%E8%AF%AD%E5%8F%A5)
-      - [c. 声明语句](#c-%E5%A3%B0%E6%98%8E%E8%AF%AD%E5%8F%A5)
-      - [d. 条件语句](#d-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5)
-      - [e. 循环语句](#e-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5)
-      - [f. 跳转语句](#f-%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5)
-      - [g. 其他语句](#g-%E5%85%B6%E4%BB%96%E8%AF%AD%E5%8F%A5)
-      - [h. 总结](#h-%E6%80%BB%E7%BB%93)
-    - [5. 字符串](#5-%E5%AD%97%E7%AC%A6%E4%B8%B2)
-      - [a. 字符串的遍历器接口](#a-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%81%8D%E5%8E%86%E5%99%A8%E6%8E%A5%E5%8F%A3)
-      - [b. includes(), startsWith(), endsWith()](#b-includes-startswith-endswith)
-      - [c. repeat()](#c-repeat)
-      - [d. matchAll()](#d-matchall)
-      - [e. 模板字符串](#e-%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2)
-    - [6. 对象](#6-%E5%AF%B9%E8%B1%A1)
-      - [a. 对象的扩展](#a-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95)
-        - [1. 属性的简洁表示法](#1-%E5%B1%9E%E6%80%A7%E7%9A%84%E7%AE%80%E6%B4%81%E8%A1%A8%E7%A4%BA%E6%B3%95)
-        - [2. 属性名表达式](#2-%E5%B1%9E%E6%80%A7%E5%90%8D%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-        - [3. 方法的 name 属性](#3-%E6%96%B9%E6%B3%95%E7%9A%84-name-%E5%B1%9E%E6%80%A7)
-        - [4. 属性的可枚举性和遍历](#4-%E5%B1%9E%E6%80%A7%E7%9A%84%E5%8F%AF%E6%9E%9A%E4%B8%BE%E6%80%A7%E5%92%8C%E9%81%8D%E5%8E%86)
-        - [5. super 关键字](#5-super-%E5%85%B3%E9%94%AE%E5%AD%97)
-        - [6. 对象的扩展运算符 ...](#6-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6-)
-      - [b. 对象的创建: 直接量、new、object.create()](#b-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA-%E7%9B%B4%E6%8E%A5%E9%87%8Fnewobjectcreate)
-      - [c. 对象的特征 value、writable、enumerable、configurable](#c-%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%89%B9%E5%BE%81-valuewritableenumerableconfigurable)
-      - [d. 对象的查询设置](#d-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9F%A5%E8%AF%A2%E8%AE%BE%E7%BD%AE)
-      - [e. 对象的删除属性](#e-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%A0%E9%99%A4%E5%B1%9E%E6%80%A7)
-      - [f. 对象的检测属性](#f-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A3%80%E6%B5%8B%E5%B1%9E%E6%80%A7)
-      - [g. 对象的枚举属性](#g-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%B1%9E%E6%80%A7)
-      - [h. 对象的三个属性: 原型属性、类属性、可扩展性(可删减属性): 区别于可配置性(与 delete 有关)](#h-%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B1%9E%E6%80%A7-%E5%8E%9F%E5%9E%8B%E5%B1%9E%E6%80%A7%E7%B1%BB%E5%B1%9E%E6%80%A7%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E5%8F%AF%E5%88%A0%E5%87%8F%E5%B1%9E%E6%80%A7-%E5%8C%BA%E5%88%AB%E4%BA%8E%E5%8F%AF%E9%85%8D%E7%BD%AE%E6%80%A7%E4%B8%8E-delete-%E6%9C%89%E5%85%B3)
-      - [i. 序列化对象](#i-%E5%BA%8F%E5%88%97%E5%8C%96%E5%AF%B9%E8%B1%A1)
-      - [j. 对象的方法](#j-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95)
-    - [7. 数组](#7-%E6%95%B0%E7%BB%84)
-    - [8. 函数](#8-%E5%87%BD%E6%95%B0)
-    - [9. 类、模板](#9-%E7%B1%BB%E6%A8%A1%E6%9D%BF)
-    - [10. 正则 Reg](#10-%E6%AD%A3%E5%88%99-reg)
-    - [11. JavaScript 子集与扩展](#11-javascript-%E5%AD%90%E9%9B%86%E4%B8%8E%E6%89%A9%E5%B1%95)
-    - [12. nodejs](#12-nodejs)
-  - [客户端](#%E5%AE%A2%E6%88%B7%E7%AB%AF)
-    - [1. Web 中的 JavaScript](#1-web-%E4%B8%AD%E7%9A%84-javascript)
-    - [2. Window 对象(default)](#2-window-%E5%AF%B9%E8%B1%A1default)
-    - [3. 脚本化文档](#3-%E8%84%9A%E6%9C%AC%E5%8C%96%E6%96%87%E6%A1%A3)
-    - [4. 脚本化 CSS](#4-%E8%84%9A%E6%9C%AC%E5%8C%96-css)
-    - [5. 事件处理(8)](#5-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%868)
-    - [6. 脚本化 HTTP](#6-%E8%84%9A%E6%9C%AC%E5%8C%96-http)
-    - [7. JQuery 库操纵文档的内容、样式、行为](#7-jquery-%E5%BA%93%E6%93%8D%E7%BA%B5%E6%96%87%E6%A1%A3%E7%9A%84%E5%86%85%E5%AE%B9%E6%A0%B7%E5%BC%8F%E8%A1%8C%E4%B8%BA)
-    - [8. 客户端 Cache](#8-%E5%AE%A2%E6%88%B7%E7%AB%AF-cache)
-    - [9. 多媒体与图形编程](#9-%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%8E%E5%9B%BE%E5%BD%A2%E7%BC%96%E7%A8%8B)
-    - [10. HTML5](#10-html5)
-  - [summary](#summary)
-    - [1.查看变量值](#1%E6%9F%A5%E7%9C%8B%E5%8F%98%E9%87%8F%E5%80%BC)
-    - [2. 对象](#2-%E5%AF%B9%E8%B1%A1)
-    - [3. 数组](#3-%E6%95%B0%E7%BB%84)
-    - [4.对象数组与对象数组](#4%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84)
-    - [5. 优先级](#5-%E4%BC%98%E5%85%88%E7%BA%A7)
-    - [6. math](#6-math)
-    - [7. 事件处理函数:](#7-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0)
-    - [8. front 文件加载顺序](#8-front-%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F)
-    - [9. 两个单独的对象一定不相等, 只有引用同一对象才想等.](#9-%E4%B8%A4%E4%B8%AA%E5%8D%95%E7%8B%AC%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%80%E5%AE%9A%E4%B8%8D%E7%9B%B8%E7%AD%89-%E5%8F%AA%E6%9C%89%E5%BC%95%E7%94%A8%E5%90%8C%E4%B8%80%E5%AF%B9%E8%B1%A1%E6%89%8D%E6%83%B3%E7%AD%89)
-    - [10. 基本类型转换](#10-%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2)
-    - [11. in、instanceof、isprototypeof、typeof 区别](#11-ininstanceofisprototypeoftypeof-%E5%8C%BA%E5%88%AB)
-    - [12. undefined 情景](#12-undefined-%E6%83%85%E6%99%AF)
-    - [13. 枚举](#13-%E6%9E%9A%E4%B8%BE)
-    - [14. Object.prototype 的属性](#14-objectprototype-%E7%9A%84%E5%B1%9E%E6%80%A7)
-    - [15. 可扩展性](#15-%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7)
-    - [16. delete](#16-delete)
-    - [17. 类](#17-%E7%B1%BB)
-    - [18. codingstyle](#18-codingstyle)
-    - [19. 函数声明语句 与 函数表达式](#19-%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E8%AF%AD%E5%8F%A5-%E4%B8%8E-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F)
-    - [20. 'use strict'](#20-use-strict)
-    - [21. String](#21-string)
-  - [API](#api)
-    - [String](#string)
-      - [1. constructor](#1-constructor)
-      - [2. property](#2-property)
-      - [3. method](#3-method)
-        - [charAt(string) 字符串指定位置的字符](#charatstring-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E7%9A%84%E5%AD%97%E7%AC%A6)
-        - [concat(string) 多个字符串拼接为字符串 Array.concat()](#concatstring-%E5%A4%9A%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2-arrayconcat)
-        - [indexOf(string) 寻找子串](#indexofstring-%E5%AF%BB%E6%89%BE%E5%AD%90%E4%B8%B2)
-        - [lastIndexOf(substring[, start]) [从指定位置开始]寻找最后一个子串](#lastindexofsubstring-start-%E4%BB%8E%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E5%BC%80%E5%A7%8B%E5%AF%BB%E6%89%BE%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%AD%90%E4%B8%B2)
-        - [match(new RegExp(...)) 使用 Regex 进行匹配](#matchnew-regexp-%E4%BD%BF%E7%94%A8-regex-%E8%BF%9B%E8%A1%8C%E5%8C%B9%E9%85%8D)
-        - [replace(string/reg, string) 替换字符串, 可以使用 RegExp](#replacestringreg-string-%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-regexp)
-        - [search(string/reg) 查找字符串, 可以使用 RegExp](#searchstringreg-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-regexp)
-        - [split(string/reg, limit) 使用字符串或 reg 将原字符串分割为数组 Array.join()](#splitstringreg-limit-%E4%BD%BF%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%96-reg-%E5%B0%86%E5%8E%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E5%89%B2%E4%B8%BA%E6%95%B0%E7%BB%84-arrayjoin)
-        - [slice(start, end) 字符串的切片或子串[可以是负数] Array.slice()](#slicestart-end-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87%E6%88%96%E5%AD%90%E4%B8%B2%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%B4%9F%E6%95%B0-arrayslice)
-        - [substring(from, to) 字符串的切片或子串[可以是负数] Array.slice()](#substringfrom-to-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87%E6%88%96%E5%AD%90%E4%B8%B2%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%B4%9F%E6%95%B0-arrayslice)
-        - [substr(start, length) 字符串的切片或子串[可以是负数] Array.slice()](#substrstart-length-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87%E6%88%96%E5%AD%90%E4%B8%B2%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%B4%9F%E6%95%B0-arrayslice)
-        - [toLowerCase() 将字符串转换为小写](#tolowercase-%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%B0%8F%E5%86%99)
-        - [toUpperCase() 将字符串转换为大写](#touppercase-%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%A4%A7%E5%86%99)
-        - [trim() 去除字符串中的空格](#trim-%E5%8E%BB%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E7%A9%BA%E6%A0%BC)
-        - [toString() 返回原始的字符串值](#tostring-%E8%BF%94%E5%9B%9E%E5%8E%9F%E5%A7%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC)
-        - [valueOf() 返回原始的字符串值](#valueof-%E8%BF%94%E5%9B%9E%E5%8E%9F%E5%A7%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC)
-        - [charCodeAt() 字符串指定位置的字符的编码](#charcodeat-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E7%9A%84%E5%AD%97%E7%AC%A6%E7%9A%84%E7%BC%96%E7%A0%81)
-        - [localeCompare(string) 比较 <0>](#localecomparestring-%E6%AF%94%E8%BE%83-0)
-
 # ECMAScript core knowledge
 
 ## 相关简介
@@ -764,12 +612,12 @@ var { x = 3 } = { x: null }; // x = null
 
 ```js
 // 注意点
-// 1）如果要将一个已经声明的变量用于解构赋值, 必须非常小心
+// 1)如果要将一个已经声明的变量用于解构赋值, 必须非常小心
 let x;
 {x} = {x: 1}; //  SyntaxError: syntax error {x}理解成一个代码块
 ({x} = {x: 1}); //ok
 
-// 2）由于数组本质是特殊的对象, 因此可以对数组进行对象属性的解构
+// 2)由于数组本质是特殊的对象, 因此可以对数组进行对象属性的解构
 let arr = [1, 2, 3];
 let {0 : first, [arr.length - 1] : last} = arr; //first = 1, last = 3
 ```
@@ -1229,7 +1077,7 @@ for(var i=0;i<a.length;a[i++]=0)
 #### e. 模板字符串
 
 ```js
-// 模板字符串（template string）是增强版的字符串, 用反引号（`）标识. 它可以当作普通字符串使用, 也可以用来定义多行字符串, 或者在字符串中嵌入变量
+// 模板字符串 (template string)是增强版的字符串, 用反引号 (`)标识. 它可以当作普通字符串使用, 也可以用来定义多行字符串, 或者在字符串中嵌入变量
 // 1. 普通字符串
 `In JavaScript '\n' is a line-feed.`;
 
@@ -1319,7 +1167,7 @@ const obj = {
 ##### 2. 属性名表达式
 
 ```js
-// 1. 字面量定义对象时，用方法二（表达式）作为对象的属性名，即把表达式放在方括号内
+// 1. 字面量定义对象时，用方法二 (表达式)作为对象的属性名，即把表达式放在方括号内
 let propKey = 'foo';
 let obj = {
   [propKey]: true,
@@ -1334,7 +1182,7 @@ let obj = {
 };
 obj.hello(); // hi
 
-// 3. 注意，属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串[object Object]，这一点要特别小心。
+// 3. 注意，属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串[object Object]，这一点要特别小心.
 
 const keyA = { a: 1 };
 const keyB = { b: 2 };
@@ -1350,7 +1198,7 @@ myObject; // Object {[object Object]: "valueB"}  // 属性同名覆盖吊一个
 ##### 3. 方法的 name 属性
 
 ```js
-// 1. 函数的name属性，返回函数名。对象方法也是函数，因此也有name属性
+// 1. 函数的name属性，返回函数名. 对象方法也是函数，因此也有name属性
 const person = {
   sayName() {
     console.log('hello!');
@@ -1366,32 +1214,32 @@ descriptor.get.name; // "get foo"
 ##### 4. 属性的可枚举性和遍历
 
 - 可枚举性: <font color='red'>尽量不要用 for...in 循环，而用 Object.keys()代替</font>
-  1. for...in 循环：只遍历对象自身的和继承的可枚举的属性。
-  2. Object.keys()：返回对象自身的所有可枚举的属性的键名。
-  3. JSON.stringify()：只串行化对象自身的可枚举的属性。
-  4. Object.assign()： 忽略 enumerable 为 false 的属性，只拷贝对象自身的可枚举的属性。
+  1. for...in 循环：只遍历对象自身的和继承的可枚举的属性.
+  2. Object.keys()：返回对象自身的所有可枚举的属性的键名.
+  3. JSON.stringify()：只串行化对象自身的可枚举的属性.
+  4. Object.assign()： 忽略 enumerable 为 false 的属性，只拷贝对象自身的可枚举的属性.
 - 属性的遍历
 
   - 遍历的规则
-    首先遍历所有数值键，按照数值升序排列。
-    其次遍历所有字符串键，按照加入时间升序排列。
+    首先遍历所有数值键，按照数值升序排列.
+    其次遍历所有字符串键，按照加入时间升序排列.
     最后遍历所有 Symbol 键，按照加入时间升序排列
 
   ```
-  （1）for...in
-      for...in循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。
+   (1)for...in
+      for...in循环遍历对象自身的和继承的可枚举属性 (不含 Symbol 属性).
 
-  （2）Object.keys(obj)
-      Object.keys返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名。
+   (2)Object.keys(obj)
+      Object.keys返回一个数组，包括对象自身的 (不含继承的)所有可枚举属性 (不含 Symbol 属性)的键名.
 
-  （3）Object.getOwnPropertyNames(obj): 小所有
-      Object.getOwnPropertyNames返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。
+   (3)Object.getOwnPropertyNames(obj): 小所有
+      Object.getOwnPropertyNames返回一个数组，包含对象自身的所有属性 (不含 Symbol 属性，但是包括不可枚举属性)的键名.
 
-  （4）Object.getOwnPropertySymbols(obj): 大所有
-      Object.getOwnPropertySymbols返回一个数组，包含对象自身的所有 Symbol 属性的键名。
+   (4)Object.getOwnPropertySymbols(obj): 大所有
+      Object.getOwnPropertySymbols返回一个数组，包含对象自身的所有 Symbol 属性的键名.
 
-  （5）Reflect.ownKeys(obj)： 大所有
-      Reflect.ownKeys返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
+   (5)Reflect.ownKeys(obj)： 大所有
+      Reflect.ownKeys返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举.
   ```
 
 ##### 5. super 关键字
@@ -1412,8 +1260,8 @@ const obj = {
 };
 Object.setPrototypeOf(obj, proto);
 obj.find(); // "hello"
-// 对象obj.find()方法之中，通过super.foo引用了原型对象proto的foo属性。
-// 注意，super关键字表示原型对象时，只能用在对象的方法之中，用在其他地方都会报错。
+// 对象obj.find()方法之中，通过super.foo引用了原型对象proto的foo属性.
+// 注意，super关键字表示原型对象时，只能用在对象的方法之中，用在其他地方都会报错.
 ```
 
 ##### 6. 对象的扩展运算符 ...
@@ -1442,13 +1290,13 @@ x; // 1
 y; // undefined
 z; // 3
 
-// 3. 对象的扩展运算符（...）用于取出参数对象的所有可遍历属性，拷贝到当前对象之中
+// 3. 对象的扩展运算符 (...)用于取出参数对象的所有可遍历属性，拷贝到当前对象之中
 let z = { a: 3, b: 4 };
 let n = { ...z }; //n = { a: 3, b: 4 }
 {...{}, a: 1} // { a: 1 }
 
 //4. 扩展运算符后面不是对象，则会自动将其转为对象
-// 等同于 {...Object(1)}; 扩展运算符后面是整数1，会自动转为数值的包装对象Number{1}。由于该对象没有自身属性，所以返回一个空对象
+// 等同于 {...Object(1)}; 扩展运算符后面是整数1，会自动转为数值的包装对象Number{1}. 由于该对象没有自身属性，所以返回一个空对象
 {...1} // {}
 {...true} // {}
 {...undefined} // {}
@@ -1494,7 +1342,7 @@ let newVersion = {
    // 恢复为默认值
    let aWithDefaults = { x: 1, y: 2, ...a };
 
-// 10. 与数组的扩展运算符一样，对象的扩展运算符后面可以跟表达式。
+// 10. 与数组的扩展运算符一样，对象的扩展运算符后面可以跟表达式.
 const obj = {
   ...(x > 1 ? {a: 1} : {}), // 会优先执行
   b: 2,
@@ -1667,7 +1515,7 @@ var point = { x: 0, y: 0 }; //可以嵌套; 每次执行都会新建并初始化
 - 属性访问错误:
   1. 查询不存在的属性返回 undefined
   2. 删除[delete]不存在的属性: true
-  3. 访问不存在对象的而属性会报错。[null/undefined 无属性]
+  3. 访问不存在对象的而属性会报错. [null/undefined 无属性]
   4. 给 null、undefined 设置属性会报错
 - setter/getter: 有 setter、getter 定义的属性称为 '存取器属性', 可以继承
   ```js
@@ -1698,7 +1546,7 @@ var point = { x: 0, y: 0 }; //可以嵌套; 每次执行都会新建并初始化
 - 检测属性: in、hasOwnProperty()、PropertyIsEnumberable()、属性检查
 
   ```js
-  // a)	in: 可以检查继承属性 [instanceof 可以检查继承的方法]
+  // a)  in: 可以检查继承属性 [instanceof 可以检查继承的方法]
   // In可以区分不存在属性和存在属性但值为undefined:
   var o = { x: undefined };
   'toString' in o; //true
@@ -1707,17 +1555,17 @@ var point = { x: 0, y: 0 }; //可以嵌套; 每次执行都会新建并初始化
   delete o.x; //true    delete o;  /error
   'x' in o; //false
 
-  // b)	hasownproperty():  //继承属性不可以
+  // b)  hasownproperty():  //继承属性不可以
   o.hasownproperty('x'); //true
   o.hasownproperty('tostring'); //false
 
-  // c)	propertyisenumerable():   //继承属性可枚举(tostring类似方法除外)
+  // c)  propertyisenumerable():   //继承属性可枚举(tostring类似方法除外)
   var o = inherit({ y: 2 });
   o.x = 1; //ok
   o.propertyisenumerable('x'); //true
   o.propertyisenumerable('y'); //false
 
-  // d)	属性查询:
+  // d)  属性查询:
   var o = { x: 1 };
   o.x !== undefined; //true    =====>o.x!=null
   o.toString !== undefined; //true
@@ -1730,7 +1578,7 @@ var point = { x: 0, y: 0 }; //可以嵌套; 每次执行都会新建并初始化
 #### g. 对象的枚举属性
 
 - 枚举属性: [获取所有属性: getOwnPropertyNames()]
-  1. 有许多实用工具库给 Object.prototype 添加了很多的新的方法或属性 [可继承], 且这些方法是可枚举的(ECMA5 之前), 所以要过滤这些方法。
+  1. 有许多实用工具库给 Object.prototype 添加了很多的新的方法或属性 [可继承], 且这些方法是可枚举的(ECMA5 之前), 所以要过滤这些方法.
   ```js
   // 方法一：
   for (p in o) {
@@ -1826,6 +1674,446 @@ var point = { x: 0, y: 0 }; //可以嵌套; 每次执行都会新建并初始化
    ```
 
 ### 7. 数组
+
+#### 相关认知
+
+```
+1.  JavaScript 中数组是无类型的：数组元素可以是任意类型，并且同一数组可以有不同元素类型.
+2.  JavaScript 中数组是动态的，可增减，声明时无需大小
+3.  数组再系统内部是经过优化的，比访问常规对象属性要快
+4.  类数组对象也适应数组的方法
+5.  JavaScript 访问不存在属性是不会报错，返回 undefined
+```
+
+#### a. 数组扩展
+
+##### 1. 扩展运算符: 主要用于函数调用
+
+```js
+// 1. 初识
+[...[], 1]; // [1]
+console.log(...[1, 2, 3]); // 1 2 3
+console.log(1, ...[2, 3, 4], 5); // 1 2 3 4 5
+
+// 2. 运算符主要用于函数调用: 该运算符将一个数组，变为参数序列
+function push(array, ...items) {
+  array.push(...items);
+}
+
+function add(z, x, y) {
+  return z + x + y;
+}
+const numbers = [4, 38];
+add(1, ...numbers); // 42
+
+// 3. 扩展运算符后面还可以放置表达式
+var x = 5;
+const arar = [...(x > 0 ? ['a'] : []), 'b'];
+
+// 4. 扩展运算符如果放在括号中，JavaScript 引擎就会认为这是函数调用. 如果这时不是函数调用，就会报错
+console.log((...[1, 2])) // Uncaught SyntaxError: Unexpected number
+console.log(...[1, 2]) // 1 2
+
+// 5. 复制数组: 浅拷贝
+const a1 = [1, 2];
+// 写法一
+const a2 = [...a1];
+// 写法二
+const [...a2] = a1;
+
+// 6. 合并数组: 浅拷贝
+const arr1 = ['a', 'b'];
+const arr2 = ['c'];
+// ES5 的合并数组
+arr1.concat(arr1, arr2);
+// ES6 的合并数组
+[...arr2, ...arr3]
+
+// 7. 与解构赋值结合
+// ES5
+a = list[0], rest = list.slice(1)
+// ES6
+[a, ...rest] = list
+
+const [first, ...rest] = [1, 2, 3, 4, 5];
+const [first, ...rest] = ["foo"];
+
+// 8. 扩展运算符还可以将字符串转为真正的数组
+[...'hello'] // [ "h", "e", "l", "l", "o" ]
+
+// 9. 任何定义了遍历器 (Iterator)接口的对象 (参阅 Iterator 一章)，都可以用扩展运算符转为真正的数组
+let nodeList = document.querySelectorAll('div'); // 类数组对象
+let array = [...nodeList]; // 转为 Array, 原因就在于NodeList对象实现了 Iterator
+
+Number.prototype[Symbol.iterator] = function*() {
+  let i = 0;
+  let num = this.valueOf();
+  while (i < num) {
+    yield i++;
+  }
+}
+console.log([...5]) // [0, 1, 2, 3, 4]
+
+// 10.
+let aClone = { ...a }; // let aClone = Object.assign({}, a);
+const obj = {a: 1, b: 2};
+let arr = [...obj]; // TypeError: Cannot spread non-iterable object
+// 对象的扩展运算符等同于使用Object.assign()方法: Object.assign() 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象
+let arr = {}...obj}; // ["a", "b"]
+
+// 11. 扩展运算符内部调用的是数据结构的 Iterator 接口，因此只要具有 Iterator 接口的对象，都可以使用扩展运算符: Map 和 Set 结构，Generator 函数
+let map = new Map([
+  [1, 'one'],
+  [2, 'two'],
+  [3, 'three'],
+]);
+let arr = [...map.keys()]; // [1, 2, 3]
+
+const go = function*(){
+  yield 1;
+  yield 2;
+  yield 3;
+};
+[...go()] // [1, 2, 3]
+```
+
+##### 2. Array.from()
+
+- Array.from 的第一个参数指定了第二个参数运行的次数, 还可以接受第二个参数，作用类似于数组的 map 方法
+- Array.from 方法用于将两类对象转为真正的数组: 类似数组的对象(array-like object) 和可遍历 (iterable)的对象 (包括 ES6 新增的数据结构 Set 和 Map)
+
+  ```js
+  let arrayLike = {
+    '0': 'a',
+    '1': 'b',
+    '2': 'c',
+    length: 3
+  };
+  // ES5的写法
+  var arr1 = [].slice.call(arrayLike); // ['a', 'b', 'c']
+  // ES6的写法
+  let arr2 = Array.from(arrayLike); // ['a', 'b', 'c']
+
+  // NodeList对象
+  let ps = document.querySelectorAll('p');
+  Array.from(ps).filter(p => {
+    return p.textContent.length > 100;
+  });
+
+  // arguments对象
+  function foo() {
+    var args = Array.from(arguments);
+    const args = [...arguments];
+    // ...
+  }
+
+  Array.from('hello'); // ['h', 'e', 'l', 'l', 'o']
+  let namesSet = new Set(['a', 'b']);
+  Array.from(namesSet); // ['a', 'b']
+  ```
+
+- Array.from 还可以接受第二个参数，作用类似于数组的 map 方法，用来对每个元素进行处理，将处理后的值放入返回的数组
+
+  ```js
+  Array.from(arrayLike, x => x * x);
+  // 等同于
+  Array.from(arrayLike).map(x => x * x);
+
+  Array.from([1, 2, 3], x => x * x);
+  // [1, 4, 9]
+
+  Array.from([1, , 2, , 3], n => n || 0); // [1, 0, 2, 0, 3]
+  // Array.from的第一个参数指定了第二个参数运行的次数
+  Array.from({ length: 2 }, () => 'jack');
+  ```
+
+##### 3. Array.of()
+
+- Array.of 方法用于将一组值，转换为数组
+  ```js
+  Array.of(3, 11, 8); // [3,11,8]
+  Array.of(3); // [3]
+  Array.of(3).length; // 1
+  ```
+
+##### 4. 数组实例的 copyWithin()
+
+- 数组实例的 copyWithin 方法，在当前数组内部，将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组. 也就是说，**<font color='red'>使用这个方法，会修改当前数组</font>**
+
+> Array.prototype.copyWithin(target, start = 0, end = this.length)
+
+- target（必需）：开始替换的位置. 如果为负值，表示倒数.
+- start（可选）：从该位置开始读取数据，默认为 0. 如果为负值，表示倒数.
+- end（可选）：到该位置前停止读取数据，默认等于数组长度. 如果为负值，表示倒数.
+
+  ```js
+  [1, 2, 3, 4, 5].copyWithin(0, 3); // [4, 5, 3, 4, 5]
+  ```
+
+##### 5. 数组实例的 find(f) 和 findIndex(f): Array.filter(predicate[, o])
+
+- 第一个符合条件的数组成员, 如果没有符合条件的成员，则返回 undefined
+  ```js
+  [1, 5, 10, 15].find(function(value[, index, arr]) {
+    return value > 9;
+  }); // 10
+  ```
+
+##### 6. 数组实例的 fill()
+
+- fill 方法使用给定值，填充一个数组, 会覆盖之前的值
+  ```js
+  // fill(value[,start,end])
+  ['a', 'b', 'c'].fill(7, 1, 2);
+  ```
+
+##### 7. 数组实例的 entries()，keys() 和 values()
+
+- keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历
+
+  ```js
+  // 方式一
+  var keys = Object.keys(o); // 获得o对象属性名组成的数组
+  var values = []; // 在数组中存储匹配属性的值
+  for (var i = 0; i < keys.length; i++) {
+    // 对于数组中每个索引
+    var key = keys[i]; // 获得索引处的键值
+    values[i] = o[key]; // 在values数组中保存属性值
+  }
+
+  // 方式2
+  var data = [1, 2, 3, 4, 5]; // 这是需要遍历的数组
+  var sumOfSquares = 0; // 要得到数据的平方和
+  data.forEach(function(x) {
+    // 把每个元素传递给此函数
+    sumOfSquares += x * x; // 平方相加
+  });
+  sumOfSquares; // =>55 : 1+4+9+16+25
+
+  // 方式3
+  for (let index of ['a', 'b'].keys()) {
+  ...
+  }
+  for (let elem of ['a', 'b'].values()) {
+    ...
+  }
+  for (let [index, elem] of ['a', 'b'].entries()) {
+    ...
+  }
+  // 如果不使用for...of循环，可以手动调用遍历器对象的next方法，进行遍历
+  let letter = ['a', 'b', 'c'];
+  let entries = letter.entries();
+  console.log(entries.next().value); // [0, 'a']
+  ```
+
+##### 8. 数组实例的 includes(string[, start])
+
+- Array.prototype.includes 方法返回一个布尔值，表示某个数组是否包含给定的值，与字符串的 includes 方法类似
+  ```js
+  [(1, 2, 3)].includes(2); // true
+  [(1, 2, 3)].includes(4); // false
+  //   -2 -1   ***     0  1
+  [1, 2, 3].includes(3, 3); // false
+  [1, 2, 3].includes(3, -1); // true
+  ```
+
+##### 9. 数组实例的 flat()，flatMap()
+
+- Array.prototype.flat()用于将嵌套的数组“拉平”，变成一维的数组. 该方法返回一个新数组，对原数据没有影响
+
+  ```js
+  a = [1, 2, [3, 4]]; // (3) [1, 2, Array(2)]
+  b = a.flat(); // (4) [1, 2, 3, 4]
+  a; // (3) [1, 2, Array(2)]
+
+  // 2. flat()默认只会“拉平”一层，如果想要“拉平”多层的嵌套数组
+  [1, 2, [3, [4, 5]]].flat(2) // [1, 2, 3, 4, 5]
+
+  // 3.如果原数组有空位，flat()方法会跳过空位
+  [1, 2, , 4, 5].flat()
+  ```
+
+- flatMap()方法对原数组的每个成员执行一个函数(相当于执行 Array.prototype.map())
+  ```js
+  [2, 3, 4].flatMap(x => [x, x * 2]);
+  // flatMap 中不能使用嵌套数组
+  [2, 3, 4, [5, 8]].flatMap(x => [x, x * 2]);
+  ```
+
+##### 10. 数组的空位
+
+- 空位不是 undefined，一个位置的值等于 undefined，依然是有值的. 空位是没有任何值，in 运算符可以说明这一点
+  ```js
+  var a = Array(3); // [, , ,]
+  0 in a; // false
+  0 in [undefined, undefined, undefined]; // true
+  ```
+- ES5 对空位的处理，已经很不一致了，大多数情况下会忽略空位
+  > forEach(), filter(), reduce(), every() 和 some()都会跳过空位.
+  > map()会跳过空位，但会保留这个值
+  > join()和 toString()会将空位视为 undefined，而 undefined 和 null 会被处理成空字符串.
+- ES6 则是明确将空位转为 undefined
+  > Array.from 方法会将数组的空位，转为 undefined，也就是说，这个方法不会忽略空位.
+  > 扩展运算符（...）也会将空位转为 undefined
+  > copyWithin()会连空位一起拷贝
+  > fill()会将空位视为正常的数组位置
+  > for...of 循环也会遍历空位
+  > entries()、keys()、values()、find()和 findIndex()会将空位处理成 undefined
+- **<font color='red'>由于空位的处理规则非常不统一，所以建议避免出现空位</font>**
+#### b. 创建数组：var 或 new Array()
+
+```js
+// 创建数组
+var empty = [,]     //无元素
+var empty = [,,]    //有两个元素undefined
+var a = new Array(length)  //length表示长度 Array(5,4,3,2, 'ok')也可以
+var a[-1.23] = true;    //可以，等价于添加了一个属性
+```
+
+#### c. 数组读写
+
+```js
+o = []; //创建了空数组
+o[1] = 'one'; //添加新属性来索引化
+// 所有的索引都是属性名，但是只有0-2^32-2之间的属性名才是属性
+```
+
+#### d. 稀疏数组: 索引不连续的数组 [1,,2]
+
+```js
+// a) 创建
+a = new Array(5);
+a = [];
+a[1000] = 0;
+// b) delete可以删除数组元素
+// c) 稀疏数组与省略元素(默认为undefined)的区别：
+var a1 = [, , ,]; // 数组是[undefined, undefined, undefined]
+var a2 = new Array(3); // 该数组根本没有元素
+var a3 = [,]; //没有元素
+0 in a1; // => true: a1在索引0处有一个元素
+0 in a2; // => false: a2在索引0处没有元素
+0 in a3; //=>false:a3在索引0处没有元素
+```
+
+#### e. 数组长度
+
+1.  不同语言中的长度表示
+
+    | first |                      s                       |
+    | :---: | :------------------------------------------: |
+    |  C#   |                   .Length                    |
+    |  C++  |              vector<int>a(100)               |
+    |  C++  |                   a.size()                   |
+    |  C++  | String: strlen() //求实际长度，参数为 char[] |
+    |  C++  |   Length: //实际长度 string=字符数组+'\0'    |
+    |  C++  |                  Sizeof():                   |
+    | java  |                length //数组                 |
+    | java  |              Length() //string               |
+    | java  |         size()方法是针对泛型集合说的         |
+    | java  |                length //数组                 |
+
+2.  在 JavaScript 中可以让 length 属性只读：
+    ```js
+    a = [1, 2, 3];
+    Object.defineProperty(a, 'length', { writable: false });
+    // 可以让数组元素不可配置：不能 delete
+    Object.defineProperty(a, 'length', { configurable: false });
+    ```
+
+#### f. 数组元素的添加删除
+
+```js
+a = [];
+a[0] = 'zero';
+a = [];
+a.push('zero'); //末尾加      // pop()  删除末尾元素
+
+a = [1, 2, 3];
+delete a[1];
+a[1] in a; //fasle
+a[1] = undefined; //true
+a.length === 3; //true
+//delete删除数组元素，但是不改变数组的length
+```
+
+#### g. 数组遍历
+
+```js
+// 方式一
+var keys = Object.keys(o); // 获得o对象属性名组成的数组
+var values = []; // 在数组中存储匹配属性的值
+for (var i = 0; i < keys.length; i++) {
+  // 对于数组中每个索引
+  var key = keys[i]; // 获得索引处的键值
+  values[i] = o[key]; // 在values数组中保存属性值
+}
+
+// 方式2
+var data = [1, 2, 3, 4, 5]; // 这是需要遍历的数组
+var sumOfSquares = 0; // 要得到数据的平方和
+data.forEach(function(x) {
+  // 把每个元素传递给此函数
+  sumOfSquares += x * x; // 平方相加
+});
+sumOfSquares; // =>55 : 1+4+9+16+25
+```
+
+#### h. 多维数组
+
+```js
+// 创建一个多维数组
+var table = new Array(10); // 表格有10行
+for (var i = 0; i < table.length; i++) table[i] = new Array(10); // 每行有10列
+// 初始化数组
+for (var row = 0; row < table.length; row++) {
+  for (col = 0; col < table[row].length; col++) {
+    table[row][col] = row * col;
+  }
+}
+// 使用多维数组来计算(查询)5*7
+var product = table[5][7]; // 35
+```
+
+#### i. 数组类型
+
+- 使用 instanceof 的问题是在 Web 浏览器中有可能有多个窗口或窗体(frame)存在. 每个窗口都有自己的 JavaScript 环境, 有自己的全局对象. 并且每个全局对象有自己的一组构造函数.
+- **<font color='red'>因此一个窗体中的对象将不可能是另外窗体中的构造函数的实例. 窗体之间的混淆不常发生</font>**
+- **但这个问题足已证明 instanceof 操作符不能视为一个可靠的数组检测方法.**
+
+```js
+var isArray =
+  Function.isArray ||
+  function(o) {
+    return (
+      typeof o === 'object' &&
+      Object.prototype.toString.call(o) === '[object Array]'
+    );
+  };
+```
+
+#### k. 类数组对象
+
+```js
+数组特征:
+  当添加或删除元素时, length自动更新
+  设置length为一个较小的值将截断数组
+  从Array.prototype中继承了一些有用的方法
+  类属性是Array:
+    classof<===>typeof+object.prototype.tostring.call(o).slice(8,-1)
+```
+
+#### l. 作为数组的字符串, 字符串是不可变的，用作数组是为只读
+
+#### m. 数组方法
+
+```js
+var s = 'test';
+a = s.charAt(0);
+console.log(a); //t
+console.log(s[1]); //e
+s[1] = 5;
+console.log(s); //test
+```
 
 ### 8. 函数
 
@@ -2067,13 +2355,13 @@ trees[3] = undefined;
 
 // 运算数 x 的类型
 typeof x;
-// 前者是否为后者的实例, 换而言之, 是判断后者的原型对象（prototype）是否在前者的原型链之上
+// 前者是否为后者的实例, 换而言之, 是判断后者的原型对象 (prototype)是否在前者的原型链之上
 function A() {}
 var a = new A();
 a instanceof A; // true
 Object instanceof Function; // true
 Function instanceof Object; // true
-// 判断当前的原型对象（prototype）是否在传入参数的原型链上面
+// 判断当前的原型对象 (prototype)是否在传入参数的原型链上面
 function A() {}
 var a = new A();
 A.prototype.isPrototypeOf(a); // true
@@ -2242,6 +2530,71 @@ e) ···
    `Hello ${name}, how are you ${time}?`;
    ```
 
+### 22. 遍历问题
+
+#### a. Map 的遍历
+
+-任何部署了 Iterator 接口的对象, 都可以用 for...of 循环遍历. Map 结构原生支持 Iterator 接口, 配合变量的解构赋值, 获取键名和键值就非常方便
+
+```js
+const map = new Map();
+map.set('first', 'hello');
+map.set('second', 'world');
+
+for (let [key, value] of map) {
+  console.log(key + ' is ' + value);
+}
+// first is hello
+// second is world
+
+// 获取键名
+for (let [key] of map) {
+  // ...
+}
+
+// 获取键值
+for (let [, value] of map) {
+  // ...
+}
+```
+
+#### b. Array 的遍历
+
+```js
+// 方式一
+var keys = Object.keys(o); // 获得o对象属性名组成的数组
+var values = []; // 在数组中存储匹配属性的值
+for (var i = 0; i < keys.length; i++) {
+  // 对于数组中每个索引
+  var key = keys[i]; // 获得索引处的键值
+  values[i] = o[key]; // 在values数组中保存属性值
+}
+
+// 方式2
+var data = [1, 2, 3, 4, 5]; // 这是需要遍历的数组
+var sumOfSquares = 0; // 要得到数据的平方和
+data.forEach(function(x) {
+  // 把每个元素传递给此函数
+  sumOfSquares += x * x; // 平方相加
+});
+sumOfSquares; // =>55 : 1+4+9+16+25
+
+// 方式3
+for (let index of ['a', 'b'].keys()) {
+ ...
+}
+for (let elem of ['a', 'b'].values()) {
+  ...
+}
+for (let [index, elem] of ['a', 'b'].entries()) {
+  ...
+}
+// 如果不使用for...of循环，可以手动调用遍历器对象的next方法，进行遍历
+let letter = ['a', 'b', 'c'];
+let entries = letter.entries();
+console.log(entries.next().value); // [0, 'a']
+```
+
 ## API
 
 ### String
@@ -2305,3 +2658,131 @@ length; // 字符串中的字符数
 ##### charCodeAt() 字符串指定位置的字符的编码
 
 ##### localeCompare(string) 比较 <0>
+
+### Array
+
+#### 1. constructor
+
+```js
+new Array();
+new Array(size);
+new Array(el0, el1, el2);
+```
+
+#### 2. property
+
+```js
+length; // 数组长度
+```
+
+#### 3. method
+
+##### every(predicate[, o]) 测试断言函数是否对每个数组元素都为真
+
+```js
+// 参数o: 调用 predicate 是可选择的 this 值
+[5, 6, 7, 8].every(x => x > 2); // true
+
+[5, 6, 7, 8].every(function(x) {
+  return x > 3;
+}); // true
+```
+
+##### filter(predicate[, o]) 返回满足断言函数的数组元素
+
+```js
+// 参数o: 调用 predicate 是可选择的 this 值
+// predicate(array[i], i, array)
+[5, 6, 7, 8].filter(x => x > 2); // [5, 6, 7, 8]
+```
+
+##### forEach(f[, o]) 为数组的每一个元素调用指定函数
+
+```js
+// f(array[i], i, array)
+var a = [1, 2, 3];
+a.forEach((x, i, a) => a[i]++);
+```
+
+##### some(predicate[, o]) 测试是否至少有一个数组元素能让断言函数为真
+
+```js
+[1, 2, 3].some(x => x > 2); // true
+```
+
+##### map(f[, o]) 从数组的元素中，计算出新的数组元素
+
+```js
+// a[i] = f(array[i], i, array)
+[[1, 2], [3, 4]].map(([a, b]) => a + b); // [3, 7]
+[[1, 2], [3, 4]].map(function([a, b]) {
+  return a + b;
+}); // [3, 7]
+```
+
+##### reduce(f[, initial]) 从数组的元素中，计算出一个值
+
+```js
+[1, 2, 3, 4].reduce((x, y) => x * y); // 24 => ((1*2)*3)*4
+```
+
+##### reduceRight(f[, initial]) 从右到左缩减数组
+
+```
+[1,2,3,4].reduceRight((x,y)=> x*y)  // 24 => ((4*3)*2)*1
+```
+
+##### indexOf(value[, start]) 在数组中查找匹配元素
+
+##### lastIndexOf(value[, start]) 在数组中反向查找
+
+##### pop() 移除并返回数组最后一个元素
+
+##### push(value ...) 把元素添加到数组尾部并返回该元素
+
+##### shift() 移除数组的第一个元素
+
+##### unshift(value...) 在数组头部插入元素
+
+##### join([separator]) 将数组的所有元素转化为字符串，并衔接起来
+
+```js
+a = new Array(1, 2, 3, 4, 'string');
+s = a.join('-'); // "1-2-3-4-string"
+```
+
+##### concat(el, [el, el]) 把元素衔接到数组中
+
+```js
+var a = [1, 2, 3];
+a.concat(4, [5, 6]); // [1, 2, 3, 4, 5, 6]
+```
+
+##### reverse() 在原数组中颠倒数组元素的顺序
+
+##### sort(oderfunc) 在原数组中对数组元素进行排序
+
+```js
+[2, 5, 4, 9, 3].sort((x, y) => x - y); // [2, 3, 4, 5, 9]
+```
+
+##### slice(start[, end]) 返回数组的一部分, 可以为负数
+
+```js
+var a = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+a.slice(1); // [2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+##### splice(start[, deleteCount, value ...]) 插入、删除或替换数组元素: 会修改原数组
+
+```js
+var a = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+a.splice(1, 2); // [2,3] a =>  [1, 4, 5, 6, 7, 8, 9]
+a.splice(1, 0, 2, 3); // 从1号位置开始，去掉0个元素并添加[2,3] a =>  [1, 4, 5, 6, 7, 8, 9]
+```
+
+##### includes(string[, start]) Array.prototype.includes 方法返回一个布尔值，表示某个数组是否包含给定的值，与字符串的 includes 方法类似
+
+##### toLocaleString() 将数组转化为本地化字符串
+
+##### toString() 将数组转化为字符串
