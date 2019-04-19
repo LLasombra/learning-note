@@ -115,6 +115,13 @@
       - [m. 数组方法](#m-%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95)
     - [8. 函数](#8-%E5%87%BD%E6%95%B0)
       - [a. 函数扩展](#a-%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95)
+        - [1. 函数参数的默认值](#1-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC)
+        - [2. rest 参数 (形式为...变量名)](#2-rest-%E5%8F%82%E6%95%B0-%E5%BD%A2%E5%BC%8F%E4%B8%BA%E5%8F%98%E9%87%8F%E5%90%8D)
+        - [3. 严格模式](#3-%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F)
+        - [4. name 属性](#4-name-%E5%B1%9E%E6%80%A7)
+        - [5. 箭头函数](#5-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0)
+        - [6. 尾调用优化](#6-%E5%B0%BE%E8%B0%83%E7%94%A8%E4%BC%98%E5%8C%96)
+        - [7. 函数参数的尾逗号](#7-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E5%B0%BE%E9%80%97%E5%8F%B7)
       - [b. 函数的定义、嵌套](#b-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%B5%8C%E5%A5%97)
       - [c. 函数调用: constructor、function、method、间接调用(call/apply)](#c-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8-constructorfunctionmethod%E9%97%B4%E6%8E%A5%E8%B0%83%E7%94%A8callapply)
       - [d. 参数: 形参 parameter、实参 argument、this](#d-%E5%8F%82%E6%95%B0-%E5%BD%A2%E5%8F%82-parameter%E5%AE%9E%E5%8F%82-argumentthis)
@@ -216,6 +223,9 @@
         - [includes(string[, start]) Array.prototype.includes 方法返回一个布尔值, 表示某个数组是否包含给定的值, 与字符串的 includes 方法类似](#includesstring-start-arrayprototypeincludes-%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA%E5%B8%83%E5%B0%94%E5%80%BC-%E8%A1%A8%E7%A4%BA%E6%9F%90%E4%B8%AA%E6%95%B0%E7%BB%84%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E7%BB%99%E5%AE%9A%E7%9A%84%E5%80%BC-%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84-includes-%E6%96%B9%E6%B3%95%E7%B1%BB%E4%BC%BC)
         - [toLocaleString() 将数组转化为本地化字符串](#tolocalestring-%E5%B0%86%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BA%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2)
         - [toString() 将数组转化为字符串](#tostring-%E5%B0%86%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2)
+
+
+
 
 # ECMAScript core knowledge
 
@@ -2057,13 +2067,13 @@ const go = function*(){
 
 ##### 4. 数组实例的 copyWithin()
 
-- 数组实例的 copyWithin 方法, 在当前数组内部, 将指定位置的成员复制到其他位置（会覆盖原有成员）, 然后返回当前数组. 也就是说, **<font color='red'>使用这个方法, 会修改当前数组</font>**
+- 数组实例的 copyWithin 方法, 在当前数组内部, 将指定位置的成员复制到其他位置(会覆盖原有成员), 然后返回当前数组. 也就是说, **<font color='red'>使用这个方法, 会修改当前数组</font>**
 
 > Array.prototype.copyWithin(target, start = 0, end = this.length)
 
-- target（必需）: 开始替换的位置. 如果为负值, 表示倒数.
-- start（可选）: 从该位置开始读取数据, 默认为 0. 如果为负值, 表示倒数.
-- end（可选）: 到该位置前停止读取数据, 默认等于数组长度. 如果为负值, 表示倒数.
+- target(必需): 开始替换的位置. 如果为负值, 表示倒数.
+- start(可选): 从该位置开始读取数据, 默认为 0. 如果为负值, 表示倒数.
+- end(可选): 到该位置前停止读取数据, 默认等于数组长度. 如果为负值, 表示倒数.
 
   ```js
   [1, 2, 3, 4, 5].copyWithin(0, 3); // [4, 5, 3, 4, 5]
@@ -2173,7 +2183,7 @@ const go = function*(){
   > join()和 toString()会将空位视为 undefined, 而 undefined 和 null 会被处理成空字符串.
 - ES6 则是明确将空位转为 undefined
   > Array.from 方法会将数组的空位, 转为 undefined, 也就是说, 这个方法不会忽略空位.
-  > 扩展运算符（...）也会将空位转为 undefined
+  > 扩展运算符(...)也会将空位转为 undefined
   > copyWithin()会连空位一起拷贝
   > fill()会将空位视为正常的数组位置
   > for...of 循环也会遍历空位
@@ -2338,7 +2348,327 @@ console.log(s); //test
 ### 8. 函数
 
 #### a. 函数扩展
+##### 1. 函数参数的默认值
+```js
+// 1. ES6 允许为函数的参数设置默认值, 即直接写在参数定义的后面
+function log(x, y = 'World') {
+  console.log(x, y);
+}
+log('Hello') // Hello World
+log('Hello', 'China') // Hello China
+log('Hello', '') // Hello
 
+// 2. 参数变量是默认声明的, 所以不能用let或const再次声明
+function foo(x = 5) {
+  let x = 1; // error
+  const x = 2; // error
+}
+
+// 3. 参数默认值不是传值的, 而是每次都重新计算默认值表达式的值. 也就是说, 参数默认值是惰性求值的
+let x = 99;
+function foo(p = x + 1) {
+  console.log(p);
+}
+foo() // 100
+x = 100;
+foo() // 101
+
+// 4. 与解构赋值默认值结合使用
+function foo({x, y = 5}) {
+  console.log(x, y);
+}
+foo({}) // undefined 5
+foo({x: 1}) // 1 5
+foo({x: 1, y: 2}) // 1 2
+foo() // TypeError: Cannot read property 'x' of undefined
+
+function foo({x, y = 5} = {}) {
+  console.log(x, y);
+}
+foo() // undefined 5
+
+function fetch(url, { body = '', method = 'GET', headers = {} } = {}) {
+  console.log(method);
+}
+
+
+// 5. 请问下面两种写法有什么差别:
+// 函数参数的默认值是空对象, 但是设置了对象解构赋值的默认值
+function m1({x = 0, y = 0} = {}) {
+  return [x, y];
+}
+// 函数参数的默认值是一个有具体属性的对象, 但是没有设置对象解构赋值的默认值
+function m2({x, y} = { x: 0, y: 0 }) {
+  return [x, y];
+}
+// x 有值, y 无值的情况
+m1({x: 3}) // [3, 0]
+m2({x: 3}) // [3, undefined]
+
+// 6. 通常情况下, 定义了默认值的参数, 应该是函数的尾参数
+// 7. 指定了默认值以后, 函数的length属性, 将返回没有指定默认值的参数个数. 也就是说, 指定了默认值后, length属性将失真.如果设置了默认值的参数不是尾参数, 那么length属性也不再计入后面的参数了.
+(function (a, b, c = 5) {}).length // 2
+(function (a, b = 1, c) {}).length // 1
+
+// 8. 一旦设置了参数的默认值, 函数进行声明初始化时, 参数会形成一个单独的作用域(context). 等到初始化结束, 这个作用域就会消失.
+var x = 1;
+function f(x, y = x) {
+  console.log(y);
+}
+f(2) // 2
+
+let foo = 'outer';
+function bar(func = () => foo) {
+  let foo = 'inner';
+  console.log(func());
+}
+bar();
+
+var x = 1;
+function foo(x, y = function() { x = 2; }) {
+  var x = 3;
+  y();
+  console.log(x);
+}
+foo() // 3
+x // 1
+
+// 9. 利用参数默认值, 可以指定某一个参数不得省略, 如果省略就抛出一个错误.
+function throwIfMissing() {
+  throw new Error('Missing parameter');
+}
+function foo(mustBeProvided = throwIfMissing()) {
+  return mustBeProvided;
+}
+foo() // Error: Missing parameter
+```
+##### 2. rest 参数 (形式为...变量名)
+```js
+// 1. rest 参数搭配的变量是一个数组, 该变量将多余的参数放入数组中
+function add(...values) {
+  let sum = 0;
+  for (var val of values) {
+    sum += val;
+  }
+  return sum;
+}
+add(2, 5, 3)
+
+// 2. 对参数排序
+// arguments变量的写法
+function sortNumbers() {
+  // 使用Array.prototype.slice.call先将其转为数组
+  return Array.prototype.slice.call(arguments).sort();
+}
+// rest参数的写法
+const sortNumbers = (...numbers) => numbers.sort();
+
+// 3. rest 参数之后不能再有其他参数
+```
+##### 3. 严格模式
+```js
+// ES2016 做了一点修改, 规定只要函数参数使用了默认值、解构赋值、或者扩展运算符, 那么函数内部就不能显式设定为严格模式, 否则会报错.
+// 报错
+function doSomething(a, b = a) {
+  'use strict';
+  // code
+}
+
+// ok
+const doSomething = (function () {
+  'use strict';
+  return function(value = 42) {
+    return value;
+  };
+}());
+```
+##### 4. name 属性
+```js
+// 函数的name属性, 返回该函数的函数名
+function foo() {}
+foo.name // "foo"
+```
+##### 5. 箭头函数
+```js
+var sum = function(num1, num2) {
+  return num1 + num2;
+};
+// 等同于
+var sum = (num1, num2) => { return num1 + num2; }
+// 等同于
+var sum = (num1, num2) => num1 + num2;
+
+// 2. 由于大括号被解释为代码块, 所以如果箭头函数直接返回一个对象
+// 报错
+let getTempItem = id => { id: id, name: "Temp" };
+// 不报错
+let getTempItem = id => ({ id: id, name: "Temp" });
+
+// 3. 箭头函数只有一行语句, 且不需要返回值
+let fn = () => void doesNotReturn();
+
+// 4.  rest 参数与箭头函数结合的例子
+// 不可以使用arguments对象, 该对象在函数体内不存在. 如果要用, 可以用 rest 参数代替
+const numbers = (...nums) => nums;
+numbers(1, 2, 3, 4, 5) // [1,2,3,4,5]
+const headAndTail = (head, ...tail) => [head, tail];
+headAndTail(1, 2, 3, 4, 5) // [1,[2,3,4,5]]
+
+// 5. 不可以使用yield命令, 因此箭头函数不能用作 Generator 函数.
+// 6. 函数体内的this对象, 就是定义时所在的对象, 而不是使用时所在的对象
+function foo() {
+  // 箭头函数中的 this 就是 foo 的 this
+  setTimeout(() => {
+    console.log('id:', this.id);
+  }, 100);
+}
+var id = 21;
+foo.call({ id: 42 }); // id: 42
+// ES5
+function foo() {
+  var _this = this;
+  setTimeout(function () {
+    console.log('id:', _this.id);
+  }, 100);
+}
+
+function Timer() {
+  this.s1 = 0;
+  this.s2 = 0;
+  // 箭头函数中的 this 就是 Timer 的 this
+  setInterval(() => this.s1++, 1000);
+  // 普通函数 后者的this指向运行时所在的作用域(即全局对象)
+  setInterval(function () {
+    this.s2++;
+  }, 1000);
+}
+var timer = new Timer();
+setTimeout(() => console.log('s1: ', timer.s1), 3100);  // s1: 3
+setTimeout(() => console.log('s2: ', timer.s2), 3100);  // s2: 0
+
+// 7. 箭头函数可以让this指向固定化, 这种特性很有利于封装回调函数
+var handler = {
+  id: '123456',
+  init: function() {
+    // event 箭头函数函数内的 this 就是 init 函数中的 this, 也就是 handler 对象
+    console.log(this)
+    document.addEventListener('click', event => this.doSomething(event.type), false);
+  },
+  doSomething: function(type) {
+    // 这里的 this 是调用者的 this, 也就是 event 中的 this
+    console.log('Handling ' + type  + ' for ' + this.id);
+  }
+};
+
+// 8. 除了this, 以下三个变量在箭头函数之中也是不存在的, 指向外层函数的对应变量：arguments、super、new.target
+function foo() {
+  setTimeout(() => {
+    console.log('args:', arguments);
+  }, 100);
+}
+foo(2, 4, 6, 8) // args: [2, 4, 6, 8]
+
+// 9. 由于箭头函数没有自己的this, 所以当然也就不能用call()、apply()、bind()这些方法去改变this的指向
+// call之前是一个函数
+(function() {
+  return [
+    // 在 { x: 'inner' } 对象上绑定函数 () => this.x
+    (() => this.x).bind({ x: 'inner' })()
+  ];
+}).call({ x: 'outer' });  // ['outer']
+
+// 10. 不适用场合
+// 第一个场合是定义对象的方法, 且该方法内部包括this.
+const cat = {
+  lives: 9,
+  // 箭头函数中的 this 是 cat 内部的 this, 也就是全局的 this
+  jumps: () => {
+    this.lives--;
+  }
+}
+// 第二个场合是需要动态this的时候, 也不应使用箭头函数.
+// this就是全局对象, 如果改成普通函数, this就会动态指向被点击的按钮对象
+var button = document.getElementById('press');
+button.addEventListener('click', () => {
+  this.classList.toggle('on');
+});
+
+// 11. 嵌套的箭头函数
+function insert(value) {
+  return {into: function (array) {
+    return {after: function (afterValue) {
+      array.splice(array.indexOf(afterValue) + 1, 0, value);
+      return array;
+    }};
+  }};
+}
+insert(2).into([1, 3]).after(1); //[1, 2, 3]
+// 等价于
+let insert = (value) => ({into: (array) => ({after: (afterValue) => {
+  array.splice(array.indexOf(afterValue) + 1, 0, value);
+  return array;
+}})});
+insert(2).into([1, 3]).after(1); //[1, 2, 3]
+
+```
+##### 6. 尾调用优化
+- 尾调用(Tail Call)是函数式编程的一个重要概念, 本身非常简单, 一句话就能说清楚, 就是指某个函数的最后一步是调用另一个函数
+- 尾调用由于是函数的最后一步操作, 所以不需要保留外层函数的调用帧, 因为调用位置、内部变量等信息都不会再用到了, 只要直接用内层函数的调用帧, 取代外层函数的调用帧就可以了.
+- “尾调用优化”(Tail call optimization), 即只保留内层函数的调用帧
+- 只有不再用到外层函数的内部变量, 内层函数的调用帧才会取代外层函数的调用帧, 否则就无法进行“尾调用优化”
+- 尾递归: 函数调用自身, 称为递归. 如果尾调用自身, 就称为尾递归.
+```js
+function f(x) {
+  if (x > 0) {
+    return m(x)
+  }
+  return n(x);
+}
+
+// 1. 不会进行尾调用优化, 因为内层函数inner用到了外层函数addOne的内部变量one
+function addOne(a){
+  var one = 1;
+  function inner(b){
+    return b + one;
+  }
+  return inner(a);
+}
+
+// 2. 尾递归
+function factorial(n) {
+  if (n === 1) return 1;
+  return n * factorial(n - 1);
+}
+factorial(5) // 120  复杂度 O(n)
+
+function factorial(n, total) {
+  if (n === 1) return total;
+  return factorial(n - 1, n * total);
+}
+factorial(5, 1) // 120 复杂度 O(1)
+
+// Fibonacci
+function Fibonacci (n) {
+  if ( n <= 1 ) {return 1};
+
+  return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+Fibonacci(10) // 89
+Fibonacci(100) // 超时
+Fibonacci(500) // 超时
+
+function Fibonacci2 (n , ac1 = 1 , ac2 = 1) {
+  if( n <= 1 ) {return ac2};
+
+  return Fibonacci2 (n - 1, ac2, ac1 + ac2);
+}
+Fibonacci2(100) // 573147844013817200000
+Fibonacci2(1000) // 7.0330367711422765e+208
+Fibonacci2(10000) // Infinity
+```
+##### 7. 函数参数的尾逗号
+- ES2017 允许函数的最后一个参数有尾逗号(trailing comma).
+- 此前, 函数定义和调用时, 都不允许最后一个参数后面出现逗号.
 #### b. 函数的定义、嵌套
 
 - 函数的定义: 表达式[没有定义前不能调用]、函数语句[常规,没定义之前也可以调用]
@@ -2443,9 +2773,9 @@ console.log(s); //test
    function.call(thisObj[, arg1[, arg2[, [,...argN]]]]);
 
    // 使用
-   // 1）Math.max 可以实现得到数组中最大的一项:
+   // 1)Math.max 可以实现得到数组中最大的一项:
    var max = Math.max.apply(null,array); // 因为Math.max不支持Math.max([param1,param2])也就是数组, 但是它支持Math.max(param1,param2...)
-   // 2）Array.prototype.push可以实现两个数组的合并
+   // 2)Array.prototype.push可以实现两个数组的合并
    var arr1 = new Array('1','2','3');
    var arr2 = new Array('4','5','6');
    Array.prototype.push.apply(arr1,arr2);    //得到合并后数组的长度, 因为push就是返回一个数组的长度
