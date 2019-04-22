@@ -1,3 +1,11 @@
+**Table of Contents**
+
+- [nodejs environment install](#nodejs-environment-install)
+  - [安装](#%E5%AE%89%E8%A3%85)
+  - [配置环境变量](#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)
+  - [安装 cnpm](#%E5%AE%89%E8%A3%85-cnpm)
+  - [卸载安装的 modules](#%E5%8D%B8%E8%BD%BD%E5%AE%89%E8%A3%85%E7%9A%84-modules)
+
 ## nodejs environment install
 
 ### 安装
@@ -18,7 +26,8 @@
   npm config set prefix "install path\node_global"
   npm config set cache "install path\node_cache"
   ```
-- 2. 添加系统环境变量 NODE_PATH: **install path\node_global\node_modules**, 将安装的全局 modules 指定位置
+- 2. 添加系统环境变量 NODE_PATH: **INSTALL_PATH\node_global\node_modules**, 将安装的全局 modules 指定位置
+- 3. 将 node_global 路径添加到 Path 中.
 
 ### 安装 cnpm
 
