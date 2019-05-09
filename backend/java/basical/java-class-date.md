@@ -244,3 +244,43 @@ SimpleDateFormat oldFormatter = new SimpleDateFormat("yyyy/MM/dd");
                     .withNano(999999999);
         }
    ```
+
+### basical
+
+- [A]DateFormat: 把日期对象格式化为一个字符串 || 把一个字符串转换为 date 对象。
+
+  ```java
+  public void testSimpleDateFormat() throws ParseException {
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    Date date = new Date();
+    System.out.println(dateFormat.format(date));
+
+    //Tue May 15 01:05:53 CST 2018
+    String datestr="2018-05-15 01:05:53";
+    Date date2 = dateFormat.parse(datestr);
+    System.out.println(date2);
+  }
+
+  //2018 年 5 月 15 日 下午 1:18
+  public void testDateFormat() {
+    DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT);
+    Date date = new Date();
+    String datestr = dateFormat.format(date);
+    System.out.println(datestr);
+  }
+
+  // 日期：
+  public static void main(String[] args) {
+    // Calendar now = Calendar.getInstance();
+    GregorianCalendar now = new GregorianCalendar();
+    // Calendar now = new Calendar()出错
+    int year = now.get(Calendar.YEAR);
+    int month = now.get(Calendar.MONTH);
+    int day = now.get(Calendar.DATE);
+    int minute = now.get(Calendar.MINUTE);
+    int hour = now.get(Calendar.HOUR);
+    int second = now.get(Calendar.SECOND);
+    System.out.println("当前日期：" + year + "年" + month + "月" + day + "日");
+    System.out.println("当前时间：" + hour + "时" + minute + "分" + second + "秒");
+  }
+  ```
