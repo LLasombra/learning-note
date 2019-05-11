@@ -4,13 +4,23 @@
   - new File(PATH);
   - getName()
   - getAbsolutePath()
-  - isDirectory()
-  - isFile()
-  - createNewFile()
-  - exists()
-  - delete()
-  - length()
+  - getAbsoluteFile()
+  - getParent()
   - renameTo()
+  -
+  - exists()
+  - canWrite()
+  - canRead()
+  - exists()
+  - isFile()
+  - isDirectory()
+  - lastModify()
+  - Length()
+  - createNewFile()
+  - delete()
+  - mkDir()
+  - list()
+  - listFiles()
 
 ```java
 import java.io.File;
