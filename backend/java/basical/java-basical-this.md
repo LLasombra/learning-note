@@ -1,3 +1,5 @@
+## this
+
 1.  this 关键字：是当前类的一个对象的引用；**`是调用这个方法的对象`**。
 
     ```java
@@ -61,3 +63,33 @@
     ```
 
     > 5. instanceOf 运算符：如果 x 属于类 A 的子类 B, x instanceof A 值也为 true。
+
+### demo
+
+```java
+public class This {
+
+    private int a=30;
+
+    public test(int b) {
+        {
+            int a=26;
+            {
+                int c=560;
+                this.a = c;
+                System.out.println(a);
+                System.out.println(this.a);
+                System.out.println(this instanceof test);  //true
+            }
+            System.out.println(this.a);
+        }
+        System.out.println(a);
+        // this.a = a;
+    }
+
+    public static void main(String[] args) {
+        test test1=new test(5);
+        System.out.println(test1.a);  //26
+    }
+}
+```
