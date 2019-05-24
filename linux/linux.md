@@ -17,43 +17,9 @@
   * **sudo apt-get remove <programname>**: 只卸载软件保留配置文件
   * **apt-get -f install**: 安装依赖
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 三、卸载软件
+  * **dpkg --get-selections  |grep firefox** 
+  * **sudo apt-get purge firefox firefox-locale-en firefox-locale-zh-hans** 
 
 
 
