@@ -60,6 +60,7 @@
 
 
 ## 注1: 搜狗输入法的安装:
+  * referece[https://blog.csdn.net/neuroc/article/details/82992524]
   * **sudo apt-get install fcitx-bin**
   * **sudo dpkg -i 搜狗安装包的文件名**
   * **sudo apt install -f # 如果出现依赖错误输入这行处理，执行完后，继续输入上面的命令 sudo apt --fix-broken install**
