@@ -62,7 +62,7 @@
 ## 注1: 搜狗输入法的安装:
   * **sudo apt-get install fcitx-bin**
   * **sudo dpkg -i 搜狗安装包的文件名**
-  * **sudo apt --fix-broken install**
+  * **sudo apt install -f # 如果出现依赖错误输入这行处理，执行完后，继续输入上面的命令 sudo apt --fix-broken install**
   * **安装成功过后，进入设置 根据红色箭头进入语言安装界面，安装语言（会自动安装中文语言）**
   * **注销或者重启**
   * **Configure Current Input Method 调出搜狗，并置顶**
