@@ -2,13 +2,23 @@
 
 ### 知识点
 
+1. 横切关注点: `跨越应用程序多个模块的功能`.
+
+2. 代理设计模式的原理:
+   > 使用一个代理将对象包装起来, 然后用该代理对象取代原始对象. `任何对原始对象的调用都要通过代理`. **代理对象决定是否以及何时将方法调用转到原始对象上**.
+3. 动态代理关系:
+4. Proxy 中的代码中:
+   > 提供具体实现类: ServiceImpl(必须要在方法中自定义异常), 如果在方法中不自定义异常, 代理调用方法时永远都不会出异常;
+5. 理解图:
+   ![avatar](https://img-blog.csdnimg.cn/20190513214146334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
+
 ### demo
 
 ```java
 @Test
 /**
     * 功能：使用代理调用方法，并加上了一些限制(Annotation)
-    *   1.创建一个被代理对象final类型:为执行方法的提供对象;因为被代理对象在代理对象proxy还在使用的时候，就会被当做垃圾回收了。
+    *   1.创建一个被代理对象final类型:为执行方法的提供对象;因为被代理对象在代理对象proxy还在使用的时候，就会被当做垃圾回收了.
     *   2.创建代理对象proxy：3个参数 Proxy.newProxyInstance(ClassLoader,Class<?>[],InvocationHandler)
     *     2.1类加载器：一般就是被代理对象的类加载器(这里由于存在多态，所以最好用被代理对象实现的接口的类加载器)
     *     2.2获取被代理对象实现的接口的Class数组:
@@ -41,7 +51,7 @@ public void testProxy2() {
 
 @Test
 /**
-    * 功能：实现了可以日志。
+    * 功能：实现了可以日志.
     *   1.创建代理对象的返回类型一般是被代理对象实现的接口类型：这里就一般是ArithmeticCaculator类型
     *
     *   2.说明3各参数：

@@ -13,10 +13,56 @@
 
 4. 定义泛型:
 
-   - 定义泛型类: 和别人一样(standstart) > 声明(接口)时, 在类名的后面, 大括号的前面利用<>来声明泛型类 , 在方法(不一定是泛型类)的返回值使用<E>E 来声明泛型类型, 则在方法的参数和方法体中都可以使用. public class Dao<T>
-   - 定义泛型方法: > 在类(不一定是泛型类)中使用泛型方法 > 在方法的返回值前面使用<E>E 声明泛型类型, 则是在方法的返回值, 参数, 方法体中都可以使用该类型。public <E> E getProperty(Integer id)
+   - 定义泛型类: 和别人一样(standstart)
+     > 声明(接口)时, 在类名的后面, 大括号的前面利用<>来声明泛型类, 在方法(不一定是泛型类)的返回值使用<E>E 来声明泛型类型, 则在方法的参数和方法体中都可以使用. public class Dao<T>
+   - 定义泛型方法:
+     > 在类(不一定是泛型类)中使用泛型方法
+     > 在方法的返回值前面使用<E>E 声明泛型类型, 则是在方法的返回值、参数、方法体中都可以使用该类型. `public <E> E getProperty(Integer id)`
 
-5. 通配符: (这里讲的是面向过程, 把对象当做参数传入进来进行操作)
+5. 泛型与子类继承:
+
+   ```java
+   // List<Object> objlist 不是 List<String> strlist的父类
+   List<Object> objlist = strlist; //ERROR:
+
+   public class List_General {
+       public static void main(String[] args) {
+           List<String> strlist=Arrays.asList("AA","BB");
+           System.out.println(strlist);
+           // List<Object> objlist=strlist;// ERROR: List<Object> objlist不是List<String> strlist的父类
+
+           //test List<PersonZ>
+           List<PersonZ>pers=new ArrayList<>();
+           pers.add(new PersonZ(20, "zhang"));
+           pers.add(new PersonZ(22, "lug"));
+           pers.add(new PersonZ(40, "1465"));
+           printPersonZInfo(pers);
+           printPersonZInfo2(pers);
+
+           //test List<Student>
+           List<Student>stus=new ArrayList<>();
+           stus.add(new Student(20, "zhang", "hazgu"));
+           stus.add(new Student(22, "lug", "sefrg"));
+           stus.add(new Student(40, "1465", "dwefgr"));
+           //printPersonZInfo(stus);  //ERROR
+           printPersonZInfo2(stus);
+       }
+
+       public static void printPersonZInfo(List<PersonZ>PersonZs){
+           for(PersonZ PersonZ:PersonZs){
+               System.out.println(PersonZ);
+           }
+       }
+
+       public  static void printPersonZInfo2(List<? extends PersonZ>PersonZs) {
+           for(PersonZ PersonZ:PersonZs){
+               System.out.println(PersonZ);
+           }
+       }
+   }
+   ```
+
+6) 通配符: (这里讲的是面向过程, 把对象当做参数传入进来进行操作)
    - 如果 Student 是 Person 的一个子类(子类或接口), 而 G 是某种泛型声明如: List<Person>, 那么`G<Student>是G<Person>的子类对型并不成立`:
    - **`Student 是 Person 的子类, 但是 ListStudent> 并不是 List<Person> 的子类`**
    - 如: `PrintInfoPersons(List<Person>persons)` 该方法的参数只能是 Person 类型的 List; 而不能是 Person 任何子类对型: 如 PrintInfo(List<Student>stus)会编译失败:

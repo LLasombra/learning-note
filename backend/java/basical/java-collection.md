@@ -4,10 +4,31 @@
 
 ![avatar](https://img-blog.csdnimg.cn/20190513192228212.gif)
 
-1. Java 集合可分为 Set、List 和 Map 三种体系: collection 包含 Set、List、Queue; `不包含 Map`s
+1. Java 集合可分为 Set、List 和 Map 三种体系: collection 包含 Set、List、Queue; `不包含 Map`
    > Set: 无序、不可重复的集合
    > List: 有序, 可重复的集合
    > Map: 具有映射关系的集合
+2. 小结
+
+   - Collection: List{ LinkedList/ArrayList } Set{ HashSet/TreeSet }
+   - Map: HashMap TreeMap
+   - Iterator:遍历
+     ```java
+     // 不带泛型：
+     Iterator iterator=collection.iterator();
+     while(iterator.hasNext()){
+       System.out.println(iterator.next());
+     }
+     // 带有泛型：
+     Iterator<Map.Entry<String, Integer>> entries = map.entrySet().iterator();
+     while (entries.hasNext()) {
+       Map.Entry<String, Integer> entry = entries.next();
+       System.out.println(entry.getKey() + ":" + entry.getValue());
+     }
+     ```
+   - Collections/Arrays
+     > Arrays.asList()
+     > Collections.sort(List<?>, Comparator)
 
 ### 知识点
 
