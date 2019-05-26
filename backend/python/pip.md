@@ -4,8 +4,9 @@
 
 ```shell
 # 安装或重置
-wget https://bootstrap.pypa.io/get-pip.py
-sudo python3 get-pip.py
+sudo apt-get install python3-pip
+* wget https://bootstrap.pypa.io/get-pip.py
+* sudo python3 get-pip.py
 # 查看pip信息
 pip --version
 # 获取帮助
