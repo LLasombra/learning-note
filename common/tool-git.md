@@ -89,6 +89,8 @@ git show ad4d41e969ff9fb5952560b28ed08bb430dd0356
 ### .gitignore 的使用
 
 ```shell
+# ignore all file contains in
+target
 # no .a files
 *.a
 # but do track lib.a, even though you're ignoring .a files above
