@@ -21,6 +21,7 @@
   * **dpkg --get-selections  |grep firefox**
   * **sudo apt-get purge firefox firefox-locale-en firefox-locale-zh-hans**
 ## 四、翻墙VPN
+  > ***天坑 :***  **apt-get install 安装的 `shadowsocks`需要使用到 `distribute`, 但是这个 Python3.3 之后就不在维护, 因此不能使用之上的 python 版本作为默认的 python 环境**
   ```shell
   # 1. 安装shadowsocks
   sudo apt-get update
