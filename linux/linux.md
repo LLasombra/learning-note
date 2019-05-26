@@ -18,8 +18,8 @@
   * **apt-get -f install**: 安装依赖
 
 ## 三、卸载软件
-  * **dpkg --get-selections  |grep firefox** 
-  * **sudo apt-get purge firefox firefox-locale-en firefox-locale-zh-hans** 
+  * **dpkg --get-selections  |grep firefox**
+  * **sudo apt-get purge firefox firefox-locale-en firefox-locale-zh-hans**
 ## 四、翻墙VPN
   ```shell
   # 1. 安装shadowsocks
@@ -49,7 +49,7 @@
   [Unit]
   Description=/etc/rc.local Compatibility
   ConditionPathExists=/etc/rc.local
-  
+
   [Service]
   Type=forking
   ExecStart=/etc/rc.local start
@@ -57,14 +57,14 @@
   StandardOutput=tty
   RemainAfterExit=yes
   SysVStartPriority=99
-  
+
   [Install]
   WantedBy=multi-user.target
   # 4.3 创建文件 rc.local
   sudo vim /etc/rc.local
   # 4.4 将下列内容复制进rc.local文件
   #!/bin/sh -e
-  # 
+  #
   # rc.local
   #
   # This script is executed at the end of each multiuser runlevel.
@@ -90,9 +90,35 @@
   ```
   ![avatar](https://img-blog.csdnimg.cn/20190525121523221.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
-
-
-
+## 五、磁盘相关
+  ```bash
+  # 查看磁盘空间使用情况
+  df -lh
+  # 查看文件夹大小
+  du -h --max-depth=0 # 0表示当前目录
+  ```
+## 六、 优化 Ubuntu 的桌面
+  1. 安装GNOME Tweaks
+   ```shell
+   sudo apt-get install gnome-tweak-tool
+   sudo apt-get install gnome-shell-extensions
+   sudo apt-get install  gnome-shell-extension-dashtodock
+   ```
+  2. 打开tweak, 选择扩展, 打开User themes选项: **然后选择外观，如果shell上有感叹号，关闭tweak, 按Alt+F2, 输入r, 执行后重新打开tweak就没有感叹号了**
+  3. 配置主题和图标, [商店网址](https://www.gnome-look.org/s/Gnome/browse/cat/135/)<br>, 完成下载， 移动到 */usr/share/themes/* 目录下 **reboot**.
+  [具体的应用、图标、shell资源链接](./gnome-resource)
+  ![avatar](https://img-blog.csdnimg.cn/20190526144526575.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
+  4. 安装 *Dash to dock*，并进行设置 dock, 具体如图:
+  ![avatar](https://img-blog.csdnimg.cn/20190526150622341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
+  5. 更换锁屏的壁纸
+  6. 设置终端
+   ```shell
+   # Zsh是替代Bash的终端，还可以设置多种主题，在终端中安装：
+   sudo apt-get install zsh
+   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+   # 最后用Zsh替换Bash：
+   chsh -s `which zsh`
+   ```
 ## 注1: 搜狗输入法的安装:
   * [referece](https://blog.csdn.net/neuroc/article/details/82992524)
   * **sudo apt-get install fcitx-bin**
@@ -102,3 +128,11 @@
   * **注销或者重启**
   * **Configure Current Input Method 调出搜狗，并置顶**
 
+## 通过命令打开文件夹 opendir:
+  ```bash
+  if [ -n "$1" ]; then
+        nautilus "$1" > /dev/null 2>&1
+  else
+        nautilus "$(pwd)" > /dev/null 2>&1
+  fi
+  ```
