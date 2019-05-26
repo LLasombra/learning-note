@@ -172,7 +172,7 @@
     "vue": "html"
   },
   "minapp-vscode.disableAutoConfig": true,
-  "editor.fontSize": 18,
+  "editor.fontSize": 16,
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "all",
   // 启用后，保存文件时在文件末尾插入一个最终新行
@@ -194,7 +194,6 @@
   "terminal.integrated.shell.windows": "E:\\Git\\bin\\bash.exe",
   // 启用后，将使用的参数和方法名称的类型进行提示。
   "docthis.inferTypesFromNames": true,
-
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -212,13 +211,22 @@
   "editor.formatOnSave": true,
   "window.zoomLevel": 0,
   "breadcrumbs.enabled": true,
-
   // #让prettier使用eslint的代码格式进行校验
   "prettier.eslintIntegration": true,
   //  #使用带引号替代双引号
   "prettier.singleQuote": true,
   //  #让函数(名)和后面的括号之间加个空格
-  "javascript.format.insertSpaceBeforeFunctionParenthesis": true
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+
+  // PYTHON
+  "python.pythonPath": "/usr/bin/python3",
+  "python.linting.pylintPath": "pylint",
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  // 默认使用pylint对Python文件进行静态检查
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintUseMinimalCheckers": true,
+  "python.formatting.provider": "autopep8"
 }
 ```
 
@@ -236,11 +244,14 @@
 |        CSS Peek         |   CSS    |
 |      Document This      |    --    |
 |         ESLint          |    JS    |
-|    HTML Boilerpalte     |    H5    |
+|    HTML Boilerplate     |    H5    |
 |         MDTools         |    MD    |
 | Prettier-Code formatter |  FORMAT  |
 |         TSLint          |  FORMAT  |
 |     Vue 2 Snippets      |   VUE    |
 |          Vetur          |   VUE    |
+|         Python          |  PYTHON  |
+|     python snippets     |  PYTHON  |
+|    python-autoopop8     |  PYTHON  |
 |         minapp          |  WECHAT  |
-|     TODO Highlight      |  WECHAT  |
+|     wechat-snippet      |  WECHAT  |
