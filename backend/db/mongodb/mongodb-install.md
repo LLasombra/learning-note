@@ -165,4 +165,5 @@ vi /etc/mongodb.conf
   auth=true (添加帐号,密码认证)
 # 使配置生效
 /etc/init.d/mongodb restart
+# 7.4 robo3t 登录时, 需要在 Auth Mechanism 这一栏选择 MONGODN-CR
 ```
