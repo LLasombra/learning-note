@@ -67,7 +67,7 @@ native      strictfp        transient       volatile    assert
 1. 引用数据类型：在栈中放的是堆内存中值的首地址
    基本数据类型：在栈中放的是值.
 2. float f=12.34F;
-   float f=12.34; -------->error
+   float f=12.34; // error
 3. 有多种类型的数据混合运算时, 系统首先自动将所有数据转换成容量最大的那种数据类型, 然后再进行计算。
 4. byte,short,char 之间不会相互转换, 他们三者在计算时首先转换为 int 类型。
 5. 取模：
@@ -95,11 +95,13 @@ native      strictfp        transient       volatile    assert
 
 ```java
 int[] a1 = new int[] { 1, 2, 3 };
+
+int[] a2 = { 1, 2, 3 };
+
 int[] a3 = new int[3];
 for (int a : a3) {
     a = 0;
 }
-int[] a2 = { 1, 2, 3 };
 ```
 
 2. 二维数组：

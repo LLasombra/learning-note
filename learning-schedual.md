@@ -1,3 +1,14 @@
+## recent
+
+    javase PPT 读一遍
+    spring
+    spring mvc
+    spring boot
+    spring security
+    spring cloud
+    mysql-high
+    mybatis
+
 ## note
 
     es6
@@ -33,8 +44,6 @@
     mysql-basical
     mysql-high
     mybatis
-
-## recent
 
 ### backend
 

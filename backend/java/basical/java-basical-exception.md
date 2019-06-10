@@ -1,15 +1,15 @@
 ## Exception
 
-2.  常见异常：
+2.  常见异常:
 
-    - 编译时异常：在编写代码时及要求处理异常。如 I/O
-    - 运行时异常：
+    - 编译时异常: 在编写代码时及要求处理异常。如 I/O
+    - 运行时异常:
       > java.lang.ArrayIndexOutOfBoundsException
       > java.lang.NullPointerException
       > java.lang.ArithmeticException
       > java.lang.ClassCastException
 
-3.  异常处理：
+3.  异常处理:
 
     - throws:
 
@@ -33,14 +33,14 @@
     }
     ```
 
-4.  自定义的异常类：
+4.  自定义的异常类:
 
     - 自己定义的异常类，通常继承 RunTimeException 类
-    - 自定义异常：两个构造函数：一个无参；一个带参数(调用 super()方法)
-    - 自定义异常的作用：看到一场的名字就知道出现了什么错误
+    - 自定义异常: 两个构造函数: 一个无参；一个带参数(调用 super()方法)
+    - 自定义异常的作用: 看到异常的名字就知道出现了什么错误
     - 自定义异常通常都要使用 throw 关键字来抛出 throw new Own_Exception("没有该用户！");
 
-5.  异常的层次：
+5.  异常的层次:
     ![avatar](https://img-blog.csdnimg.cn/20190509192324928.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzA0MzY0,size_16,color_FFFFFF,t_70)
 
 ## demo
@@ -57,14 +57,14 @@ public class TestException {
         // 1.数组下标越界异常:java.lang.ArrayIndexOutOfBoundsException
         int[] a = new int[2]; // a[2]=2;
 
-        // 2.空指针异常：java.lang.NullPointerException
+        // 2.空指针异常: java.lang.NullPointerException
         int[][] b = new int[2][]; // b[1][1]=5;
         String string = null; // string.charAt(1);
 
-        // 3.数学异常：java.lang.ArithmeticException
+        // 3.数学异常: java.lang.ArithmeticException
         // int c =5/0;
 
-        // 4.类型转换异常：java.lang.ClassCastException
+        // 4.类型转换异常: java.lang.ClassCastException
         Object object = new Object(); // Exception exception=(Exception) object;
 
         //5.ClassNotFoundException
@@ -79,11 +79,11 @@ import java.util.List;
 public class OwnDefineException {
 
     public static void main(String[] args) {
-        getUser("AA");	//无反应，运行正常：OK,没有出现异常！
-        getUser("ZZ");	//抛出异常：Exception in thread "main" basical.Exception_Basical: 没有该用户！
+        getUser("AA");	//无反应，运行正常: OK,没有出现异常！
+        getUser("ZZ");	//抛出异常: Exception in thread "main" basical.Exception_Basical: 没有该用户！
     }
     public static void getUser(String user) {
-        //在集合中放置几个用户名：AA、BB、CC
+        //在集合中放置几个用户名: AA、BB、CC
         List<String>users=Arrays.asList("AA","BB","CC");//创建list快速
         if(users.contains(user)){
             System.out.println("OK,没有出现异常！");;
@@ -95,10 +95,10 @@ public class OwnDefineException {
 }
 
 /**
-  * 自定义异常：
+  * 自定义异常:
   * 	1.自己定义的异常类，通常继承RunTimeException类
-  * 	2.自定义异常：两个构造函数：一个无参；一个带参数(调用super()方法)
-  * 	3.自定义异常的作用：看到一场的名字就知道出现了什么错误
+  * 	2.自定义异常: 两个构造函数: 一个无参；一个带参数(调用super()方法)
+  * 	3.自定义异常的作用: 看到一场的名字就知道出现了什么错误
   * 	4.自定义异常通常都要使用throw关键字来抛出		throw new Own_Exception("没有该用户！");
   */
 class Own_Exception extends RuntimeException{

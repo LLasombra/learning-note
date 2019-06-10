@@ -12,20 +12,20 @@
 
    - 对象序列化：使用 `OutputStream writeObject` 写入本地文件;
    - 对象反序列化：使用 `InputStream readObject` 读取
-   - 作用：对象序列化的目标是将对象保存到磁盘上, 或允许在网络中直接传输对象。
+   - 作用：对象序列化的目标是将对象保存到磁盘上, 或允许在网络中直接传输对象.
    - 序列化机制是 JavaEE 平台的基础
    - 实现可序列化：两个接口之一
      > Serializable
      > Externalizable
    - 序列化文件本身就是乱码
 
-5. 当试图对一个对象进行序列化的时候, 如果遇到不支持 Serializable 接口的对象。在此情况下, 将抛出 NotSerializableException
+5. 当试图对一个对象进行序列化的时候, 如果遇到不支持 Serializable 接口的对象. 在此情况下, 将抛出 NotSerializableException
 
 6. Serializable 与 Externalizable 的区别
 
    - Externalizable 继承了 Serializable
    - 当使用 Externalizable 接口来进行序列化与反序列化的时候需要开发人员重写 `writeExternal()` 与 `readExternal()` 方法
-   - 实现 Externalizable 接口的类必须要提供一个 public 的无参的构造器: 在使用 Externalizable 进行序列化的时候, 在读取对象时, 会调用被序列化类的无参构造器去创建一个新的对象, 然后再将被保存对象的字段的值分别填充到新对象中。
+   - 实现 Externalizable 接口的类必须要提供一个 public 的无参的构造器: 在使用 Externalizable 进行序列化的时候, 在读取对象时, 会调用被序列化类的无参构造器去创建一个新的对象, 然后再将被保存对象的字段的值分别填充到新对象中.
 
 7. Transient 关键字
 

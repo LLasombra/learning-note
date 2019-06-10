@@ -51,8 +51,8 @@
 - RandomAccessFile 类既可以读取文件内容, 也可以向文件输出数据[随机访问文件的任何位置]
 - 移动记录指针
   ```java
-  long getFilePointer(): 获取文件记录指针的当前位置
-  void seek(long pos): 将文件记录指针定位到 pos 位置
+  long getFilePointer() // 获取文件记录指针的当前位置
+  void seek(long pos) // 将文件记录指针定位到 pos 位置
   ```
 - 访问模式
   ```java
@@ -123,8 +123,11 @@
 #### Channel
 
 1. 通道(Channel): 用于源节点与目标节点的连接. 在 Java NIO 中`负责缓冲区中数据的传输`. **Channel 本身不存储数据(类似于铁路), 因此要配合缓冲区使用(火车)**
+2. 功能: 可以将文件的聚集读取到 Channel 中, 可以将 Channel 中的数据分散写入文件
 
-2. Channel 的主要实现类:
+   - Channel 的分散写入、聚集读取
+
+3. Channel 的主要实现类:
 
    ```java
    java.nio.channels.Channel接口:
@@ -134,7 +137,7 @@
        DatagramChannel //网络
    ```
 
-3. 获取 Channel:
+4. 获取 Channel:
 
    - Java 针对 Channel 的类提供了 `getChannel()` 方法
 
@@ -158,7 +161,7 @@
 
    - 在 JDK1.7 中的 NIO2 的 Files 工具类的 `newByteChannel()`
 
-4. Channel 之间得数据传输:
+5. Channel 之间得数据传输:
    ```java
    // transferFrom():
    outchannel.transferFrom(inchannel,0,inchannel.size());
@@ -241,7 +244,7 @@
                        DatagarmChannel
    ```
 
-2. 实现步揍(阻塞式的):
+2. 实现步骤(阻塞式的):
 
    - Client:
      ```java
