@@ -19,8 +19,21 @@
 - **sudo apt-get remove <programname>**: 只卸载软件保留配置文件
 - **apt-get -f install**: 安装依赖
 
-## 三、卸载软件
+## 三、卸载安装卸载
 
+### 安装
+
+- apt-get install git
+- deb: sudo dpkg -i git.deb
+- AppImage:
+  ```shell
+  chmod a+x git.AppImage
+  ./git.AppImage
+  ```
+
+### 卸载
+
+- apt-get remove git
 - **dpkg --get-selections |grep firefox**
 - **sudo apt-get purge firefox firefox-locale-en firefox-locale-zh-hans**
 
