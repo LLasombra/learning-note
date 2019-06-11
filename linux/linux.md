@@ -24,7 +24,10 @@
 ### 安装
 
 - apt-get install git
-- deb: sudo dpkg -i git.deb
+- deb:
+  ```shell
+  sudo dpkg -i git.deb
+  ```
 - AppImage:
   ```shell
   chmod a+x git.AppImage
@@ -124,11 +127,11 @@ du -h --max-depth=0 # 0表示当前目录
 
 1. 安装 GNOME Tweaks
 
-```shell
-sudo apt-get install gnome-tweak-tool
-sudo apt-get install gnome-shell-extensions
-sudo apt-get install  gnome-shell-extension-dashtodock
-```
+   ```shell
+   sudo apt-get install gnome-tweak-tool
+   sudo apt-get install gnome-shell-extensions
+   sudo apt-get install  gnome-shell-extension-dashtodock
+   ```
 
 2. 打开 tweak, 选择扩展, 打开 User themes 选项: **然后选择外观，如果 shell 上有感叹号，关闭 tweak, 按 Alt+F2, 输入 r, 执行后重新打开 tweak 就没有感叹号了**
 3. 配置主题和图标, [商店网址](https://www.gnome-look.org/s/Gnome/browse/cat/135/)<br>, 完成下载， 移动到 _/usr/share/themes/_ 目录下 **reboot**.
@@ -139,13 +142,32 @@ sudo apt-get install  gnome-shell-extension-dashtodock
 5. 更换锁屏的壁纸
 6. 设置终端
 
-```shell
-# Zsh是替代Bash的终端，还可以设置多种主题，在终端中安装：
-sudo apt-get install zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-# 最后用Zsh替换Bash：
-chsh -s `which zsh`
-```
+   ```shell
+   # Zsh是替代Bash的终端，还可以设置多种主题，在终端中安装：
+   sudo apt-get install zsh
+   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+   # 最后用Zsh替换Bash：
+   chsh -s `which zsh`
+   ```
+
+## zsh 使用 alias 快速启动
+
+- 在 ~/.bash_aliases 文件下添加
+  ```shell
+  alias ...="cd ../.."
+  alias ....="cd ../../.."
+  alias download="cd ~/Downloads"
+  ```
+- 在 ~/.zshrc 文件最后添加
+  ```shell
+  if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+  fi
+  ```
+- 使配置的 alias 生效
+  ```shell
+  source ~/.zshrc
+  ```
 
 ## 注 1: 搜狗输入法的安装:
 
